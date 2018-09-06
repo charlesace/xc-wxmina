@@ -14,6 +14,70 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+// 封装微信 request
+
+function request(url, data = {}, method = "GET") {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: url,
+      data: data,
+      method: method,
+      header: {
+        'Content-Type': 'application/json'  
+      },
+      success(res) {
+        console.log('success')
+        console.log(res)
+
+        if (res.statusCode === 200) {
+
+          if (res.data.errorno === 401) {
+
+          }
+        }
+      }
+    })
+  })
+}
+/**
+ * 检查微信会话是否过期
+ */
+function checkSession () {
+  return new Promise((resolve, reject) => {
+    wx.checkSession({
+      success () {
+        resolve(true)
+      },
+      fail () {
+        reject(false)
+      }
+    })
+  })
+}
+
+/**
+ * 调用微信登录
+ */
+function login () {
+  return new Promise((resolve, reject) => {
+    wx.login({
+      success (res) {
+        if (res.code) {
+          // 登录远程服务器
+          console.log(res)
+          resolve(res)
+        } else {
+          reject(res)
+        }
+      },
+      fail (err) {
+        reject(err)
+      }
+    })
+  })
+}
+
+
 module.exports = {
   formatTime: formatTime
 }
