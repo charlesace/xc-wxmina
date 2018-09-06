@@ -3,13 +3,18 @@ page {
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
   height: 100%;
-  padding: 20rpx;
 
   background-color: #f3f3f3;
 }
 
 .describe {
+  margin-top: 20rpx;
 
   font-size: 30rpx;
   color: #999;
@@ -22,7 +27,7 @@ page {
 
 
 .category {
-  margin: 20rpx;
+  margin: 20rpx 0;
   padding: 40rpx 100rpx;
   border-radius: 4rpx;
 
