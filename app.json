@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/login/login",
     "pages/user_center/user_center",
     "pages/template_list/template_list",
-    "pages/index/index",
     "pages/logs/logs"
   ],
   "window": {

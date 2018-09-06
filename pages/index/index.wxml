@@ -1,13 +1,9 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+  <navigator url="../login/login">登录</navigator>
+  <navigator url="../template_list/template_list"
+    open-type="switchTab">收款</navigator>
+  <navigator url="../user_center/user_center"
+    open-type="switchTab">用户中心</navigator>
+  <!-- <navigator url="../login/login">登录</navigator> -->
 </view>
