@@ -1,0 +1,32 @@
+<view class="container">
+  <view class="template-list">
+    <view class="describe">请选择一个收款模板：</view>
+    <view class="category">
+      <view class="category-title">万科项目</view>
+      <view class="template-item">
+        <navigator>万科认筹金</navigator>
+      </view>
+      <view class="template-item">
+        <navigator>户型改造费</navigator>
+      </view>
+      <view class="template-item">
+        <navigator>装修款</navigator>
+      </view>
+    </view>
+    <view class="category">
+      <view class="category-title">美的项目</view>
+      <view class="template-item">
+        <navigator>车位款</navigator>
+      </view>
+    </view>
+  </view>
+
+  <view class="nav-footer">
+    <navigator>
+      收款
+    </navigator>
+    <navigator>
+      我的
+    </navigator>
+  </view>
+</view>
