@@ -1,0 +1,74 @@
+/* pages/user_center/user_center.wxss */
+page {
+  height: 100%;
+  background-color: #f3f3f3;
+}
+
+.container {
+  padding: 0;
+
+}
+.userinfo {
+  display: flex;
+  height: 240rpx;
+
+  background: linear-gradient(to right,#f19f6e, #ed7148);
+}
+
+.userinfo-avatar{
+  overflow:hidden;  
+  display: block;  
+  width: 160rpx;  
+  height: 160rpx;  
+  margin: 40rpx;  
+  margin-top: 40rpx;  
+  border-radius: 50%;  
+  border: 2px solid #fff;  
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);  
+}
+
+.userinfo-nickname {
+  margin-left: 40rpx;
+  line-height: 200rpx;
+
+  color: #fff;
+}
+/* 内容 */
+.content {
+  margin-top: 40rpx;
+}
+.panel {
+  margin-top: 4rpx;
+  height: 100rpx;
+  padding: 0 40rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  justify-content: flex-start;
+
+  background-color: #fff;
+}
+.panel .value {
+  flex: 1;
+  text-align: right;
+
+  color: #adadad;
+}
+
+
+
+/* 退出按钮 */
+.logout {
+  margin-top: 40rpx;
+}
+
+.btn-logout {
+  width: 80%;
+
+  border: 2rpx solid #008fff;
+  border-radius: 60rpx;
+  background-color: #fff;
+
+  color: #008fff;
+}

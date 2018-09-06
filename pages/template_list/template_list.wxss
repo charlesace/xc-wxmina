@@ -3,6 +3,7 @@ page {
 }
 
 .container {
+  height: 100%;
   padding: 20rpx;
 
   background-color: #f3f3f3;

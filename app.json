@@ -1,15 +1,16 @@
 {
-  "pages":[
+  "pages": [
+    "pages/user_center/user_center",
     "pages/template_list/template_list",
     "pages/login/login",
     "pages/index/index",
     "pages/logs/logs"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#000",
@@ -20,7 +21,7 @@
         "text": "收款"
       },
       {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/user_center/user_center",
         "text": "我的"
       }
     ]
