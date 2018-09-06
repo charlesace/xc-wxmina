@@ -8,16 +8,3 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
-
-.nav-footer {
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-
-  width: 100%;
-
-  position: fixed;
-  bottom: 0;
-  height: 40rpx;
-  
-}

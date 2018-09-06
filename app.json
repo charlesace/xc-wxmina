@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/login/login",
     "pages/template_list/template_list",
+    "pages/login/login",
     "pages/index/index",
     "pages/logs/logs"
   ],
