@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/template_list/template_list",
     "pages/login/login",
+    "pages/template_list/template_list",
     "pages/index/index",
     "pages/logs/logs"
   ],
@@ -10,5 +10,19 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#3d7ce2",
+    "list": [
+      {
+        "pagePath": "pages/template_list/template_list",
+        "text": "收款"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "我的"
+      }
+    ]
   }
 }

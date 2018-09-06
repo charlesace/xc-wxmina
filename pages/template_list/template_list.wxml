@@ -20,13 +20,4 @@
       </view>
     </view>
   </view>
-
-  <view class="nav-footer">
-    <navigator>
-      收款
-    </navigator>
-    <navigator>
-      我的
-    </navigator>
-  </view>
 </view>
