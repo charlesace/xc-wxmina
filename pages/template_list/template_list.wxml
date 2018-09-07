@@ -1,23 +1,30 @@
 <view class="container">
   <view class="template-list">
     <view class="describe">请选择一个收款模板：</view>
-    <view class="category">
-      <view class="category-title">万科项目</view>
-      <view class="template-item">
-        <navigator>万科认筹金</navigator>
-      </view>
-      <view class="template-item">
-        <navigator>户型改造费</navigator>
-      </view>
-      <view class="template-item">
-        <navigator>装修款</navigator>
+    <view class="page">
+      <view class="page__bd">
+        <view wx:for="{{cateInfo}}"
+          wx:key="catalog_id"
+          class="weui-panel">
+          <view class="weui-panel__hd">{{item.catalog_name}}</view>
+          <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+              <view class="weui-cells weui-cells_in-small-appmsg">
+                <navigator wx:for="{{item.product_list}}"
+                  wx:key="split_rule_id"
+                  url="/pages/logs/logs?templateID={{item.split_rule_id}}"
+                  class="weui-cell weui-cell_access"
+                  hover-class="weui-cell_active">
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view>{{item.product_name}}</view>
+                    </view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </navigator>
+              </view>
+            </view>
+          </view>
+        </view>
       </view>
     </view>
-    <view class="category">
-      <view class="category-title">美的项目</view>
-      <view class="template-item">
-        <navigator>车位款</navigator>
-      </view>
-    </view>
-  </view>
+</view>
 </view>
