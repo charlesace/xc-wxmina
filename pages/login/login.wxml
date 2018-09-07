@@ -1,15 +1,19 @@
 <view class="container">
-  <form class="login-dialog"
-    bindsubmit="login">
+  <form class="login-dialog">
     <view class="section">
       <input placeholder="登录名/手机号"
+        bindinput="bindinputUsername"
         auto-focus/>
     </view>
     <view class="section">
       <input type="password"
-        placeholder="密码"/>
+        placeholder="密码"
+        bindinput="bindinputPassword"/>
     </view>
     <button
-      form-type="submit">登录</button>
+      form-type="submit"
+      open-type="getUserInfo"
+      lang="zh_CN"
+      bindgetuserinfo="onGotUserInfo">登录</button>
   </form>
 </view>

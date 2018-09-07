@@ -32,39 +32,32 @@ function request(url, data = {}, method = "GET") {
         console.log(res)
 
         if (res.statusCode === 200) {
+          let code = null
+          return login().then((res) => {
+            code = res.code
+            return getUserInfo()
+          }).then((userInfo) => {
+            //  登录远程服务器
+            request(api.AuthLoginByWeixin,
+              {
+                code: code,
+                userInfo: userInfo
+              },
+              'POST').then((res) => {
+                if (res.errorno === 0) {
+                  //  存储用户信息
+                  wx.setStorageSync('userInfo', res.data.userInfo)
 
-          if (res.data.errorno === 401) {
-
-            let code = null
-            return login().then((res) => {
-              code = res.code
-              return getUserInfo()
-            }).then((userInfo) => {
-              //  登录远程服务器
-              request(api.AuthLoginByWeixin,
-                {
-                  code: code,
-                  userInfo: userInfo
-                },
-                'POST').then((res) => {
-                  if (res.errorno === 0) {
-                    //  存储用户信息
-                    wx.setStorageSync('userInfo', res.data.userInfo)
-                    wx.setStorageSync('token', res.data.token)
-
-                    resolve(res)
-                  } else {
-                    reject(res)
-                  }
-                }).catch((err) => {
-                  reject(err)
-                })
-            }).catch((err) => {
-              reject(err)
-            })
-          } else {
-            resolve(res.data)
-          }
+                  resolve(res)
+                } else {
+                  reject(res)
+                }
+              }).catch((err) => {
+                reject(err)
+              })
+          }).catch((err) => {
+            reject(err)
+          })
         } else {
           reject(res.errMsg)
         }

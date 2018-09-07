@@ -4,7 +4,13 @@ Page({
   data: {
     
   },
-  login () {
-    console.log('logining....')
+  onGotUserInfo (userInfo) {
+    console.log(userInfo)
+  },
+  bindinputUsername (event) {
+
+  },
+  bindinputPassword (event) {
+
   }
 })
