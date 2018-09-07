@@ -54,11 +54,11 @@ function checkLogin() {
       }).catch(() => {
         reject(false);
         console.log('session_Key过期')
-        app.globalData.token = '';
         // return false
       });
 
     } else {
+      console.log('no userInfo')
       reject(false);
     }
   });

@@ -42,6 +42,10 @@ Page({
     //     }
     //   })
     // }
+
+    // wx.navigateTo({
+    //   url: '../login/login'
+    // })
   },
   getUserInfo: function(e) {
     console.log(e)
