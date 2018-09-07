@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const user = require('../../models/user.js')
 
 Page({
   data: {
@@ -16,6 +17,19 @@ Page({
     })
   },
   onLoad: function () {
+    console.log(app.globalData.userInfo)
+    console.log(app.globalData.scene)
+
+    user.checkLogin().then(res => {
+      console.log('app login')
+      this.globalData.userInfo = wx.getStorageInfoSync('userInfo')
+    }).catch(err => {
+      console.log('login fail')
+      wx.redirectTo({
+        url: '../../pages/login/login'
+      })
+    })
+
     // if (app.globalData.userInfo) {
     //   this.setData({
     //     userInfo: app.globalData.userInfo,

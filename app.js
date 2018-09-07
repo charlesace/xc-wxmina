@@ -8,20 +8,23 @@ App({
     let {
       scene
     } = options
-    console.log('onAppLaunch', options)
-    console.log('scene', scene)
+    
+    this.globalData.scene = scene
 
-    user.checkLogin().then(res => {
-      console.log('app login')
-      this.globalData.userInfo = wx.getStorageInfoSync('userInfo')
-    }).catch(err => {
-      console.log('login fail')
+    util.checkSession().then(
+      //  login Status : login
+      res => {
+      }
+    ).catch((error) => {
+      // login Status : session timeout , relogin
+      util.login()
     })
   },
   globalData: {
     userInfo: {
       nickname: '游客',
       username: 'login'
-    }
+    },
+    scene: ''
   }
 })
