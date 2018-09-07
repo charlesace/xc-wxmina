@@ -1,3 +1,5 @@
+const api = require('../config/api.js')
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -33,8 +35,53 @@ function request(url, data = {}, method = "GET") {
 
           if (res.data.errorno === 401) {
 
+            let code = null
+            return login().then((res) => {
+              code = res.code
+              return getUserInfo()
+            }).then((userInfo) => {
+              //  登录远程服务器
+              request(api.AuthLoginByWeixin,
+                {
+                  code: code,
+                  userInfo: userInfo
+                },
+                'POST').then((res) => {
+                  if (res.errorno === 0) {
+                    //  存储用户信息
+                    wx.setStorageSync('userInfo', res.data.userInfo)
+                    wx.setStorageSync('token', res.data.token)
+
+                    resolve(res)
+                  } else {
+                    reject(res)
+                  }
+                }).catch((err) => {
+                  reject(err)
+                })
+            }).catch((err) => {
+              reject(err)
+            })
+          } else {
+            resolve(res.data)
           }
+        } else {
+          reject(res.errMsg)
         }
+      },
+      fail(err) {
+        reject(err)
+        console.log('failed')
+        wx.hideLoading()
+        wx.showToast({
+          title: '服务器故障或没有网络连接！',
+          icon: 'none',
+          duration: 2500,
+          mask: true,
+          success () {},
+          fail () {},
+          complete () {}
+        })
       }
     })
   })
@@ -72,6 +119,23 @@ function login () {
       },
       fail (err) {
         reject(err)
+      }
+    })
+  })
+}
+
+/**
+ * 获取用户信息
+ */
+function getUserInfo () {
+  return new Promise((resolve, reject) => {
+    wx.getUserInfo({
+      widthCredentials: true,
+      success (res) {
+        resolve(res)
+      },
+      fail (error) {
+        reject(error)
       }
     })
   })
