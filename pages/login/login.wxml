@@ -1,16 +1,21 @@
 <view class="container">
   <form class="login-dialog">
     <view class="section">
-      <input placeholder="登录名/手机号"
+      <text class="iconfont icon-user"></text>
+      <input placeholder="请输入登录账号"
+        placeholder-class="place-holder"
         bindinput="bindinputUsername"
         auto-focus/>
     </view>
     <view class="section">
+      <text class="iconfont icon-lock"></text>
       <input type="password"
-        placeholder="密码"
+        placeholder-class="place-holder"
+        placeholder="请输入登录密码"
         bindinput="bindinputPassword"/>
     </view>
     <button
+      class="btn-login"
       form-type="submit"
       open-type="getUserInfo"
       lang="zh_CN"
