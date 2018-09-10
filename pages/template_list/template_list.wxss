@@ -16,39 +16,15 @@ page {
 
   font-size: 30rpx;
   color: #999;
+
+  text-align: center;
+}
+
+.page {
+  margin-top: 20rpx;
 }
 
 .template-list {
   width: 90%;
 }
 
-
-
-.category {
-  margin: 20rpx 0;
-  padding: 40rpx 100rpx;
-  border-radius: 4rpx;
-
-  background-color: #fff;
-  box-shadow: 0 0 4rpx 4rpx rgba(200, 200, 200, 0.4);
-}
-
-.category-title {
-  text-align: center;
-}
-
-.template-item {
-  margin: 20rpx auto;
-  width: 80%;
-}
-
-.template-item navigator {
-
-  padding: 10rpx;
-  border: 2rpx solid #3d7ce2;
-  border-radius: 8rpx;
-
-  color: #3d7ce2;
-  font-size: 36rpx;
-  text-align: center;
-}

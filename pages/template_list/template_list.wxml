@@ -1,6 +1,6 @@
 <view class="container">
   <view class="template-list">
-    <view class="describe">请选择一个收款模板：</view>
+    <view class="describe">请选择一个收款模板</view>
     <view class="page">
       <view class="page__bd">
         <view wx:for="{{cateInfo}}"
