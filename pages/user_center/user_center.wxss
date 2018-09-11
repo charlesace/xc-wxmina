@@ -35,7 +35,7 @@ page {
 }
 /* 内容 */
 .content {
-  margin-top: 40rpx;
+  margin-top: 30rpx;
 }
 .panel {
   margin-top: 4rpx;
@@ -48,6 +48,9 @@ page {
   justify-content: flex-start;
 
   background-color: #fff;
+}
+.login-info {
+  margin-bottom: 30rpx;
 }
 .panel .value {
   flex: 1;
