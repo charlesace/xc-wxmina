@@ -8,10 +8,20 @@ function loginByXC (data) {
   return util.request(
     url,
     data,
-    'post'
+    'POST'
   )
 }
 
+function logoutByXC (data) {
+  let url = api.XCLogout
+
+  return Promise.resolve(true)
+  return util.request(url,
+    data,
+    'POST')
+}
+
 module.exports = {
-  loginByXC
+  loginByXC,
+  logoutByXC
 }

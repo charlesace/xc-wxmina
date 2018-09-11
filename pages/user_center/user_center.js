@@ -1,4 +1,6 @@
 // pages/user_center/user_center.js
+let loginModel = require('../../models/login.js')
+
 Page({
 
   /**
@@ -62,5 +64,13 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  logout () {
+    loginModel.logoutByXC().then(() => {
+      wx.redirectTo({
+        url: '../login/login'
+      })
+    })
   }
 })
