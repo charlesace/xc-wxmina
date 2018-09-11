@@ -5,7 +5,7 @@
       <input placeholder="请输入登录账号"
         placeholder-class="place-holder"
         bindinput="bindinputUsername"
-        auto-focus/>
+        focus/>
     </view>
     <view class="section">
       <text class="iconfont icon-lock"></text>
