@@ -1,4 +1,6 @@
 const api = require('../config/api.js')
+const md5 = require('../lib/md5.js')
+const signConfig = require('../config/sign.js')
 
 const formatTime = date => {
   const year = date.getFullYear()
@@ -16,13 +18,53 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+// function makeSign (obj) {
+//   if (!obj) { 
+//     console.log('需要加密的数组对象为空')
+//     let str = ''
+//     let arr = Object.keys(obj)
+
+//     for (let i in arr) {
+//       str += arr[i] + obj[arr[i]]
+//     }
+
+//     str += signConfig.md5Key
+
+//     let enctrypted = md5(str)
+
+//     return encrypted
+//   }
+// }
+
 // 封装微信 request
 
 function request(url, data = {}, method = "GET") {
   return new Promise((resolve, reject) => {
+    console.log(data, new Date().getTime())
+    let appID = '6444759177398198272'
+    let token = 'ge80346e1aa874d93ada608e9042ab9d1'
+    let version = '1.0'
+    let md5Key = '22060f4662574492a0b1568a3f74f53a'
+    let timeStamp = new Date().getTime()
+
+
+    let sign = md5(appID + timeStamp + version + 'employee.login' + data.toString() + md5Key)
+
+    console.log(sign)
+
+    let newData = {
+      app_id: appID,
+      timeStamp: timeStamp,
+      version: version,
+      sign: sign,
+      service: 'employee.login',
+      token,
+      params: data
+    }
+
     wx.request({
       url: url,
-      data: data,
+      data: newData,
       method: method,
       header: {
         'Content-Type': 'application/json'  

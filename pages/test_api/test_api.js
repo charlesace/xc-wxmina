@@ -30,8 +30,12 @@ Page({
   onShow: function () {
     util.request(
       'http://47.97.81.252:8012/service/soa',
-      {'hello': 'world'},
-      'POST'
+      {
+        login_account: 'shou',
+        password: '123456',
+        wx_openid: 'o_bXM4jYesiOeSKK-Jeb3rgX6DSw'
+      },
+      'GET'
     ).then((res) => {
       console.log(res)
     })
