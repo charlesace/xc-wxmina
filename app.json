@@ -5,7 +5,8 @@
     "pages/index/index",
     "pages/user_center/user_center",
     "pages/logs/logs",
-    "pages/order/order"
+    "pages/order/order",
+    "pages/test_api/test_api"
   ],
   "window": {
     "backgroundTextStyle": "light",
