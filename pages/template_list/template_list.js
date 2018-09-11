@@ -1,4 +1,6 @@
 const app = getApp()
+const templateListModel = require('../../models/template_list.js')
+
 
 Page({
   data: {
@@ -53,5 +55,20 @@ Page({
       },
       
     ]
+  },
+  onShow () {
+    console.log('I\'m in template_list page')
+    getTemplateListInfo()
+  },
+  onPullDownRefresh () {
+    console.log('pullDown')
+    getTemplateListInfo()
+  },
+  getTemplateListInfo () {
+    templateListModel.getTemplateList().then((res) => {
+      this.setData({
+        cateInfo: res
+      })
+    })
   }
 })

@@ -107,6 +107,10 @@ function login () {
         if (res.code) {
           // 登录远程服务器
           console.log(res)
+          wx.showModal({
+            title: 'code',
+            content: res.code
+          })
           resolve(res)
         } else {
           reject(res)
