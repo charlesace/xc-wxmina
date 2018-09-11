@@ -21,4 +21,5 @@
       lang="zh_CN"
       bindgetuserinfo="onGotUserInfo">登录</button>
   </form>
+  <text selectable="true">{{code}}</text>
 </view>

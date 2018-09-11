@@ -68,15 +68,15 @@ function request(url, data = {}, method = "GET") {
         reject(err)
         console.log('failed')
         wx.hideLoading()
-        wx.showToast({
-          title: '服务器故障或没有网络连接！',
-          icon: 'none',
-          duration: 2500,
-          mask: true,
-          success () {},
-          fail () {},
-          complete () {}
-        })
+        // wx.showToast({
+        //   title: '服务器故障或没有网络连接！',
+        //   icon: 'none',
+        //   duration: 2500,
+        //   mask: true,
+        //   success () {},
+        //   fail () {},
+        //   complete () {}
+        // })
       }
     })
   })
@@ -107,10 +107,6 @@ function login () {
         if (res.code) {
           // 登录远程服务器
           console.log(res)
-          wx.showModal({
-            title: 'code',
-            content: res.code
-          })
           resolve(res)
         } else {
           reject(res)

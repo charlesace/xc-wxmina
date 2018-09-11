@@ -58,11 +58,11 @@ Page({
   },
   onShow () {
     console.log('I\'m in template_list page')
-    getTemplateListInfo()
+    this.getTemplateListInfo()
   },
   onPullDownRefresh () {
     console.log('pullDown')
-    getTemplateListInfo()
+    this.getTemplateListInfo()
   },
   getTemplateListInfo () {
     templateListModel.getTemplateList().then((res) => {

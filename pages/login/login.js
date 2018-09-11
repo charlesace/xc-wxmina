@@ -5,12 +5,17 @@ const util = require('../../utils/util.js')
 Page({
   data: {
     username: '',
-    password: ''
+    password: '',
+    code: '',
   },
   onGotUserInfo (userInfo) {
 
     util.login().then((res) => {
       console.log(res)
+
+      this.setData({
+        code: res.code
+      })
 
       let username = this.data.username
       let password = this.data.password
