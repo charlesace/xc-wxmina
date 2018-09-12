@@ -1,6 +1,7 @@
-const ApiRootUrl = 'http://127.0.0.1:8360/api/'
+const ApiRootUrl = 'http://47.97.81.252:8012/'
 
 module.exports = {
+  soa: ApiRootUrl + 'service/soa',
   AuthLoginByWeixin: ApiRootUrl + 'auth/loginByWeixin',
   XCLogin: ApiRootUrl + 'login',
   XCLogout: ApiRootUrl + 'logout',

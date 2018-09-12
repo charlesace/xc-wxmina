@@ -11,14 +11,20 @@ Page({
   onGotUserInfo (userInfo) {
 
     util.login().then((res) => {
-      console.log(res)
+      let code = res.code
 
       this.setData({
-        code: res.code
+        code: code
       })
 
       let username = this.data.username
       let password = this.data.password
+
+      login.getOpenID({
+          code_no: code
+        }).then((openID) => {
+          
+        })
 
       login.loginByXC({
         username,

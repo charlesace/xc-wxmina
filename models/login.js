@@ -1,27 +1,36 @@
 const util = require('../utils/util.js')
 const api = require('../config/api.js')
+const soaUrl = api.soa
+const services = require('../config/soaService.js')
+
+function getOpenID (params) {
+  return util.request(
+    soaUrl,
+    params,
+    'GET',
+    services.getWechatOpenID
+  )
+}
 
 function loginByXC (data) {
-  let url = api.XCLogin
-
-  return Promise.resolve(true)
+  // return Promise.resolve(true)
   return util.request(
-    url,
+    soaUrl,
     data,
-    'POST'
+    'GET'
   )
 }
 
 function logoutByXC (data) {
-  let url = api.XCLogout
-
-  return Promise.resolve(true)
-  return util.request(url,
+  // return Promise.resolve(true)
+  return util.request(
+    soaUrl,
     data,
-    'POST')
+    'GET')
 }
 
 module.exports = {
+  getOpenID,
   loginByXC,
   logoutByXC
 }

@@ -38,27 +38,25 @@ const formatNumber = n => {
 
 // 封装微信 request
 
-function request(url, data = {}, method = "GET") {
+function request(url, data = {}, method = "GET", service) {
   return new Promise((resolve, reject) => {
-    console.log(data, new Date().getTime())
-    let appID = '6444759177398198272'
-    let token = 'ge80346e1aa874d93ada608e9042ab9d1'
-    let version = '1.0'
-    let md5Key = '22060f4662574492a0b1568a3f74f53a'
-    let timeStamp = new Date().getTime()
+    let timestamp = new Date().getTime()
+    let appID = wx.getStorageSync('appID') || '0'
+    let version = signConfig.version
+    let MD5Key = signConfig.MD5Key
+    let token = signConfig.token
 
+    let strMD5 = appID + timestamp + version + service + JSON.stringify(data) + MD5Key
 
-    let sign = md5(appID + timeStamp + version + 'employee.login' + data.toString() + md5Key)
-
-    console.log(sign)
+    let sign = md5(strMD5)
 
     let newData = {
       app_id: appID,
-      timeStamp: timeStamp,
+      timestamp: timestamp,
       version: version,
       sign: sign,
-      service: 'employee.login',
-      token,
+      service: service,
+      token: token,
       params: data
     }
 
@@ -70,11 +68,35 @@ function request(url, data = {}, method = "GET") {
         'Content-Type': 'application/json'  
       },
       success(res) {
+        let {
+          data,
+          errMsg,
+          statusCode,
+          header
+        } = res
         console.log('success')
         console.log(res)
 
-        if (res.statusCode === 200) {
-          resolve(res)
+        if (statusCode === 200) {
+          //  http请求成功
+          let response = JSON.parse(data.response)
+          let {
+            status,
+            message,
+            error_code,
+            result
+          } = response
+
+          if (status === 'OK') {
+            // 请求成功
+          } else if (status === 'error') {
+            // 请求失败
+            reject(response)
+          }
+
+          
+
+          // resolve(res)
 
           // let code = null
           // return login().then((res) => {
