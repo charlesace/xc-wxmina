@@ -17,12 +17,14 @@ Page({
     })
   },
   onLoad: function () {
-    console.log(app.globalData.userInfo)
-    console.log(app.globalData.scene)
+    console.log('index router')
 
     user.checkLogin().then(res => {
       console.log('app login')
-      this.globalData.userInfo = wx.getStorageInfoSync('userInfo')
+      wx.switchTab({
+          url: '../template_list/template_list'
+      })
+
     }).catch(err => {
       console.log('login fail')
       wx.redirectTo({

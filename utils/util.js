@@ -41,10 +41,16 @@ const formatNumber = n => {
 function request(url, data = {}, method = "GET", service) {
   return new Promise((resolve, reject) => {
     let timestamp = parseInt(new Date().getTime() / 1000, 10)
-    let appID = wx.getStorageSync('appID') || '0'
+    let appID = '0'
     let version = signConfig.version
     let MD5Key = signConfig.MD5Key
     let token = signConfig.token
+
+    if (data['app_id']) {
+        appID = data['app_id']
+    } else {
+        appID = wx.getStorageSync('appID') || '0'
+    }
 
     let strMD5 = appID + timestamp + version + service + JSON.stringify(data) + MD5Key
 
@@ -92,6 +98,10 @@ function request(url, data = {}, method = "GET", service) {
             resolve(result)
           } else if (status === 'error') {
             // 请求失败
+            wx.showToast({
+              title: message + 'code: ' + error_code,
+              icon: 'none'
+            })
             reject(response)
           }
 
