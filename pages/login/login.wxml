@@ -1,24 +1,32 @@
 <view class="container">
-  <form class="login-dialog">
-    <view class="section">
-      <text class="iconfont icon-user"></text>
-      <input placeholder="请输入登录账号"
-        placeholder-class="place-holder"
-        bindinput="bindinputUsername"
-        focus/>
+    <view class="frame">
+        <image class="logo" src="../../res/img/logo.png"></image>
+        <view class="section">
+            <text class="iconfont icon-user"></text>
+            <input placeholder="请输入登录账号"
+                placeholder-class="place-holder"
+                confirm-type="next"
+                confirm-hold="true"
+                bindconfirm="onAccountConfirm"
+                bindinput="bindinputUsername"
+                maxlength="20">
+            </input>
+        </view>
+        <view class="section">
+            <text class="iconfont icon-lock"></text>
+            <input type="password"
+                placeholder-class="place-holder"
+                placeholder="请输入登录密码"
+                bindinput="bindinputPassword"
+                maxlength="20"
+                focus="{{pwdFocus}}">
+            </input>
+        </view>
+        <button
+            class="btn-login"
+            form-type="submit"
+            open-type="getUserInfo"
+            lang="zh_CN"
+            bindgetuserinfo="onGotUserInfo">登录</button>
     </view>
-    <view class="section">
-      <text class="iconfont icon-lock"></text>
-      <input type="password"
-        placeholder-class="place-holder"
-        placeholder="请输入登录密码"
-        bindinput="bindinputPassword"/>
-    </view>
-    <button
-      class="btn-login"
-      form-type="submit"
-      open-type="getUserInfo"
-      lang="zh_CN"
-      bindgetuserinfo="onGotUserInfo">登录</button>
-  </form>
 </view>
