@@ -39,122 +39,127 @@ const formatNumber = n => {
 // 封装微信 request
 
 function request(url, data = {}, method = "GET", service) {
-  return new Promise((resolve, reject) => {
-    let timestamp = parseInt(new Date().getTime() / 1000, 10)
-    let appID = '0'
-    let version = signConfig.version
-    let MD5Key = signConfig.MD5Key
-    let token = signConfig.token
-
-    if (data['app_id']) {
-        appID = data['app_id']
-    } else {
-        appID = wx.getStorageSync('appID') || '0'
-    }
-
-    let strMD5 = appID + timestamp + version + service + JSON.stringify(data) + MD5Key
-
-    let sign = md5(strMD5)
-
-    let newData = {
-      app_id: appID,
-      timestamp: timestamp,
-      version: version,
-      sign: sign,
-      service: service,
-      token: token,
-      params: data
-    }
-
-    wx.request({
-      url: url,
-      data: newData,
-      method: method,
-      header: {
-        'Content-Type': 'application/json'  
-      },
-      success(res) {
-        let {
-          data,
-          errMsg,
-          statusCode,
-          header
-        } = res
-        // console.log('success')
-        // console.log(res)
-
-        if (statusCode === 200) {
-          //  http请求成功
-          let response = JSON.parse(data.response)
-          let {
-            status,
-            message,
-            error_code,
-            result
-          } = response
-
-          if (status === 'OK') {
-            // 请求成功
-            resolve(result)
-          } else if (status === 'error') {
-            // 请求失败
-            wx.showToast({
-              title: message + 'code: ' + error_code,
-              icon: 'none'
-            })
-            reject(response)
-          }
-
-          
-
-          // resolve(res)
-
-          // let code = null
-          // return login().then((res) => {
-          //   code = res.code
-          //   return getUserInfo()
-          // }).then((userInfo) => {
-          //   //  登录远程服务器
-          //   request(api.AuthLoginByWeixin,
-          //     {
-          //       code: code,
-          //       userInfo: userInfo
-          //     },
-          //     'POST').then((res) => {
-          //       if (res.errorno === 0) {
-          //         //  存储用户信息
-          //         wx.setStorageSync('userInfo', res.data.userInfo)
-
-          //         resolve(res)
-          //       } else {
-          //         reject(res)
-          //       }
-          //     }).catch((err) => {
-          //       reject(err)
-          //     })
-          // }).catch((err) => {
-          //   reject(err)
-          // })
-        } else {
-          reject(res.errMsg)
-        }
-      },
-      fail(err) {
-        reject(err)
-        console.log('failed')
-        wx.hideLoading()
-        // wx.showToast({
-        //   title: '服务器故障或没有网络连接！',
-        //   icon: 'none',
-        //   duration: 2500,
-        //   mask: true,
-        //   success () {},
-        //   fail () {},
-        //   complete () {}
-        // })
-      }
+    wx.showLoading({
+        mask: true
     })
-  })
+
+    return new Promise((resolve, reject) => {
+        let timestamp = parseInt(new Date().getTime() / 1000, 10)
+        let appID = '0'
+        let version = signConfig.version
+        let MD5Key = signConfig.MD5Key
+        let token = signConfig.token
+
+        if (data['app_id']) {
+            appID = data['app_id']
+        } else {
+            appID = wx.getStorageSync('appID') || '0'
+        }
+
+        let strMD5 = appID + timestamp + version + service + JSON.stringify(data) + MD5Key
+
+        let sign = md5(strMD5)
+
+        let newData = {
+        app_id: appID,
+        timestamp: timestamp,
+        version: version,
+        sign: sign,
+        service: service,
+        token: token,
+        params: data
+        }
+
+        wx.request({
+        url: url,
+        data: newData,
+        method: method,
+        header: {
+            'Content-Type': 'application/json'  
+        },
+        success(res) {
+            wx.hideLoading()
+
+            let {
+                data,
+                errMsg,
+                statusCode,
+                header
+            } = res
+            // console.log('success')
+            // console.log(res)
+
+            if (statusCode === 200) {
+            //  http请求成功
+                let response = JSON.parse(data.response)
+                let {
+                    status,
+                    message,
+                    error_code,
+                    result
+                } = response
+
+                if (status === 'OK') {
+                    // 请求成功
+                    resolve(result)
+                } else if (status === 'error') {
+                    // 请求失败
+                    wx.showToast({
+                    title: message + 'code: ' + error_code,
+                    icon: 'none'
+                    })
+                    reject(response)
+                }
+
+                
+
+                // resolve(res)
+
+                // let code = null
+                // return login().then((res) => {
+                //   code = res.code
+                //   return getUserInfo()
+                // }).then((userInfo) => {
+                //   //  登录远程服务器
+                //   request(api.AuthLoginByWeixin,
+                //     {
+                //       code: code,
+                //       userInfo: userInfo
+                //     },
+                //     'POST').then((res) => {
+                //       if (res.errorno === 0) {
+                //         //  存储用户信息
+                //         wx.setStorageSync('userInfo', res.data.userInfo)
+
+                //         resolve(res)
+                //       } else {
+                //         reject(res)
+                //       }
+                //     }).catch((err) => {
+                //       reject(err)
+                //     })
+                // }).catch((err) => {
+                //   reject(err)
+                // })
+            } else {
+            reject(res.errMsg)
+            }
+        },
+        fail(err) {
+            reject(err)
+            wx.hideLoading()
+            // wx.showToast({
+            //   title: '服务器故障或没有网络连接！',
+            //   icon: 'none',
+            //   duration: 2500,
+            //   mask: true,
+            //   success () {},
+            //   fail () {},
+            //   complete () {}
+            // })
+        }
+        })
+    })
 }
 /**
  * 检查微信会话是否过期
