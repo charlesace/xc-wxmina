@@ -40,7 +40,13 @@ Page({
           code_no: code,
           app_id: appID
         }).then((res) => {
-          
+          let wxOpenID = res['wx_openid']
+
+          wx.setStorageSync('wxOpenID', wxOpenID)
+
+          wx.switchTab({
+              url: '../template_list/template_list'
+          })
         })
       })
 
