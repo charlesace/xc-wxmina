@@ -65,10 +65,17 @@ Page({
     this.getTemplateListInfo()
   },
   getTemplateListInfo () {
-    templateListModel.getTemplateList().then((res) => {
-      this.setData({
-        cateInfo: res
+      let appID = wx.getStorageSync('appID')
+
+      templateListModel.getTemplateList({
+          app_id: appID
+      }).then((res) => {
+          let cateInfo = res['catalog_list']
+
+          this.setData({
+              cateInfo: cateInfo
+          })
+
       })
-    })
   }
 })
