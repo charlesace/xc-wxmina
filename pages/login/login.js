@@ -4,8 +4,8 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
-    username: '',
-    password: '',
+    username: 'shou',
+    password: '123456',
     code: '',
   },
   onGotUserInfo (userInfo) {
@@ -20,13 +20,31 @@ Page({
       let username = this.data.username
       let password = this.data.password
 
+      let appID = wx.getStorageSync('appID')
+
       login.loginByXC({
-        username,
+        login_account: username,
         password,
         app_id: '0'
       }).then((res) => {
+        let appID = res['app_id']
+        let mobile = res['mobile']
+        let userName = res['name']
+        let userType = res['type']
 
+        wx.setStorageSync('userInfo', res)
+        wx.setStorageSync('appID', appID)
+        console.log('res', res)
+
+        login.getOpenID({
+          code_no: code,
+          app_id: appID
+        }).then((res) => {
+          
+        })
       })
+
+      
 
       // login.getOpenID({
       //     code_no: code
