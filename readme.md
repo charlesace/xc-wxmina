@@ -14,3 +14,8 @@ https://api.xxxxx.com/service/soa
 ## 登录流程
 1. 使用用户名密码登录（appID 传递 0），获取 appID
 2. 使用 appID 获取 wx_openid
+
+
+
+## 测试账号
+账号 shou 密码 123456
