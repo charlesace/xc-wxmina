@@ -40,7 +40,7 @@ const formatNumber = n => {
 
 function request(url, data = {}, method = "GET", service) {
   return new Promise((resolve, reject) => {
-    let timestamp = new Date().getTime()
+    let timestamp = parseInt(new Date().getTime() / 1000, 10)
     let appID = wx.getStorageSync('appID') || '0'
     let version = signConfig.version
     let MD5Key = signConfig.MD5Key
