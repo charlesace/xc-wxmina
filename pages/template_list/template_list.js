@@ -1,5 +1,5 @@
 const app = getApp()
-const templateListModel = require('../../models/template_list.js')
+const templateModel = require('../../models/template.js')
 
 
 Page({
@@ -67,10 +67,11 @@ Page({
   getTemplateListInfo () {
       let appID = wx.getStorageSync('appID')
 
-      templateListModel.getTemplateList({
+      templateModel.getTemplateList({
           app_id: appID
       }).then((res) => {
           let cateInfo = res['catalog_list']
+          console.log(cateInfo)
 
           this.setData({
               cateInfo: cateInfo

@@ -21,6 +21,17 @@ function getTemplateList (data) {
     )
 }
 
+function getTemplateDetail(data) {
+
+    return util.request(
+        soaUrl,
+        data,
+        'GET',
+        services.getSplitTemplate
+    )
+}
+
 module.exports = {
-  getTemplateList
+    getTemplateList,
+    getTemplateDetail
 }

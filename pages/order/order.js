@@ -1,3 +1,5 @@
+const templateModel = require('../../models/template.js')
+
 // pages/order/order.js
 Page({
 
@@ -5,14 +7,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+      templateID: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+      console.log(options)
+      let templateID = options['templateID']
+      this.setData({
+          templateID: templateID
+      }, this.getTemplateDetail)
   },
 
   /**
@@ -25,8 +31,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow: function () { 
   },
 
   /**
@@ -62,5 +67,20 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  getTemplateDetail () {
+      let templateID = this.data.templateID
+      let params = {
+          product_id: templateID
+      }
+
+      console.log(params)
+
+      templateModel.getTemplateDetail({
+          product_id: templateID
+      }).then((result) => {
+
+      })
   }
 })
