@@ -74,8 +74,8 @@ function request(url, data = {}, method = "GET", service) {
           statusCode,
           header
         } = res
-        console.log('success')
-        console.log(res)
+        // console.log('success')
+        // console.log(res)
 
         if (statusCode === 200) {
           //  http请求成功
@@ -89,6 +89,7 @@ function request(url, data = {}, method = "GET", service) {
 
           if (status === 'OK') {
             // 请求成功
+            resolve(result)
           } else if (status === 'error') {
             // 请求失败
             reject(response)
