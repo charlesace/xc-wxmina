@@ -20,24 +20,32 @@ Page({
       let username = this.data.username
       let password = this.data.password
 
-      login.getOpenID({
-          code_no: code
-        }).then((openID) => {
-          
-        })
-
       login.loginByXC({
         username,
-        password
+        password,
+        app_id: '0'
       }).then((res) => {
-        console.log('success', res)
-        wx.switchTab({
-          url: '../template_list/template_list'
-        })
 
-      }).catch((err) => {
-        console.log('error', err)
       })
+
+      // login.getOpenID({
+      //     code_no: code
+      //   }).then((openID) => {
+
+      //   })
+
+      // login.loginByXC({
+      //   username,
+      //   password
+      // }).then((res) => {
+      //   console.log('success', res)
+      //   wx.switchTab({
+      //     url: '../template_list/template_list'
+      //   })
+
+      // }).catch((err) => {
+      //   console.log('error', err)
+      // })
     })
   },
   bindinputUsername (event) {

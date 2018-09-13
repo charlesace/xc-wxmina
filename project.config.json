@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -50,7 +50,21 @@
 				{
 					"id": -1,
 					"name": "test_api",
-					"pathName": "pages/test_api/test_api"
+					"pathName": "pages/test_api/test_api",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "login",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "fromQrcode",
+					"pathName": "pages/index/index",
+					"scene": "1011"
 				}
 			]
 		}

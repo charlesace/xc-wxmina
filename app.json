@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/login/login",
     "pages/template_list/template_list",
-    "pages/index/index",
     "pages/user_center/user_center",
     "pages/logs/logs",
     "pages/order/order",

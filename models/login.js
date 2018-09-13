@@ -17,7 +17,8 @@ function loginByXC (data) {
   return util.request(
     soaUrl,
     data,
-    'GET'
+    'GET',
+    services.login
   )
 }
 
