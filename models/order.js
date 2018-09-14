@@ -20,7 +20,8 @@ function getMemberAuthStatus (data) {
         soaUrl,
         data,
         'POST',
-        services.memberAuthStatusGet
+        services.memberAuthStatusGet,
+        true
     )
 }
 
