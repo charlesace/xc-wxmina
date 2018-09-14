@@ -12,7 +12,7 @@
               <view class="weui-cells weui-cells_in-small-appmsg">
                 <navigator wx:for="{{item.product_list}}"
                   wx:key="split_rule_id"
-                  url="/pages/order/order?templateID={{item.split_rule_id}}"
+                  url="/pages/order/order?templateID={{item.product_id}}"
                   class="weui-cell weui-cell_access"
                   hover-class="weui-cell_active">
                     <view class="weui-cell__bd weui-cell_primary">

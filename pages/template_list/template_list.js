@@ -11,6 +11,7 @@ Page({
     //     product_list: [
     //       {
     //         product_name: '万科aaa',
+    //         product_id: '1',
     //         is_create_member: true,
     //         is_confirm_split: false,
     //         split_rule_id: '111'
