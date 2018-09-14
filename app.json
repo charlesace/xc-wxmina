@@ -1,31 +1,31 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/login/login",
-    "pages/template_list/template_list",
-    "pages/user_center/user_center",
-    "pages/logs/logs",
-    "pages/order/order",
-    "pages/test_api/test_api"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "color": "#000",
-    "selectedColor": "#3d7ce2",
-    "list": [
-      {
-        "pagePath": "pages/template_list/template_list",
-        "text": "收款"
-      },
-      {
-        "pagePath": "pages/user_center/user_center",
-        "text": "我的"
-      }
-    ]
-  }
+    "pages": [  
+        "pages/index/index",
+        "pages/login/login",
+        "pages/template_list/template_list",
+        "pages/user_center/user_center",
+        "pages/logs/logs",
+        "pages/order/order",
+        "pages/test_api/test_api"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "WeChat",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "color": "#000",
+        "selectedColor": "#3d7ce2",
+        "list": [
+        {
+            "pagePath": "pages/template_list/template_list",
+            "text": "收款"
+        },
+        {
+            "pagePath": "pages/user_center/user_center",
+            "text": "我的"
+        }
+        ]
+    }
 }
