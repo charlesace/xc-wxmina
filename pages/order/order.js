@@ -8,10 +8,63 @@ Page({
    */
     data: {
         productID: '',
-        productName: '',
-        members: [],
-        orderConfig: [],
-        splitRuleID: ''
+        productName: '21312',
+        members: [
+            {
+                "assigned_member_id": "6445191069863911424",
+                "is_seller_member": true,
+                "role_code": "R003",
+                "assigned_member_name": "刘子巧11",
+                "role_name": "卖家"
+            },
+            {
+                "assigned_member_id": "6445228747670036480",
+                "is_member_show": true,
+                "role_code": "R002",
+                "assigned_member_name": "刘子巧",
+                "role_name": "买家"
+            },
+            {
+                "assigned_member_id": "6445212271437291520",
+                "is_member_show": true,
+                "role_code": "R001",
+                "assigned_member_name": "金奥",
+                "role_name": "开发商"
+            },
+            {
+                "assigned_member_id": "6445447698853273600",
+                "is_member_updatable": false,
+                "is_member_show": true,
+                "role_code": "R000",
+                "assigned_member_name": "崔博",
+                "role_name": "平台角色"
+            }
+        ],
+        orderConfig: [
+            {
+                "field": "DF",
+                "label": "FSAF"
+            },
+            {
+                "field": "C",
+                "control": "TextInput",
+                "is_required": true,
+                "label": "商品总数"
+            },
+            {
+                "field": "B",
+                "control": "TextInput",
+                "is_required": true,
+                "label": "商品进价"
+            },
+            {
+                "field": "A",
+                "control": "TextInput",
+                "is_required": true,
+                "label": "订单总额"
+            }
+        ],
+        splitRuleID: '6445460536065925120'
     },
 
     /**
@@ -89,7 +142,7 @@ Page({
             let members = result['members']
             let splitRuleID = result['split_rule_id']
 
-            console.log(result)
+            console.log(productName, orderConfig, members, splitRuleID)
             this.setData({
                 productName: productName,
                 orderConfig: orderConfig,

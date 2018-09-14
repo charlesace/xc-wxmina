@@ -25,9 +25,9 @@
                 <view class="weui-cell__ft weui-cell__ft_in-access"></view>
             </view>
         </view> -->
-        <!-- member Info -->
 
         <view class="weui-panel">
+            <!-- member Info -->
             <view class="weui-cell weui-cell_link"
                 wx:for="{{members}}"
                 wx:key="role_code"
@@ -39,6 +39,40 @@
                 </view> -->
                 <view class="weui-cell__ft weui-cell__ft_in-access"
                     wx:if="{{item.is_member_updatable}}">
+                </view>
+            </view>
+            <!-- orderConfig -->
+            <!-- <view class="weui-cells weui-cells_after-title"
+                wx:for="{{orderConfig}}"
+                wx:key="field">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">qq</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入qq"/>
+                </view>
+            </view> -->
+
+            <view
+                class="order-cell"
+                wx:for="{{orderConfig}}"
+                wx:key="field">
+                <!-- <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">{{item.label}}</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" placeholder=""/>
+                    </view>
+                </view> -->
+                <view class="order-cell-input"
+                    wx:if="{{item.control === 'TextInput'}}">
+                    <view class="order-cell___hd">
+                        <view class="order-cell-label">{{item.label}}</view>
+                    </view>
+                    <view class="order-cell__bd">
+                        <input type="digit"></input>
+                    </view>
                 </view>
             </view>
         </view>

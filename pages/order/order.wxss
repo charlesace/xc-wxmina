@@ -56,3 +56,31 @@ page {
   background-color: #008fff;
   color: #fff;
 }
+
+.weui-cell {
+    position: static;
+    border-bottom: 1px solid #ddd;
+}
+
+.order-cell {
+    padding:10px 15px;
+    display:flex;
+    align-items:center;
+
+    border-bottom: 1px solid #ddd;
+}
+.order-cell-input {
+    display:flex;
+    justify-content: space-between;
+
+    width: 100%;
+    font-size: 14px;
+}
+.order-cell-input .order-cell-label{
+    width: 105px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.order-cell {
+    
+}
