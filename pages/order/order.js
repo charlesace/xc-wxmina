@@ -1,6 +1,7 @@
 const templateModel = require('../../models/template.js')
-const orderModal = require('../../models/order.js')
-var QRCode = require('../../lib/qrcode.js')
+const orderModel = require('../../models/order.js')
+const QRCode = require('../../lib/qrcode.js')
+const util = require('../../utils/util.js')
 
 // pages/order/order.js
 Page({
@@ -10,6 +11,7 @@ Page({
    */
     data: {
         hiddenQrcode: true,
+        xcAuthNO: '',
         productID: '',
         productName: '21312',
         members: [
@@ -157,9 +159,13 @@ Page({
     },
 
     showQrcodeModal () {
-        orderModal.getMemberAuthno({}).then((result) => {
+        orderModel.getMemberAuthno({}).then((result) => {
             let xcAuthNO = result['xc_auth_no']
             let productID = this.data['productID']
+
+            this.setData({
+                xcAuthNO: xcAuthNO
+            })
 
             let qrcodeUrl = `http(s)://xxxx/cashier/auth?member_auth_id=${xcAuthNO}&product_id=${productID}`
 
@@ -168,6 +174,8 @@ Page({
                 width: 150,
                 height: 150
             })
+
+            this.getAuthStatus()
         })
         this.setData({
             hiddenQrcode: false
@@ -177,6 +185,22 @@ Page({
     closeQrcodeModal () {
         this.setData({
             hiddenQrcode: true
+        })
+
+        clearInterval(this.data.interval)
+        this.data.interval = null
+    },
+
+    //  获取客户扫码认证状态
+    getAuthStatus () {
+        let getMemberAuthStatus = orderModel.getMemberAuthStatus
+
+        let interval = util.interval(getMemberAuthStatus, 2000, {
+            xc_auth_no: this.data.xcAuthNO
+        })
+
+        this.setData({
+            interval: interval
         })
     }
 })

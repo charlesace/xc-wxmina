@@ -15,7 +15,16 @@ function getMemberAuthno (data) {
     )
 }
 
+function getMemberAuthStatus (data) {
+    return util.request(
+        soaUrl,
+        data,
+        'POST',
+        services.memberAuthStatusGet
+    )
+}
 
 module.exports = {
-    getMemberAuthno
+    getMemberAuthno,
+    getMemberAuthStatus
 }

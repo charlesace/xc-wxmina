@@ -7,11 +7,11 @@ module.exports = {
     getSplitTemplate: 'employee.split.template.query',
     orderCreate: 'employee.order.create',
     getOrderDetail: 'employee.order.detail.query',
-    memberAuthnoGet: 'member.authno.get',
     // 绑卡相关
+    memberAuthnoGet: 'member.authno.get',
     memberCreate: 'member.create',
     memberCreateVerify: 'member.create.verify',
     memberPersonBindCard: 'member.person.apply.bindcard',
     memberPersonBindCardConfirm: 'member.person.confrim.bindcard',
-    memberAuthNoQuery: 'member.authno.query'
+    memberAuthStatusGet: 'member.authno.query'
 }

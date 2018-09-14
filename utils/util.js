@@ -226,10 +226,19 @@ function getUserInfo () {
 }
 
 
+function interval (callback, timeout, param) {
+    let args = Array.prototype.splice.call(arguments, 2)
+    var _cb = function () {
+        callback.apply(null, args)
+    }
+    return setInterval(_cb, timeout)
+}
+
 module.exports = {
-  formatTime: formatTime,
-  request,
-  checkSession,
-  login,
-  getUserInfo
+    formatTime: formatTime,
+    request,
+    checkSession,
+    login,
+    getUserInfo,
+    interval
 }
