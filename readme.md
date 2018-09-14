@@ -25,3 +25,12 @@ http(s)://xxxx/cashier/auth?member_auth_id=111&product_id=222
 
 ## 测试账号
 账号 shou 密码 123456
+
+## 后台
+http://47.97.81.252:8011/cashier
+administrator
+admin
+
+
+ceshi3-cyx
+772675
