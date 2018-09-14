@@ -82,3 +82,11 @@ page {
 .order-cell .order-cell-value {
     /* align-self: flex-end; */
 }
+
+modal canvas {
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 300rpx;
+    height: 300rpx;
+}

@@ -1,4 +1,6 @@
 const templateModel = require('../../models/template.js')
+const orderModal = require('../../models/order.js')
+var QRCode = require('../../lib/qrcode.js')
 
 // pages/order/order.js
 Page({
@@ -7,6 +9,7 @@ Page({
    * 页面的初始数据
    */
     data: {
+        hiddenQrcode: true,
         productID: '',
         productName: '21312',
         members: [
@@ -150,6 +153,30 @@ Page({
                 splitRuleID: splitRuleID
             })
 
+        })
+    },
+
+    showQrcodeModal () {
+        orderModal.getMemberAuthno({}).then((result) => {
+            let xcAuthNO = result['xc_auth_no']
+            let productID = this.data['productID']
+
+            let qrcodeUrl = `http(s)://xxxx/cashier/auth?member_auth_id=${xcAuthNO}&product_id=${productID}`
+
+            let qrcode = new QRCode('canvas', {
+                text: qrcodeUrl,
+                width: 150,
+                height: 150
+            })
+        })
+        this.setData({
+            hiddenQrcode: false
+        })
+    },
+
+    closeQrcodeModal () {
+        this.setData({
+            hiddenQrcode: true
         })
     }
 })
