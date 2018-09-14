@@ -192,12 +192,32 @@ Page({
     },
 
     //  获取客户扫码认证状态
+    handleAuthStatusChange () {
+        return orderModel.getMemberAuthStatus({
+            xc_auth_no: this.data.xcAuthNO
+        }).then((result) => {
+            console.log(result)
+            let {
+                member_id,
+                is_bind_card
+            } = result
+
+            if (member_id && is_bind_card) {
+                clearInterval(this.data.interval)
+            }
+
+        }).catch((error) => {
+        })
+    },
+
     getAuthStatus () {
         let getMemberAuthStatus = orderModel.getMemberAuthStatus
 
-        let interval = util.interval(getMemberAuthStatus, 2000, {
+        let interval = util.interval(this.handleAuthStatusChange, 2000, {
             xc_auth_no: this.data.xcAuthNO
         })
+
+        // let interval = setInterval(this.h, 2000)
 
         this.setData({
             interval: interval
