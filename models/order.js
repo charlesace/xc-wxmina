@@ -15,6 +15,7 @@ function getMemberAuthno (data) {
     )
 }
 
+
 module.exports = {
     getMemberAuthno
 }

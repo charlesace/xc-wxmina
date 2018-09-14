@@ -16,6 +16,12 @@ https://api.xxxxx.com/service/soa
 2. 使用 appID 获取 wx_openid
 
 
+## 配置
+微信后台配置 选择前缀匹配
+http(s)://xxxx/cashier/auth
+
+生成二维码地址
+http(s)://xxxx/cashier/auth?member_auth_id=111&product_id=222
 
 ## 测试账号
 账号 shou 密码 123456
