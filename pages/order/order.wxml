@@ -1,5 +1,6 @@
 <!--pages/order/order.wxml-->
-<view class="page">
+<scroll-view class="page"
+    scroll-y="true">
     <view class="page__hd">
         <view class="product-name">{{productName}}</view>
         <view class="input-tip">请输入消费总金额</view>
@@ -71,7 +72,7 @@
                         <view class="order-cell-label">{{item.label}}</view>
                     </view>
                     <view class="order-cell__bd">
-                        <input type="digit"></input>
+                        <input type="digit" class="order-cell-value"></input>
                     </view>
                 </view>
             </view>
@@ -87,7 +88,7 @@
                         <text class="auth-status">待认证</text>
                         <!-- <text class="auth-status">已认证</text> -->
                     </view>
-                    <view class="weui-cell__ft">
+                    <view class="weui-cell__ft weui-cell__ft_in-access">
                         <text class="iconfont icon-qrcode"></text>
                         <!-- <text>13344445555</text> -->
                     </view>
@@ -99,4 +100,4 @@
     <view class="page__ft">
         <button class="btn-confirm">确认下单</button>
     </view>
-</view>
+</scroll-view>

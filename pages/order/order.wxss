@@ -36,12 +36,10 @@ page {
 
 .page__bd {
   margin-top: 30rpx;
-  padding-bottom: 100rpx;
+  padding-bottom: 20rpx;
 }
 
 .page__ft {
-  position:fixed;
-  bottom: 0;
 
   width: 100%;
 
@@ -81,6 +79,6 @@ page {
     word-wrap: break-word;
     word-break: break-all;
 }
-.order-cell {
-    
+.order-cell .order-cell-value {
+    /* align-self: flex-end; */
 }
