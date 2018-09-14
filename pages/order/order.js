@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-      templateID: ''
+      productID: ''
   },
 
   /**
@@ -15,9 +15,9 @@ Page({
    */
   onLoad: function (options) {
       console.log(options)
-      let templateID = options['templateID']
+      let productID = options['productID']
       this.setData({
-          templateID: templateID
+          productID: productID
       }, this.getTemplateDetail)
   },
 
@@ -70,15 +70,15 @@ Page({
   },
 
   getTemplateDetail () {
-      let templateID = this.data.templateID
+      let productID = this.data.productID
       let params = {
-          product_id: templateID
+          product_id: productID
       }
 
       console.log(params)
 
       templateModel.getTemplateDetail({
-          product_id: templateID
+          product_id: productID
       }).then((result) => {
 
       })
