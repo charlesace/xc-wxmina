@@ -1,2 +1,4 @@
 <!--pages/test_api/test_api.wxml-->
-<button bindtap="request">POST</button>
+<button bindtap="sendRequest">POST</button>
+<view>response:</view>
+<view>{{response}}</view>
