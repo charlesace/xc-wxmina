@@ -91,7 +91,8 @@ function request(url, data = {}, method = "GET", service) {
 
             if (statusCode === 200) {
             //  http请求成功
-                let response = JSON.parse(data.response)
+                // let response = JSON.parse(data.response)
+                let response = data.response
                 let {
                     status,
                     message,
@@ -142,7 +143,7 @@ function request(url, data = {}, method = "GET", service) {
                 //   reject(err)
                 // })
             } else {
-            reject(res.errMsg)
+                reject(res.errMsg)
             }
         },
         fail(err) {
