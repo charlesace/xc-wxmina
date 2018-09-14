@@ -28,17 +28,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    util.request(
-      'http://47.97.81.252:8012/service/soa',
-      {
-        login_account: 'shou',
-        password: '123456',
-        wx_openid: 'o_bXM4jYesiOeSKK-Jeb3rgX6DSw'
-      },
-      'GET'
-    ).then((res) => {
-      console.log(res)
-    })
+    // util.request(
+    //   'http://47.97.81.252:8012/service/soa',
+    //   {
+    //     login_account: 'shou',
+    //     password: '123456',
+    //     wx_openid: 'o_bXM4jYesiOeSKK-Jeb3rgX6DSw'
+    //   },
+    //   'GET'
+    // ).then((res) => {
+    //   console.log(res)
+    // })
   },
 
   /**
@@ -74,5 +74,20 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+    request () {
+        util.request(
+            'http://47.97.81.252:8012/service/soa',
+            {
+                login_account: 'shou',
+                password: '123456',
+                appid: '0'
+            },
+            'POST',
+            'employee.login'
+        ).then((res) => {
+            console.log(res)
+        })
+    }
 })
