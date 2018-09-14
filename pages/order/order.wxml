@@ -1,5 +1,5 @@
 <!--pages/order/order.wxml-->
-<scroll-view class="page"
+<view class="page"
     scroll-y="true">
     <view class="page__hd">
         <view class="product-name">{{productName}}</view>
@@ -106,4 +106,4 @@
     <view class="page__ft">
         <button class="btn-confirm">确认下单</button>
     </view>
-</scroll-view>
+</view>
