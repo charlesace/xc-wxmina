@@ -6,17 +6,16 @@ const http = require('../utils/httpRequest.js')
 
 module.exports = {
     // 获取买家临时唯一编码
-    getMemberAuthno: function(data) {
-        return http.request(
-            data,
-            'member.authno.get'
-        )
+    getMemberAuthNo: function() {
+        return http.request('member.authno.get')
     },
 
-    getMemberAuthStatus: function(data) {
+    // 获取买家认证状态
+    getMemberAuthStatus: function(authNo) {
         return http.request(
-            data,
-            'member.authno.query',
+            'member.authno.query', {
+                xc_auth_no: authNo
+            },
             true
         )
     }

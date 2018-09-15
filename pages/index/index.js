@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const user = require('../../models/user.js')
+const login = require('../../models/login.js')
 
 Page({
     data: {
@@ -17,17 +17,17 @@ Page({
         })
     },
     onLoad: function(query) {
-        console.log('index router')
-        console.log(query)
+        // console.log('index router')
+        // console.log(query)
 
-        user.checkLogin().then(res => {
-            console.log('app login')
+        login.checkLogin().then(res => {
+            // console.log('app login')
             wx.switchTab({
                 url: '../template_list/template_list'
             })
 
         }).catch(err => {
-            console.log('login fail')
+            // console.log('login fail')
             wx.redirectTo({
                 url: '../../pages/login/login'
             })

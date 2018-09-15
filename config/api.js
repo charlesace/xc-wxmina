@@ -5,5 +5,4 @@ module.exports = {
     AuthLoginByWeixin: ApiRootUrl + 'auth/loginByWeixin',
     XCLogin: ApiRootUrl + 'login',
     XCLogout: ApiRootUrl + 'logout',
-    getTemplateList: ApiRootUrl + 'getTemplateList'
 }

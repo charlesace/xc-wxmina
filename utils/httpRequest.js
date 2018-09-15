@@ -7,26 +7,18 @@ const md5 = require('../lib/md5.js')
 const signConfig = require('../config/sign.js')
 
 module.exports = {
-    request: function(data = {}, service, poll) {
+    request: function(service, data = {}, poll = false) {
         let url = api.soa
         let method = 'POST'
         let isPoll = poll
 
         return new Promise((resolve, reject) => {
             let timestamp = parseInt(new Date().getTime() / 1000, 10)
-            let appID = '0'
             let version = signConfig.version
             let MD5Key = signConfig.MD5Key
             let token = signConfig.token
-
-            if (data['app_id']) {
-                appID = data['app_id']
-            } else {
-                appID = wx.getStorageSync('appID') || '0'
-            }
-
+            let appID = data['app_id'] || wx.getStorageSync('appId') || '0'
             let strMD5 = appID + timestamp + version + service + JSON.stringify(data) + MD5Key
-
             let sign = md5(strMD5)
 
             let newData = {
@@ -111,29 +103,6 @@ module.exports = {
                 },
                 complete() {
                     // wx.hideLoading()
-                }
-            })
-        })
-    },
-
-
-    /**
-     * 调用微信登录
-     */
-    login: function() {
-        return new Promise((resolve, reject) => {
-            wx.login({
-                success(res) {
-                    if (res.code) {
-                        // 登录远程服务器
-                        console.log(res)
-                        resolve(res)
-                    } else {
-                        reject(res)
-                    }
-                },
-                fail(err) {
-                    reject(err)
                 }
             })
         })

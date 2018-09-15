@@ -8,8 +8,8 @@ module.exports = {
     getTemplateList: function(data) {
 
         return http.request(
-            data,
-            'xxx'
+            'xxx',
+            data
         )
     }
 

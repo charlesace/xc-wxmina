@@ -64,9 +64,7 @@ Page({
     },
 
     getTemplateDetail(productId) {
-        templateModel.getTemplateDetail({
-            product_id: productId
-        }).then((result) => {
+        templateModel.getTemplateDetail(productId).then((result) => {
             console.log(result)
             this.setData({
                 productName: result['product_name'],
@@ -78,8 +76,8 @@ Page({
     testPhone() {
         if (!util.isPhoneNumber(this.data.phone)) {
             wx.showToast({
-                title: "请输入正确的手机号",
-                icon: "none"
+                title: '请输入正确的手机号',
+                icon: 'none'
             })
             return false
         }

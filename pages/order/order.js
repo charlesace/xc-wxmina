@@ -129,16 +129,7 @@ Page({
     },
 
     getTemplateDetail() {
-        let productID = this.data.productID
-        let params = {
-            product_id: productID
-        }
-
-        console.log(params)
-
-        templateModel.getTemplateDetail({
-            product_id: productID
-        }).then((result) => {
+        templateModel.getTemplateDetail(this.data.productID).then((result) => {
             let productName = result['product_name']
             let orderConfig = result['order_config']
             let members = result['members']
@@ -156,9 +147,9 @@ Page({
     },
 
     showQrcodeModal() {
-        orderModel.getMemberAuthno({}).then((result) => {
+        orderModel.getMemberAuthNo().then((result) => {
             let xcAuthNO = result['xc_auth_no']
-            let productID = this.data['productID']
+            let productID = this.data.productID
 
             this.setData({
                 xcAuthNO: xcAuthNO
@@ -190,11 +181,9 @@ Page({
 
     //  获取客户扫码认证状态
     handleAuthStatusChange() {
-        console.log("code=" + this.data.xcAuthNO)
-
-        return orderModel.getMemberAuthStatus({
-            xc_auth_no: this.data.xcAuthNO
-        }).then((result) => {
+        return orderModel.getMemberAuthStatus(
+            this.data.xcAuthNO
+        ).then((result) => {
             console.log(result)
             let {
                 member_id,
@@ -211,11 +200,7 @@ Page({
     getAuthStatus() {
         let getMemberAuthStatus = orderModel.getMemberAuthStatus
 
-        let interval = util.interval(this.handleAuthStatusChange, 2000, {
-            xc_auth_no: this.data.xcAuthNO
-        })
-
-        // let interval = setInterval(this.h, 2000)
+        let interval = util.interval(this.handleAuthStatusChange, 2000)
 
         this.setData({
             interval: interval
