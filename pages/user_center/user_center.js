@@ -1,20 +1,26 @@
 // pages/user_center/user_center.js
 let login = require('../../models/login.js')
+let config = require('../../config/config.js')
 
 Page({
-
     /**
      * 页面的初始数据
      */
     data: {
-        userName: ''
+        userName: '',
+        servicePhone: '',
+        version: ''
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        this.setData({ userName:login.xcUserInfo.name})
+        this.setData({
+            userName: login.xcUserInfo.name,
+            servicePhone: config.servicePhone,
+            version: config.clientVersion
+        })
     },
 
     /**

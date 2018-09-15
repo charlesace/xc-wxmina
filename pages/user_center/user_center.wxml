@@ -16,11 +16,11 @@
 
         <view class="panel">
             <text class="label">技术支持</text>
-            <text class="value" selectable="true">0574-85223333</text>
+            <text class="value" selectable="true">{{servicePhone}}</text>
         </view>
         <view class="panel">
             <text class="label">当前版本</text>
-            <text class="value">1.0.0</text>
+            <text class="value">{{version}}</text>
         </view>
     </view>
     <view class="logout">
