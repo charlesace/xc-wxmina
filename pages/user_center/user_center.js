@@ -1,76 +1,72 @@
 // pages/user_center/user_center.js
-let loginModel = require('../../models/login.js')
+let login = require('../../models/login.js')
 
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    userName: 'supertiny'
-  },
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        userName: ''
+    },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
-  },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function(options) {
+        this.setData({ userName:login.xcUserInfo.name})
+    },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function() {
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
+    },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function() {
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
+    },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function() {
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
+    },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function() {
 
-  logout () {
-    loginModel.logoutByXC().then(() => {
-      wx.redirectTo({
-        url: '../login/login'
-      })
-    })
-  }
+    },
+
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function() {
+
+    },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function() {
+
+    },
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function() {
+
+    },
+
+    logout() {
+        login.logoutServer()
+    }
 })

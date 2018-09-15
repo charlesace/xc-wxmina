@@ -3,7 +3,7 @@ const version = '1.0'
 const token = 'ge80346e1aa874d93ada608e9042ab9d1'
 
 module.exports = {
-  MD5Key,
-  version,
-  token
+    MD5Key,
+    version,
+    token
 }

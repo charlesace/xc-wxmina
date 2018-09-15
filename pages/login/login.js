@@ -5,9 +5,17 @@ const login = require('../../models/login.js')
 
 Page({
     data: {
-        username: 'shou',
-        password: '123456',
+        username: '',
+        password: '',
         pwdFocus: false
+    },
+
+    onLoad: function(options) {
+        if (login.xcUserInfo && login.xcUserInfo.name) {
+            this.setData({
+                username: login.xcUserInfo.name
+            })
+        }
     },
 
     onAccountConfirm() {
@@ -18,6 +26,20 @@ Page({
 
     onGotUserInfo(result) {
         if (!result || !result.detail || !result.detail.userInfo) {
+            return
+        }
+        if (!this.data.username) {
+            wx.showToast({
+                title: '请输入登录账号',
+                icon: 'none'
+            })
+            return
+        }
+        if (!this.data.password) {
+            wx.showToast({
+                title: '请输入登录密码',
+                icon: 'none'
+            })
             return
         }
         login.setUserInfo(result.detail.userInfo)

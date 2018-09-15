@@ -3,7 +3,8 @@
         <image class="logo" src="../../res/img/logo.png"></image>
         <view class="section">
             <text class="iconfont icon-user"></text>
-            <input placeholder="请输入登录账号"
+            <input value="{{username}}"
+                placeholder="请输入登录账号"
                 placeholder-class="place-holder"
                 confirm-type="next"
                 confirm-hold="true"
