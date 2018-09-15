@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 7,
 			"list": [
 				{
 					"id": -1,
@@ -78,6 +78,13 @@
 					"name": "orderWidthProductID",
 					"pathName": "pages/order/order",
 					"query": "productID=16"
+				},
+				{
+					"id": 7,
+					"name": "用户授权码",
+					"pathName": "pages/auth/auth",
+					"query": "s=member_auth&i=123&p=456",
+					"scene": "1011"
 				}
 			]
 		}

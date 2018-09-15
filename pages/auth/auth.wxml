@@ -1,0 +1,34 @@
+<!--pages/order/order.wxml-->
+<view class="container">
+    <view class="head">
+        <view class="name">{{mchName}}</view>
+        <view class="tip">邀请您完成身份认证</view>
+    </view>
+    <view class="content">
+        <view class="section">
+            <view class="label">手机号</view>
+            <input class="input"
+                type="number"
+                placeholder="请输入手机号"
+                placeholder-class="place-holder"
+                bindinput="bindInputPhone"
+                maxlength="11">
+            </input>
+        </view>
+        <view class="line"></view>
+        <view class="section">
+            <view class="label">验证码</view>
+            <input class="input"
+                type="number"
+                placeholder="请输入验证码"
+                placeholder-class="place-holder"
+                bindinput="bindInputCode"
+                maxlength="8">
+            </input>
+            <button class="send" bindtap="onSend">发送验证码</button>
+        </view>
+    </view>
+    <view class="btn-frame">
+        <button class="btn" bindtap="onConfirm">下一步</button>
+    </view>
+</view>

@@ -3,19 +3,19 @@ const md5 = require('../lib/md5.js')
 const signConfig = require('../config/sign.js')
 
 const formatTime = date => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  const second = date.getSeconds()
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const hour = date.getHours()
+    const minute = date.getMinutes()
+    const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+    return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
 const formatNumber = n => {
-  n = n.toString()
-  return n[1] ? n : '0' + n
+    n = n.toString()
+    return n[1] ? n : '0' + n
 }
 
 // function makeSign (obj) {
@@ -75,7 +75,7 @@ function request(url, data = {}, method = "GET", service) {
             data: newData,
             method: method,
             header: {
-                'Content-Type': 'application/json'  
+                'Content-Type': 'application/json'
             },
             success(res) {
                 let {
@@ -88,7 +88,7 @@ function request(url, data = {}, method = "GET", service) {
                 // console.log(res)
 
                 if (statusCode === 200) {
-                //  http请求成功
+                    //  http请求成功
                     // let response = JSON.parse(data.response)
                     let response = data.response
                     let {
@@ -112,7 +112,7 @@ function request(url, data = {}, method = "GET", service) {
                         reject(response)
                     }
 
-                    
+
 
                     // resolve(res)
 
@@ -159,12 +159,12 @@ function request(url, data = {}, method = "GET", service) {
                     icon: 'none',
                     duration: 2500,
                     mask: true,
-                    success () {},
-                    fail () {},
-                    complete () {}
+                    success() {},
+                    fail() {},
+                    complete() {}
                 })
             },
-            complete () {
+            complete() {
                 // wx.hideLoading()
             }
         })
@@ -173,63 +173,68 @@ function request(url, data = {}, method = "GET", service) {
 /**
  * 检查微信会话是否过期
  */
-function checkSession () {
-  return new Promise((resolve, reject) => {
-    wx.checkSession({
-      success () {
-        resolve(true)
-      },
-      fail () {
-        reject(false)
-      }
+function checkSession() {
+    return new Promise((resolve, reject) => {
+        wx.checkSession({
+            success() {
+                resolve(true)
+            },
+            fail() {
+                reject(false)
+            }
+        })
     })
-  })
 }
 
 /**
  * 调用微信登录
  */
-function login () {
-  return new Promise((resolve, reject) => {
-    wx.login({
-      success (res) {
-        if (res.code) {
-          // 登录远程服务器
-          console.log(res)
-          resolve(res)
-        } else {
-          reject(res)
-        }
-      },
-      fail (err) {
-        reject(err)
-      }
+function login() {
+    return new Promise((resolve, reject) => {
+        wx.login({
+            success(res) {
+                if (res.code) {
+                    // 登录远程服务器
+                    console.log(res)
+                    resolve(res)
+                } else {
+                    reject(res)
+                }
+            },
+            fail(err) {
+                reject(err)
+            }
+        })
     })
-  })
 }
 
 /**
  * 获取用户信息
  */
-function getUserInfo () {
-  return new Promise((resolve, reject) => {
-    wx.getUserInfo({
-      widthCredentials: true,
-      success (res) {
-        resolve(res)
-      },
-      fail (error) {
-        reject(error)
-      }
+function getUserInfo() {
+    return new Promise((resolve, reject) => {
+        wx.getUserInfo({
+            widthCredentials: true,
+            success(res) {
+                resolve(res)
+            },
+            fail(error) {
+                reject(error)
+            }
+        })
     })
-  })
+}
+
+function isPhoneNumber(str) {
+    return ((/^1(3|4|5|6|7|8|9)\d{9}$/.test(str)));
 }
 
 
 module.exports = {
-  formatTime: formatTime,
-  request,
-  checkSession,
-  login,
-  getUserInfo
+    formatTime: formatTime,
+    isPhoneNumber,
+    request,
+    checkSession,
+    login,
+    getUserInfo
 }
