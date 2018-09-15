@@ -1,3 +1,5 @@
+// 待删除
+
 module.exports = {
     getMember: 'employee.member.query',
 

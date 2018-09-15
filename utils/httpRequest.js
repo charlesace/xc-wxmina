@@ -2,21 +2,19 @@
  * 封装微信 request
  */
 
-const api = require('../config/api.js')
+const config = require('../config/config.js')
 const md5 = require('../lib/md5.js')
-const signConfig = require('../config/sign.js')
 
 module.exports = {
     request: function(service, data = {}, poll = false) {
-        let url = api.soa
+        let url = config.apiUrl
         let method = 'POST'
-        let isPoll = poll
 
         return new Promise((resolve, reject) => {
             let timestamp = parseInt(new Date().getTime() / 1000, 10)
-            let version = signConfig.version
-            let MD5Key = signConfig.MD5Key
-            let token = signConfig.token
+            let MD5Key = config.md5Key
+            let token = config.token
+            let version = data['version'] || '1.0'
             let appID = data['app_id'] || wx.getStorageSync('appId') || '0'
             let strMD5 = appID + timestamp + version + service + JSON.stringify(data) + MD5Key
             let sign = md5(strMD5)
@@ -31,7 +29,7 @@ module.exports = {
                 params: JSON.stringify(data)
             }
 
-            if (!isPoll) {
+            if (!poll) {
                 wx.showLoading({
                     mask: true
                 })
@@ -71,7 +69,7 @@ module.exports = {
                         } else if (status === 'error') {
                             // 请求失败
                             wx.hideLoading()
-                            if (!isPoll) {
+                            if (!poll) {
                                 wx.showToast({
                                     title: message + 'code: ' + error_code,
                                     icon: 'none'

@@ -3,7 +3,7 @@
  */
 
 const http = require('../utils/httpRequest.js')
-const api = require('../config/api.js')
+const config = require('../config/config.js')
 
 module.exports = {
     openId: '',
@@ -57,7 +57,7 @@ module.exports = {
     //             return;
     //         }
     //         let code = res.code
-    //         this.getOpenID(code, api.wxAppId).then((res) => {
+    //         this.getOpenID(code, config.wxAppId).then((res) => {
     //             this.openId = res['wx_openid']
     //             this.loginServer(account, password, this.openId).then((res) => {
     //                 this.onLoginSuccess(res)
