@@ -83,7 +83,7 @@
 					"id": 7,
 					"name": "用户授权码",
 					"pathName": "pages/auth/auth",
-					"query": "s=member_auth&i=123&p=456",
+					"query": "s=user_auth&i=6446554885075902464&p=16",
 					"scene": "1011"
 				}
 			]

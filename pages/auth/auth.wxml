@@ -1,8 +1,8 @@
 <!--pages/order/order.wxml-->
 <view class="container">
     <view class="head">
-        <view class="name">{{mchName}}</view>
-        <view class="tip">邀请您完成身份认证</view>
+        <view class="name">{{productName}}</view>
+        <view class="tip">请您完成身份认证</view>
     </view>
     <view class="content">
         <view class="section">

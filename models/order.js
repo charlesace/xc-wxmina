@@ -1,31 +1,23 @@
-const util = require('../utils/util.js')
-const api = require('../config/api.js')
-const soaUrl = api.soa
-const services = require('../config/soaService.js')
-
 /**
- * 获取买家临时唯一编码
+ * 订单模块
  */
-function getMemberAuthno (data) {
-    return util.request(
-        soaUrl,
-        data,
-        'POST',
-        services.memberAuthnoGet
-    )
-}
 
-function getMemberAuthStatus (data) {
-    return util.request(
-        soaUrl,
-        data,
-        'POST',
-        services.memberAuthStatusGet,
-        true
-    )
-}
+const http = require('../utils/httpRequest.js')
 
 module.exports = {
-    getMemberAuthno,
-    getMemberAuthStatus
+    // 获取买家临时唯一编码
+    getMemberAuthno: function(data) {
+        return http.request(
+            data,
+            'member.authno.get'
+        )
+    },
+
+    getMemberAuthStatus: function(data) {
+        return http.request(
+            data,
+            'member.authno.query',
+            true
+        )
+    }
 }

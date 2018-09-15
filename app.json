@@ -5,8 +5,7 @@
         "pages/template_list/template_list",
         "pages/user_center/user_center",
         "pages/order/order",
-        "pages/auth/auth",
-        "pages/test_api/test_api"
+        "pages/auth/auth"
     ],
     "window": {
         "backgroundTextStyle": "light",

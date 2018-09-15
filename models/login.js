@@ -1,37 +1,28 @@
-const util = require('../utils/util.js')
-const api = require('../config/api.js')
-const soaUrl = api.soa
-const services = require('../config/soaService.js')
+/**
+ * 登录模块
+ */
 
-function getOpenID (params) {
-  return util.request(
-    soaUrl,
-    params,
-    'POST',
-    services.getWechatOpenID
-  )
-}
-
-function loginByXC (data) {
-  // return Promise.resolve(true)
-  return util.request(
-    soaUrl,
-    data,
-    'POST',
-    services.login
-  )
-}
-
-function logoutByXC (data) {
-  // return Promise.resolve(true)
-  return util.request(
-    soaUrl,
-    data,
-    'POST')
-}
+const http = require('../utils/httpRequest.js')
 
 module.exports = {
-  getOpenID,
-  loginByXC,
-  logoutByXC
+    getOpenID: function(params) {
+        return http.request(
+            params,
+            'employee.wx.openid.get'
+        )
+    },
+
+    loginByXC: function(data) {
+        return http.request(
+            data,
+            'employee.login'
+        )
+    },
+
+    logoutByXC: function(data) {
+        return http.request(
+            data,
+            'employee.login.out'
+        )
+    }
 }

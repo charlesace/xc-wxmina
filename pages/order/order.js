@@ -6,16 +6,15 @@ const util = require('../../utils/util.js')
 // pages/order/order.js
 Page({
 
-  /**
-   * 页面的初始数据
-   */
+    /**
+     * 页面的初始数据
+     */
     data: {
         hiddenQrcode: true,
         xcAuthNO: '',
         productID: '',
         productName: '21312',
-        members: [
-            {
+        members: [{
                 "assigned_member_id": "6445191069863911424",
                 "is_seller_member": true,
                 "role_code": "R003",
@@ -45,8 +44,7 @@ Page({
                 "role_name": "平台角色"
             }
         ],
-        orderConfig: [
-            {
+        orderConfig: [{
                 "field": "DF",
                 "label": "FSAF"
             },
@@ -75,7 +73,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         console.log(options)
         let productID = options['productID']
         this.setData({
@@ -86,52 +84,51 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () { 
-    },
+    onShow: function() {},
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
 
     },
 
-    getTemplateDetail () {
+    getTemplateDetail() {
         let productID = this.data.productID
         let params = {
             product_id: productID
@@ -158,7 +155,7 @@ Page({
         })
     },
 
-    showQrcodeModal () {
+    showQrcodeModal() {
         orderModel.getMemberAuthno({}).then((result) => {
             let xcAuthNO = result['xc_auth_no']
             let productID = this.data['productID']
@@ -182,7 +179,7 @@ Page({
         })
     },
 
-    closeQrcodeModal () {
+    closeQrcodeModal() {
         this.setData({
             hiddenQrcode: true
         })
@@ -192,7 +189,9 @@ Page({
     },
 
     //  获取客户扫码认证状态
-    handleAuthStatusChange () {
+    handleAuthStatusChange() {
+        console.log("code=" + this.data.xcAuthNO)
+
         return orderModel.getMemberAuthStatus({
             xc_auth_no: this.data.xcAuthNO
         }).then((result) => {
@@ -206,11 +205,10 @@ Page({
                 clearInterval(this.data.interval)
             }
 
-        }).catch((error) => {
-        })
+        }).catch((error) => {})
     },
 
-    getAuthStatus () {
+    getAuthStatus() {
         let getMemberAuthStatus = orderModel.getMemberAuthStatus
 
         let interval = util.interval(this.handleAuthStatusChange, 2000, {

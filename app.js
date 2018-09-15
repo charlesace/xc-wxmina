@@ -4,26 +4,18 @@ const api = require('./config/api.js')
 const user = require('./models/user.js')
 
 App({
-    onLaunch (options) {
+    onLaunch(options) {
         let {
             scene
         } = options
-        
-        this.globalData.scene = scene
 
-        util.checkSession().then(
-            //  login Status : login
-            res => {
-                }
-            ).catch((error) => {
-            // login Status : session timeout , relogin
-                util.login()
-            })
-        },
+        this.globalData.scene = scene
+    },
+
     globalData: {
         userInfo: {
-        nickname: '游客',
-        username: 'login'
+            nickname: '游客',
+            username: 'login'
         },
         scene: ''
     }

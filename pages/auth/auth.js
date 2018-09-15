@@ -1,10 +1,12 @@
-// const templateModel = require('../../models/template.js')
+const templateModel = require('../../models/template.js')
 const util = require('../../utils/util.js')
 
 // pages/auth/auth.js
 Page({
     data: {
-        mchName: "",
+        productId: "",
+        productName: "",
+        needBindCard: false,
         phone: "",
         code: ""
     },
@@ -13,11 +15,12 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        // console.log(options)
-        // let productID = options['productID']
-        // this.setData({
-        //     productID: productID
-        // }, this.getTemplateDetail)
+        console.log(options)
+        let productId = options.p
+        this.setData({
+            productId: productId
+        })
+        this.getTemplateDetail(productId)
     },
 
     /**
@@ -60,50 +63,47 @@ Page({
         })
     },
 
-    getTemplateDetail() {
-        let productID = this.data.productID
-        let params = {
-            product_id: productID
-        }
-
-        console.log(params)
-
+    getTemplateDetail(productId) {
         templateModel.getTemplateDetail({
-            product_id: productID
+            product_id: productId
         }).then((result) => {
-            let productName = result['product_name']
-            let orderConfig = result['order_config']
-            let members = result['members']
-            let splitRuleID = result['split_rule_id']
-
-            console.log(productName, orderConfig, members, splitRuleID)
+            console.log(result)
             this.setData({
-                productName: productName,
-                orderConfig: orderConfig,
-                members: members,
-                splitRuleID: splitRuleID
+                productName: result['product_name'],
+                needBindCard: false/**TODO/ */
             })
-
         })
     },
 
-    testPhone () {
+    testPhone() {
         if (!util.isPhoneNumber(this.data.phone)) {
-            wx.showToast({ title: "请输入正确的手机号", icon: "none" })
+            wx.showToast({
+                title: "请输入正确的手机号",
+                icon: "none"
+            })
             return false
         }
         return true
     },
 
-    onSend () {
+    onSend() {
         if (this.testPhone()) {
-            wx.showToast({ title: "OK", icon: "none" })
+            wx.showToast({
+                title: "OK",
+                icon: "none"
+            })
         }
     },
 
-    onConfirm () {
-        if (!this.testPhone()) {
-            return
+    onConfirm() {
+        if (!this.data.code) {
+            wx.showToast({
+                title: "xxxxx",
+                icon: "none"
+            })
         }
+        // if (!this.testPhone()) {
+        //     return
+        // }
     }
 })
