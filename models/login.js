@@ -7,7 +7,7 @@ function getOpenID (params) {
   return util.request(
     soaUrl,
     params,
-    'GET',
+    'POST',
     services.getWechatOpenID
   )
 }
@@ -17,7 +17,7 @@ function loginByXC (data) {
   return util.request(
     soaUrl,
     data,
-    'GET',
+    'POST',
     services.login
   )
 }
@@ -27,7 +27,7 @@ function logoutByXC (data) {
   return util.request(
     soaUrl,
     data,
-    'GET')
+    'POST')
 }
 
 module.exports = {

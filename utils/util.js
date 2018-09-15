@@ -38,7 +38,9 @@ const formatNumber = n => {
 
 // 封装微信 request
 
-function request(url, data = {}, method = "GET", service) {
+function request(url, data = {}, method = "GET", service, poll) {
+    let isPoll = poll
+
 
     return new Promise((resolve, reject) => {
         let timestamp = parseInt(new Date().getTime() / 1000, 10)
@@ -67,9 +69,11 @@ function request(url, data = {}, method = "GET", service) {
             params: JSON.stringify(data)
         }
 
-        wx.showLoading({
-            mask: true
-        })
+        if (!isPoll) {
+            wx.showLoading({
+                mask: true
+            })
+        }
         wx.request({
             url: url,
             data: newData,
@@ -105,10 +109,13 @@ function request(url, data = {}, method = "GET", service) {
                     } else if (status === 'error') {
                         // 请求失败
                         wx.hideLoading()
-                        wx.showToast({
-                            title: message + 'code: ' + error_code,
-                            icon: 'none'
-                        })
+                        if (!isPoll) {
+                            wx.showToast({
+                                title: message + 'code: ' + error_code,
+                                icon: 'none'
+                            })
+                        }
+
                         reject(response)
                     }
 
@@ -158,7 +165,7 @@ function request(url, data = {}, method = "GET", service) {
                     title: '服务器故障或没有网络连接！',
                     icon: 'none',
                     duration: 2500,
-                    mask: true,
+                    // mask: true,
                     success() {},
                     fail() {},
                     complete() {}
@@ -225,16 +232,24 @@ function getUserInfo() {
     })
 }
 
+function interval(callback, timeout, param) {
+    let args = Array.prototype.splice.call(arguments, 2)
+    var _cb = function() {
+        callback.apply(null, args)
+    }
+    return setInterval(_cb, timeout)
+}
+
 function isPhoneNumber(str) {
     return ((/^1(3|4|5|6|7|8|9)\d{9}$/.test(str)));
 }
 
-
 module.exports = {
     formatTime: formatTime,
-    isPhoneNumber,
     request,
     checkSession,
     login,
-    getUserInfo
+    getUserInfo,
+    interval,
+    isPhoneNumber
 }

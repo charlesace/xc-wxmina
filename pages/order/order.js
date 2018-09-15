@@ -1,4 +1,7 @@
 const templateModel = require('../../models/template.js')
+const orderModel = require('../../models/order.js')
+const QRCode = require('../../lib/qrcode.js')
+const util = require('../../utils/util.js')
 
 // pages/order/order.js
 Page({
@@ -7,6 +10,8 @@ Page({
    * 页面的初始数据
    */
     data: {
+        hiddenQrcode: true,
+        xcAuthNO: '',
         productID: '',
         productName: '21312',
         members: [
@@ -150,6 +155,72 @@ Page({
                 splitRuleID: splitRuleID
             })
 
+        })
+    },
+
+    showQrcodeModal () {
+        orderModel.getMemberAuthno({}).then((result) => {
+            let xcAuthNO = result['xc_auth_no']
+            let productID = this.data['productID']
+
+            this.setData({
+                xcAuthNO: xcAuthNO
+            })
+
+            let qrcodeUrl = `http(s)://xxxx/cashier/auth?member_auth_id=${xcAuthNO}&product_id=${productID}`
+
+            let qrcode = new QRCode('canvas', {
+                text: qrcodeUrl,
+                width: 150,
+                height: 150
+            })
+
+            this.getAuthStatus()
+        })
+        this.setData({
+            hiddenQrcode: false
+        })
+    },
+
+    closeQrcodeModal () {
+        this.setData({
+            hiddenQrcode: true
+        })
+
+        clearInterval(this.data.interval)
+        this.data.interval = null
+    },
+
+    //  获取客户扫码认证状态
+    handleAuthStatusChange () {
+        return orderModel.getMemberAuthStatus({
+            xc_auth_no: this.data.xcAuthNO
+        }).then((result) => {
+            console.log(result)
+            let {
+                member_id,
+                is_bind_card
+            } = result
+
+            if (member_id && is_bind_card) {
+                clearInterval(this.data.interval)
+            }
+
+        }).catch((error) => {
+        })
+    },
+
+    getAuthStatus () {
+        let getMemberAuthStatus = orderModel.getMemberAuthStatus
+
+        let interval = util.interval(this.handleAuthStatusChange, 2000, {
+            xc_auth_no: this.data.xcAuthNO
+        })
+
+        // let interval = setInterval(this.h, 2000)
+
+        this.setData({
+            interval: interval
         })
     }
 })

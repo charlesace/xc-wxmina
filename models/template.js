@@ -16,7 +16,7 @@ function getTemplateList (data) {
     return util.request(
         soaUrl,
         data,
-        'GET',
+        'POST',
         services.getTemplateList
     )
 }
@@ -26,7 +26,7 @@ function getTemplateDetail(data) {
     return util.request(
         soaUrl,
         data,
-        'GET',
+        'POST',
         services.getSplitTemplate
     )
 }

@@ -1,5 +1,5 @@
 <!--pages/order/order.wxml-->
-<scroll-view class="page"
+<view class="page"
     scroll-y="true">
     <view class="page__hd">
         <view class="product-name">{{productName}}</view>
@@ -82,7 +82,8 @@
         <view class="weui-panel">
             <view class="weui-panel__hd">客户信息</view>
             <view class="weui-panel__bd">
-                <view class="weui-cell weui-cell_link">
+                <view class="weui-cell weui-cell_link"
+                    bindtap="showQrcodeModal">
                     <view class="weui-cell__bd">
                         扫码认证
                         <text class="auth-status">待认证</text>
@@ -96,8 +97,13 @@
             </view>
         </view>
     </view>
+    <modal no-cancel="true"
+        hidden="{{hiddenQrcode}}"
+        bindconfirm="closeQrcodeModal">
+        <canvas class="canvas" canvas-id="canvas" bindlongtap="save"></canvas>
+    </modal>
 
     <view class="page__ft">
         <button class="btn-confirm">确认下单</button>
     </view>
-</scroll-view>
+</view>
