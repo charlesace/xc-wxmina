@@ -1,14 +1,19 @@
-const templateModel = require('../../models/template.js')
+const template = require('../../models/template.js')
+const auth = require('../../models/auth.js')
 const util = require('../../utils/util.js')
 
 // pages/auth/auth.js
 Page({
     data: {
-        productId: "",
-        productName: "",
+        productId: '',
+        productName: '',
         needBindCard: false,
-        phone: "",
-        code: ""
+        phone: '',
+        code: '',
+        coolDown: false,
+        coolDownTime: 0,
+        sendText: '发送验证码',
+        interval: null
     },
 
     /**
@@ -16,11 +21,12 @@ Page({
      */
     onLoad: function(options) {
         console.log(options)
-        let productId = options.p
+
+        auth.authId = options.i
         this.setData({
-            productId: productId
+            productId: options.p
         })
-        this.getTemplateDetail(productId)
+        this.getTemplateDetail(this.data.productId)
     },
 
     /**
@@ -46,7 +52,7 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function() {
-
+        this.endCoolDown()
     },
 
     bindInputPhone(event) {
@@ -64,12 +70,11 @@ Page({
     },
 
     getTemplateDetail(productId) {
-        templateModel.getTemplateDetail(productId).then((result) => {
-            console.log(result)
+        template.getTemplateDetail(productId).then((result) => {
             this.setData({
-                productName: result['product_name'],
-                needBindCard: false/**TODO/ */
+                productName: result['product_name']
             })
+            auth.needBindCard = true /**TODO/ */
         })
     },
 
@@ -84,24 +89,76 @@ Page({
         return true
     },
 
-    onSend() {
-        if (this.testPhone()) {
-            wx.showToast({
-                title: "OK",
-                icon: "none"
+    startCoolDown() {
+        this.data.coolDownTime = 30
+        this.setData({
+            coolDown: true,
+            sendText: '重发 (' + this.data.coolDownTime + ')'
+        })
+
+        let interval = util.interval(this.updateCoolDown, 1000)
+        this.setData({
+            interval: interval
+        })
+    },
+
+    updateCoolDown() {
+        let timeLeft = this.data.coolDownTime - 1
+        if (timeLeft <= 0) {
+            this.endCoolDown()
+        } else {
+            this.data.coolDownTime = timeLeft
+            this.setData({
+                sendText: '重发 (' + this.data.coolDownTime + ')'
             })
         }
     },
 
+    endCoolDown() {
+        this.data.coolDownTime = 0
+        this.setData({
+            coolDown: false,
+            sendText: '发送验证码'
+        })
+        if (this.data.interval) {
+            clearInterval(this.data.interval)
+            this.data.interval = null
+        }
+    },
+
+    onSend() {
+        if (!this.testPhone()) {
+            return
+        }
+        // loading
+        this.startCoolDown()
+        auth.requestCreateMember(this.data.phone).then(() => {
+            wx.showToast({
+                title: '验证码已发送',
+                icon: 'none'
+            })
+        })
+    },
+
     onConfirm() {
+        if (!this.testPhone()) {
+            return
+        }
+        if (!auth.memberId) {
+            wx.showToast({
+                title: '请先申请验证码',
+                icon: 'none'
+            })
+            return
+        }
         if (!this.data.code) {
             wx.showToast({
-                title: "xxxxx",
-                icon: "none"
+                title: '请填写验证码',
+                icon: 'none'
             })
+            return
         }
-        // if (!this.testPhone()) {
-        //     return
-        // }
+
+        auth.requestVerifyMember(this.data.code)
     }
 })

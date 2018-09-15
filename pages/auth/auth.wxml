@@ -25,7 +25,7 @@
                 bindinput="bindInputCode"
                 maxlength="8">
             </input>
-            <button class="send" bindtap="onSend">发送验证码</button>
+            <button class="send" disabled="{{coolDown}}" bindtap="onSend">{{sendText}}</button>
         </view>
     </view>
     <view class="btn-frame">
