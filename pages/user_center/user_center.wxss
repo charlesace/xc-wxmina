@@ -11,7 +11,7 @@ page {
 
 .userinfo {
     display: flex;
-    height: 300rpx;
+    height: 250rpx;
     flex-direction: row;
     align-items: center;
     background: linear-gradient(45deg, #27a7fd, #fac5ff);
@@ -20,31 +20,23 @@ page {
 .userinfo-avatar {
     overflow: hidden;
     display: block;
-    width: 160rpx;
-    height: 160rpx;
+    width: 140rpx;
+    height: 140rpx;
     margin: 40rpx;
-    margin-top: 40rpx;
     border-radius: 50%;
     border: 2px solid #fff;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .userinfo-nickname {
-    margin-left: 40rpx;
-    line-height: 200rpx;
     color: #fff;
 }
 
 /* 内容 */
 
-.content {
-    margin-top: 30rpx;
-}
-
-.panel {
-    margin-top: 4rpx;
+.section {
+    width: 750rpx;
     height: 100rpx;
-    padding: 0 40rpx;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -52,26 +44,38 @@ page {
     background-color: #fff;
 }
 
-.login-info {
-    margin-bottom: 30rpx;
+.label {
+    width: 160rpx;
+    margin-left: 40rpx;
+    color: #444;
+    font-weight: bold;
+    font-size: 34rpx;
 }
 
-.panel .value {
-    flex: 1;
+.value {
+    width: 490rpx;
+    margin-left:20rpx;
+    color: #999;
+    font-size: 36rpx;
     text-align: right;
-    color: #adadad;
 }
+
+.account {
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+}
+
 
 /* 退出按钮 */
-
 .logout {
-    margin-top: 40rpx;
-}
-
-.btn-logout {
-    width: 80%;
+    margin-top: 60rpx;
+    width: 550rpx;
+    height: 90rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 2rpx solid #ff2600;
-    border-radius: 60rpx;
+    border-radius: 45rpx;
     background-color: #fff;
     color: #ff2600;
 }

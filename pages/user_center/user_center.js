@@ -17,7 +17,7 @@ Page({
      */
     onLoad: function(options) {
         this.setData({
-            userName: login.xcUserInfo.name,
+            userName: login.xcUserInfo.name || '',
             servicePhone: config.servicePhone,
             version: config.clientVersion
         })
