@@ -66,13 +66,13 @@ module.exports = {
                 'member.person.apply.bindcard', {
                     member_id: this.memberId,
                     name: name,
-                    id_card_no: card,
-                    account_no: idNo,
+                    id_card_no: idNo,
+                    account_no: card,
                     phone: phone
                 }
             ).then((res) => {
                 console.log(res)
-                this.bankCardId = res.bank_card_id
+                this.bankCardId = res.card_id
                 resolve()
             }).catch((err) => {
                 reject(err)

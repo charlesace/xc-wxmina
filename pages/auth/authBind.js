@@ -100,8 +100,39 @@ Page({
         }
     },
 
-    onSend() {
+    checkInput() {
+        if (!this.data.name) {
+            wx.showToast({
+                title: '请填写姓名',
+                icon: 'none'
+            })
+            return false
+        }
+        // if (!this.data.idNo) {
+        //     wx.showToast({
+        //         title: '请填写身份证号',
+        //         icon: 'none'
+        //     })
+        //     return false
+        // }
+        if (!auth.isIdNumber(this.data.idNo)) {
+            return false
+        }
+        if (!this.data.cardNo) {
+            wx.showToast({
+                title: '请填写银行卡号',
+                icon: 'none'
+            })
+            return false
+        }
         if (!auth.testPhone(this.data.phone)) {
+            return false
+        }
+        return true
+    },
+
+    onSend() {
+        if (!this.checkInput()) {
             return
         }
         this.startCoolDown()
@@ -114,31 +145,7 @@ Page({
     },
 
     onConfirm() {
-        if (!this.data.name) {
-            wx.showToast({
-                title: '请填写姓名',
-                icon: 'none'
-            })
-            return
-        }
-        // if (!this.data.idNo) {
-        //     wx.showToast({
-        //         title: '请填写身份证号',
-        //         icon: 'none'
-        //     })
-        //     return
-        // }
-        if (!auth.isIdNumber(this.data.idNo)) {
-            return
-        }
-        if (!this.data.cardNo) {
-            wx.showToast({
-                title: '请填写银行卡号',
-                icon: 'none'
-            })
-            return
-        }
-        if (!auth.testPhone(this.data.phone)) {
+        if (!this.checkInput()) {
             return
         }
         if (!auth.bankCardId) {
