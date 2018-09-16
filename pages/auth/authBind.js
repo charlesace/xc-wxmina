@@ -2,14 +2,15 @@ const template = require('../../models/template.js')
 const auth = require('../../models/auth.js')
 const util = require('../../utils/util.js')
 
-// pages/auth/auth.js
+// pages/auth/authBind.js
 Page({
     data: {
         productName: '',
-        needBindCard: false,
+        name: '',
+        idNo: '',
+        cardNo: '',
         phone: '',
         code: '',
-        confirmText: '',
         coolDown: false,
         coolDownTime: 0,
         sendText: '发送验证码',
@@ -20,30 +21,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        console.log(options)
-
-        auth.authId = options.i
-        auth.productId = options.p
-        this.getTemplateDetail()
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {},
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function() {
-
+        this.setData({
+            productName: auth.productName
+        })
     },
 
     /**
@@ -53,30 +33,33 @@ Page({
         this.endCoolDown()
     },
 
-    bindInputPhone(event) {
-        let phone = event.detail.value
+    bindInputName(event) {
         this.setData({
-            phone: phone
+            name: event.detail.value
+        })
+    },
+
+    bindInputID(event) {
+        this.setData({
+            idNo: event.detail.value
+        })
+    },
+
+    bindInputCard(event) {
+        this.setData({
+            cardNo: event.detail.value
+        })
+    },
+
+    bindInputPhone(event) {
+        this.setData({
+            phone: event.detail.value
         })
     },
 
     bindInputCode(event) {
-        let code = event.detail.value
         this.setData({
-            code: code
-        })
-    },
-
-    getTemplateDetail() {
-        template.getTemplateDetail(auth.productId).then((result) => {
-            console.log(result)
-            auth.productName = result['product_name']
-            auth.needBindCard = true /**TODO/ */
-            let text = auth.needBindCard ? '下一步' : '完成'
-            this.setData({
-                productName: auth.productName,
-                confirmText: text
-            })
+            code: event.detail.value
         })
     },
 
@@ -122,7 +105,7 @@ Page({
             return
         }
         this.startCoolDown()
-        auth.requestCreateMember(this.data.phone).then(() => {
+        auth.requestBindCard(this.data.name, this.data.cardNo, this.data.idNo, this.data.phone).then(() => {
             wx.showToast({
                 title: '验证码已发送',
                 icon: 'none'
@@ -131,10 +114,34 @@ Page({
     },
 
     onConfirm() {
+        if (!this.data.name) {
+            wx.showToast({
+                title: '请填写姓名',
+                icon: 'none'
+            })
+            return
+        }
+        // if (!this.data.idNo) {
+        //     wx.showToast({
+        //         title: '请填写身份证号',
+        //         icon: 'none'
+        //     })
+        //     return
+        // }
+        if (!auth.isIdNumber(this.data.idNo)) {
+            return
+        }
+        if (!this.data.cardNo) {
+            wx.showToast({
+                title: '请填写银行卡号',
+                icon: 'none'
+            })
+            return
+        }
         if (!auth.testPhone(this.data.phone)) {
             return
         }
-        if (!auth.memberId) {
+        if (!auth.bankCardId) {
             wx.showToast({
                 title: '请先申请验证码',
                 icon: 'none'
@@ -149,6 +156,6 @@ Page({
             return
         }
 
-        auth.requestVerifyMember(this.data.code)
+        auth.requestConfirmBind(this.data.code)
     }
 })

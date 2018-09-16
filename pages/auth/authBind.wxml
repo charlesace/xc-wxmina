@@ -1,0 +1,67 @@
+<!--pages/auth/authBind.wxml-->
+<view class="container">
+    <view class="head">
+        <view class="name">{{productName}}</view>
+        <view class="tip">请您完成银行卡绑定</view>
+    </view>
+    <view class="content">
+    <view class="section">
+            <view class="label">姓名</view>
+            <input class="input"
+                type="text"
+                placeholder="请输入姓名"
+                placeholder-class="place-holder"
+                bindinput="bindInputName"
+                maxlength="30">
+            </input>
+        </view>
+        <view class="line"></view>
+        <view class="section">
+            <view class="label">身份证号</view>
+            <input class="input"
+                type="idcard"
+                placeholder="请输入身份证号"
+                placeholder-class="place-holder"
+                bindinput="bindInputID"
+                maxlength="18">
+            </input>
+        </view>
+        <view class="line"></view>
+        <view class="section">
+            <view class="label">银行卡号</view>
+            <input class="input"
+                type="number"
+                placeholder="请输入银行卡号"
+                placeholder-class="place-holder"
+                bindinput="bindInputCard"
+                maxlength="19">
+            </input>
+        </view>
+        <view class="line"></view>
+        <view class="section">
+            <view class="label">预留手机</view>
+            <input class="input"
+                type="number"
+                placeholder="请输入预留手机号"
+                placeholder-class="place-holder"
+                bindinput="bindInputPhone"
+                maxlength="11">
+            </input>
+        </view>
+        <view class="line"></view>
+        <view class="section">
+            <view class="label">验证码</view>
+            <input class="input-short"
+                type="number"
+                placeholder="请输入验证码"
+                placeholder-class="place-holder"
+                bindinput="bindInputCode"
+                maxlength="8">
+            </input>
+            <button class="send" disabled="{{coolDown}}" bindtap="onSend">{{sendText}}</button>
+        </view>
+    </view>
+    <view class="btn-frame">
+        <button class="btn" bindtap="onConfirm">完成</button>
+    </view>
+</view>

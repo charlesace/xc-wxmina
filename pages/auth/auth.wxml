@@ -1,4 +1,4 @@
-<!--pages/order/order.wxml-->
+<!--pages/auth/auth.wxml-->
 <view class="container">
     <view class="head">
         <view class="name">{{productName}}</view>
@@ -29,6 +29,6 @@
         </view>
     </view>
     <view class="btn-frame">
-        <button class="btn" bindtap="onConfirm">下一步</button>
+        <button class="btn" bindtap="onConfirm">{{confirmText}}</button>
     </view>
 </view>

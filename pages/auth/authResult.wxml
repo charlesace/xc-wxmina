@@ -1,0 +1,6 @@
+<!--pages/auth/authResult.wxml-->
+<view class="container">
+    <view class="head">
+        <view class="name">您已认证成功</view>
+    </view>
+</view>

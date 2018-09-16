@@ -1,0 +1,30 @@
+/* pages/auth/authResult.wxss */
+
+page {
+    background-color: #f3f3f3;
+    height: 100%;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.head {
+    width: 750rpx;
+    height: 240rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #008fff;
+}
+
+.name {
+    font-size: 40rpx;
+    color: #fff;
+}
