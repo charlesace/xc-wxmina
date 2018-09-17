@@ -1,0 +1,14 @@
+<!-- pages/order/watingForPayment.wxml -->
+<view class="container">
+    <view class="frame">
+        <view class="amount">
+            金额:
+            <view class="amount-number">￥ {{amountNumber}}</view>
+        </view>
+        <view class="code">{{code}}</view>
+        <view class="describe">请在 POS 中输入以上凭证号</view>
+        <view class="img-container">
+            <image src=""></image>
+        </view>
+    </view>
+</view>

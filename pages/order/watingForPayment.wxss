@@ -1,0 +1,42 @@
+/* pages/order/watingForPayment.wxss */
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.frame {
+    display: flex;
+    width: 500rpx;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 200rpx;
+}
+
+.amount {
+    margin-top: 100rpx;
+}
+
+.amount-number {
+    display: inline-block;
+
+    color: red;
+}
+
+.code {
+    margin-top: 20rpx;
+
+    font-size: 50rpx;
+}
+
+.describe {
+    margin-top: 10rpx;
+
+    font-size: 30rpx;
+    color: #999;
+}
