@@ -47,26 +47,6 @@ module.exports = {
     },
 
     // 账密登录
-    // login: function(account, password) {
-    //     this.wxLogin().then((res) => {
-    //         if (!res.code) {
-    //             wx.showToast({
-    //                 title: '登录失败，请重新尝试',
-    //                 icon: 'none'
-    //             })
-    //             return;
-    //         }
-    //         let code = res.code
-    //         this.getOpenID(code, config.wxAppId).then((res) => {
-    //             this.openId = res['wx_openid']
-    //             this.loginServer(account, password, this.openId).then((res) => {
-    //                 this.onLoginSuccess(res)
-    //             })
-    //         })
-    //     })
-    // },
-
-    // 错误登录逻辑，待删除
     login: function(account, password) {
         this.wxLogin().then((res) => {
             if (!res.code) {
@@ -77,18 +57,10 @@ module.exports = {
                 return;
             }
             let code = res.code
-            this.loginServer(account, password, '').then((res) => {
-                this.appId = res['app_id']
-                this.xcUserInfo = {
-                    employeeId: res['employee_id'],
-                    mobile: res['mobile'],
-                    name: res['name'],
-                    type: res['type']
-                }
-
-                this.getOpenID(code, this.appId).then((res) => {
-                    this.openId = res['wx_openid']
-                    this.onLoginSuccess()
+            this.getOpenId(code, config.wxAppId).then((res) => {
+                this.openId = res['wx_openid']
+                this.loginServer(account, password, this.openId).then((res) => {
+                    this.onLoginSuccess(res)
                 })
             })
         })
@@ -114,11 +86,11 @@ module.exports = {
     },
 
     // 获取微信openid
-    getOpenID: function(code, wxAppId) {
+    getOpenId: function(code, wxAppId) {
         return http.request(
             'employee.wx.openid.get', {
                 code_no: code,
-                app_id: wxAppId
+                wx_app_id: wxAppId
             }
         )
     },
