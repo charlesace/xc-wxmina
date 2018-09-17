@@ -13,76 +13,25 @@ Page({
         hiddenQrcode: true,
         xcAuthNO: '',
         productID: '',
-        productName: '21312',
-        members: [{
-                "assigned_member_id": "6445191069863911424",
-                "is_seller_member": true,
-                "role_code": "R003",
-                "assigned_member_name": "刘子巧11",
-                "role_name": "卖家"
-            },
-            {
-                "assigned_member_id": "6445228747670036480",
-                "is_member_show": true,
-                "role_code": "R002",
-                "assigned_member_name": "刘子巧",
-                "role_name": "买家"
-            },
-            {
-                "assigned_member_id": "6445212271437291520",
-                "is_member_show": true,
-                "role_code": "R001",
-                "assigned_member_name": "金奥",
-                "role_name": "开发商"
-            },
-            {
-                "assigned_member_id": "6445447698853273600",
-                "is_member_updatable": false,
-                "is_member_show": true,
-                "role_code": "R000",
-                "assigned_member_name": "崔博",
-                "role_name": "平台角色"
-            }
+        productName: '',
+        members: [
         ],
-        orderConfig: [{
-                "field": "DF",
-                "label": "FSAF"
-            },
-            {
-                "field": "C",
-                "control": "TextInput",
-                "is_required": true,
-                "label": "商品总数"
-            },
-            {
-                "field": "B",
-                "control": "TextInput",
-                "is_required": true,
-                "label": "商品进价"
-            },
-            {
-                "field": "A",
-                "control": "TextInput",
-                "is_required": true,
-                "label": "订单总额"    
-            }
+        orderConfig: [
         ],
+        orderParams: [
+
+        ],  //  创建订单的参数
+        orderAmount: '',
         isCreateMember: false,  //  是否需要创建会员
+        isAuthPass: false,   //    是否认证完成
         splitRuleID: '6445460536065925120',
 
         // search
         currentSearch: {},
-        searchList: [{
-            name: 'hehe',
-            id: '0'
-        }, {
-            name: 'haha',
-            id: '1',
-            selected: true
-        }],
+        searchList: [],
         inputShowed: false,
         inputVal: "",
-        SearchPageHidden: true 
+        searchPageHidden: true 
     },
 
     /**
@@ -119,7 +68,8 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function() {
-
+        clearInterval(this.data.interval)
+        this.data.interval = null
     },
 
     /**
@@ -152,9 +102,16 @@ Page({
             let isCreateMember = result['is_create_member']
 
             console.log(productName, orderConfig, members, splitRuleID)
+            let orderParams = orderConfig.map((item) => {
+                return {
+                    field: item['field']
+                }
+            })
+
             this.setData({
                 productName: productName,
                 orderConfig: orderConfig,
+                orderParams: orderParams,
                 members: members,
                 splitRuleID: splitRuleID,
                 isCreateMember: isCreateMember
@@ -162,13 +119,21 @@ Page({
 
         })
     },
+    //  订单金额 input
+    bindinputOrderAmount (event) {
+        let orderAmount = event.detail.value
+        if (orderAmount.split('.').length > 2) {
+            return
+        }
+        this.setData({
+            orderAmount: orderAmount
+        })
+    },
     /**
      * 点击角色部分，如果可修改，弹出搜索框选择
      *
      */
     searchMember (event) {
-        console.log(event.currentTarget.dataset)
-        console.log('click member')
 
         let dataset = event['currentTarget']['dataset']
         let search = dataset.search
@@ -184,9 +149,6 @@ Page({
 
         let memberName = this.data.searchName || ''
 
-        let startIndex = 0
-        let pageSize = 20
-
         if (!is_member_updatable) {
             return
         }
@@ -194,13 +156,29 @@ Page({
         this.showSearchPage()
         wx.setNavigationBarTitle({title: role_name})
 
-        orderModel.getMemberSearchList(role_code, memberName, startIndex, pageSize)
+        orderModel.getAllMemberList(role_code).then((result) => {
+            let searchList = result['members'] || []
+
+            this.setData({
+                searchList: searchList
+            })
+        })
 
     },
 
     showSearchPage: function () {
         this.setData({
-            SearchPageHidden: false
+            searchPageHidden: false
+        })
+    },
+    hideSearchPage: function () {
+        this.setData({
+            searchPageHidden: true
+        })
+    },
+    resetSearchData: function () {
+        this.setData({
+            searchList: []
         })
     },
 
@@ -219,6 +197,18 @@ Page({
         this.setData({
             inputVal: ""
         })
+        let searchData = this.data.currentSearch
+        let {
+            role_code
+        } = searchData
+
+        orderModel.getAllMemberList(role_code).then((result) => {
+            let searchList = result['members'] || []
+
+            this.setData({
+                searchList: searchList
+            })
+        })
     },
     inputTyping: function (e) {
         let searchData = this.data.currentSearch
@@ -227,10 +217,74 @@ Page({
             inputVal: inputVal
         })
 
-        console.log(searchData, inputVal)
+        let {
+            role_code
+        } = searchData
 
+        // let startIndex = 0
+        // let pageSize = 20
+
+        orderModel.getMemberSearchList(role_code, inputVal).then((result) => {
+            console.log(result)
+            let searchList = result['members'] || []
+
+            this.setData({
+                searchList: searchList
+            })
+        })
+    },
+
+    chooseMember (event) {
+        let dataset = event['currentTarget']['dataset']
+        let currentSearch = this.data['currentSearch']
+        let chooseItem = dataset.item
+        // 根据 当前搜索项与点击的项， 设置
+        let members = this.data['members']
+
+        let updatedMembers = members.map((item) => {
+            if (item['role_code'] === currentSearch['role_code']) {
+                item['assigned_member_id'] = chooseItem['id']
+                item['assigned_member_name'] = chooseItem['name']
+            }
+
+            return item
+        })
+
+        this.setData({
+            members: updatedMembers
+        })
+
+        this.hideSearchPage()
+        this.resetSearchData()
+    },
+    // search page end
+
+    // order_config start
+
+    orderConfigChange (event) {
+        let value = event.detail.value
+        let currentItem  = event['currentTarget']['dataset']['item']
+        let orderParams = this.data['orderParams']
+
+        console.log('111', currentItem, value, orderParams)
+
+        let updatedParams = orderParams.map((item) => {
+            if (item.field === currentItem.field) {
+                item.value = value
+            }
+
+            return item
+        })
+
+        console.log(updatedParams)
+
+        this.setData({
+            orderParams: updatedParams
+        })
 
     },
+
+    // order_config end
 
     showQrcodeModal() {
         orderModel.getMemberAuthNo().then((result) => {
@@ -261,8 +315,8 @@ Page({
             hiddenQrcode: true
         })
 
-        clearInterval(this.data.interval)
-        this.data.interval = null
+        // clearInterval(this.data.interval)
+        // this.data.interval = null
     },
 
     //  获取客户扫码认证状态
@@ -278,6 +332,9 @@ Page({
 
             if (member_id && is_bind_card) {
                 clearInterval(this.data.interval)
+                this.setData({
+                    hasAuthPass: true
+                })
             }
 
         }).catch((error) => {})
@@ -291,5 +348,35 @@ Page({
         this.setData({
             interval: interval
         })
+    },
+
+    orderConfirm () {
+        let data = this['data']
+        let {
+            orderAmount,
+            productID,
+            xcAuthNO,
+            orderParams,
+            members,
+            isCreateMember,
+            isAuthPass
+        } = data
+
+        console.log(isCreateMember, isAuthPass)
+        console.log(orderAmount, productID, xcAuthNO, orderParams, members)
+
+        // orderParams = orderParams.filter((item) => {
+        //     return item.value !== undefined
+        // })
+
+        console.log(orderParams)
+
+
+        // if (isCreateMember && isAuthPass) {
+        // }
+        orderModel.createOrder(orderAmount, productID, xcAuthNO, orderParams, members).then((result) => {
+            console.log(result)
+        })
+        
     }
 })

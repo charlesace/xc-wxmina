@@ -7,15 +7,27 @@ const login = require('./login.js')
 
 module.exports = {
     //  获取搜索列表
-    getMemberSearchList: function (roleID, memberName, startIndex, pageSize) {
+    getMemberSearchList: function (roleID, memberName) {
 
         return http.request(
             'employee.member.query', {
                 app_id: login.appId,
                 member_role: roleID,
                 member_name: memberName,
-                start_index: startIndex,
-                page_size: pageSize
+                start_index: 0,
+                page_size: 100
+            }
+        )
+    },
+
+    getAllMemberList: function (roleID) {
+        return http.request(
+            'employee.member.query', {
+                app_id: login.appId,
+                member_role: roleID,
+                member_name: '',
+                start_index: 0,
+                page_size: 100
             }
         )
     },
@@ -32,6 +44,25 @@ module.exports = {
                 xc_auth_no: authNo
             },
             true
+        )
+    },
+
+    //  创建订单
+    createOrder: function (orderAmount, productID, xcAuthNO, orderConfig, members) {
+
+        return http.request(
+            'employee.order.crate',
+            {
+                pay_info: {
+                    order_amount: orderAmount,
+                    xc_auth_no: xcAuthNO,
+                    product_id: productID,
+                    employee_id: login['xcUserInfo']['employeeId'],
+                    employee_name: login['xcUserInfo']['name'],
+                    order_config: orderConfig,
+                    members: members
+                }
+            }
         )
     }
 }

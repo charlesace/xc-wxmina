@@ -73,6 +73,9 @@ page {
 }
 
 .order-cell {
+    position: relative;
+    z-index: 0;
+
     padding:10px 15px;
     display:flex;
     align-items:center;
