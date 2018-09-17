@@ -102,3 +102,8 @@ modal canvas {
     width: 300rpx;
     height: 300rpx;
 }
+
+/* 搜索页面 */
+.search-page {
+
+}

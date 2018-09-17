@@ -67,7 +67,10 @@ Page({
                 "label": "订单总额"
             }
         ],
-        splitRuleID: '6445460536065925120'
+        splitRuleID: '6445460536065925120',
+        inputShowed: false,
+        inputVal: "",
+        SearchPageHidden: false 
     },
 
     /**
@@ -144,6 +147,55 @@ Page({
             })
 
         })
+    },
+    /**
+     * 点击角色部分，如果可修改，弹出搜索框选择
+     *
+     */
+    searchMember (event) {
+        console.log(event.currentTarget.dataset)
+        console.log('click member')
+
+        let dataset = event['currentTarget']['dataset']
+        let search = dataset.search
+        let {
+            role_code,
+            is_member_updatable
+        } = search
+
+        let memberName = this.data.searchName || ''
+
+        let startIndex = 0
+        let pageSize = 20
+
+        if (!is_member_updatable) {
+            return
+        }
+
+        orderModel.getMemberSearchList(role_code, memberName, startIndex, pageSize)
+
+    },
+
+    showInput: function () {
+        this.setData({
+            inputShowed: true
+        });
+    },
+    hideInput: function () {
+        this.setData({
+            inputVal: "",
+            inputShowed: false
+        });
+    },
+    clearInput: function () {
+        this.setData({
+            inputVal: ""
+        });
+    },
+    inputTyping: function (e) {
+        this.setData({
+            inputVal: e.detail.value
+        });
     },
 
     showQrcodeModal() {
