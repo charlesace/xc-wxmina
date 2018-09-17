@@ -64,13 +64,25 @@ Page({
                 "field": "A",
                 "control": "TextInput",
                 "is_required": true,
-                "label": "订单总额"
+                "label": "订单总额"    
             }
         ],
+        isCreateMember: false,  //  是否需要创建会员
         splitRuleID: '6445460536065925120',
+
+        // search
+        currentSearch: {},
+        searchList: [{
+            name: 'hehe',
+            id: '0'
+        }, {
+            name: 'haha',
+            id: '1',
+            selected: true
+        }],
         inputShowed: false,
         inputVal: "",
-        SearchPageHidden: false 
+        SearchPageHidden: true 
     },
 
     /**
@@ -137,13 +149,15 @@ Page({
             let orderConfig = result['order_config']
             let members = result['members']
             let splitRuleID = result['split_rule_id']
+            let isCreateMember = result['is_create_member']
 
             console.log(productName, orderConfig, members, splitRuleID)
             this.setData({
                 productName: productName,
                 orderConfig: orderConfig,
                 members: members,
-                splitRuleID: splitRuleID
+                splitRuleID: splitRuleID,
+                isCreateMember: isCreateMember
             })
 
         })
@@ -160,8 +174,13 @@ Page({
         let search = dataset.search
         let {
             role_code,
+            role_name,
             is_member_updatable
         } = search
+
+        this.setData({
+            currentSearch: search
+        })
 
         let memberName = this.data.searchName || ''
 
@@ -172,30 +191,45 @@ Page({
             return
         }
 
+        this.showSearchPage()
+        wx.setNavigationBarTitle({title: role_name})
+
         orderModel.getMemberSearchList(role_code, memberName, startIndex, pageSize)
 
+    },
+
+    showSearchPage: function () {
+        this.setData({
+            SearchPageHidden: false
+        })
     },
 
     showInput: function () {
         this.setData({
             inputShowed: true
-        });
+        })
     },
     hideInput: function () {
         this.setData({
             inputVal: "",
             inputShowed: false
-        });
+        })
     },
     clearInput: function () {
         this.setData({
             inputVal: ""
-        });
+        })
     },
     inputTyping: function (e) {
+        let searchData = this.data.currentSearch
+        let inputVal = e.detail.value
         this.setData({
-            inputVal: e.detail.value
-        });
+            inputVal: inputVal
+        })
+
+        console.log(searchData, inputVal)
+
+
     },
 
     showQrcodeModal() {

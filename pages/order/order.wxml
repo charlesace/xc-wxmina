@@ -64,7 +64,7 @@
                 </view>
             </view>
             <!-- 客户信息 -->
-            <view class="weui-panel">
+            <view class="weui-panel" wx:if="{{isCreateMember}}">
                 <view class="weui-panel__hd">客户信息</view>
                 <view class="weui-panel__bd">
                     <view class="weui-cell weui-cell_link" bindtap="showQrcodeModal">
@@ -105,31 +105,23 @@
                         <view class="weui-search-bar__text">搜索</view>
                     </label>
                 </view>
-                <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">
+                <!-- <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">
                     取消
-                </view>
+                </view> -->
             </view>
             <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
-                <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+                <view class="weui-cell"
+                    wx:for="{{searchList}}"
+                    wx:key="{{item.id}}"
+                    hover-class="weui-cell_active"
+                    bindtap="chooseMember">
                     <view class="weui-cell__bd">
-                        <view>实时搜索文本</view>
+                        <view>{{item.name}}</view>
                     </view>
-                </navigator>
-                <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                    <view class="weui-cell__bd">
-                        <view>实时搜索文本</view>
-                    </view>
-                </navigator>
-                <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                    <view class="weui-cell__bd">
-                        <view>实时搜索文本</view>
-                    </view>
-                </navigator>
-                <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                    <view class="weui-cell__bd">
-                        <view>实时搜索文本</view>
-                    </view>
-                </navigator>
+                    <view class="weui-cell__ft"
+                        wx:if="{{item.selected}}">
+                    >?</view>
+                </view>
             </view>
         </view>
     </view>
