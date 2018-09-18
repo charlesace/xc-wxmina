@@ -1,6 +1,6 @@
 <!--pages/order/orderDetail.wxml-->
 <view class="container">
-    <view>{{order_amount}}</view>
+    <view class="order-amount">{{order_amount}}</view>
     <view>交易成功</view>
     <view class="receipt-info section">
         <view class="section-hd">收款信息</view>

@@ -7,6 +7,10 @@
     padding: 50rpx 30rpx;
 }
 
+.order-amount {
+    font-size: 60rpx;
+}
+
 .section {
     display: flex;
     flex-direction: row;
