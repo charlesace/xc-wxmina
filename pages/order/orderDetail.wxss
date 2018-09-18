@@ -1,0 +1,37 @@
+/* pages/order/orderDetail.wxss */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50rpx 30rpx;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+
+    font-size: 28rpx;
+}
+
+.section .section-hd {
+    width: 200rpx;
+}
+
+.section .section-bd {
+    flex: 1;
+}
+.section .section-cell {
+    display: flex;
+    flex-direction: row;
+}
+.section .section-bd .section-cell{
+    justify-content: space-between;
+
+}
+
+.order-detail-info {
+    flex-direction: column;
+}

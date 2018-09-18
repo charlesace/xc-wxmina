@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 9,
 			"list": [
 				{
 					"id": -1,
@@ -91,6 +91,12 @@
 					"name": "等待支付",
 					"pathName": "pages/order/watingForPayment",
 					"query": "code=88888"
+				},
+				{
+					"id": -1,
+					"name": "订单详情",
+					"pathName": "pages/order/orderDetail",
+					"query": "productID=123222"
 				}
 			]
 		}

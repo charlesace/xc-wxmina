@@ -64,5 +64,14 @@ module.exports = {
                 }
             }
         )
+    },
+
+    getOrderDetail: function (orderID) {
+        return http.request(
+            'employee.order.detail.query',
+            {
+                order_id: orderID
+            }
+        )
     }
 }

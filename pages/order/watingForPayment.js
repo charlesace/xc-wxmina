@@ -6,7 +6,8 @@ Page({
      */
     data: {
         code: '1234444',
-        amountNumber: '200.00'
+        amountNumber: '200.00',
+        interval: null,
     },
 
     /**

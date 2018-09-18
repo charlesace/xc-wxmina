@@ -1,0 +1,36 @@
+<!--pages/order/orderDetail.wxml-->
+<view class="container">
+    <view>100.00</view>
+    <view>交易成功</view>
+    <view class="receipt-info section">
+        <view class="section-hd">收款信息</view>
+        <view class="section-bd">
+            <view class="section-cell">订单金额 <view>100.00 元</view></view>
+            <view class="section-cell">收款人员 <view>张三</view></view>
+        </view>
+    </view>
+    <view class="payment-info section">
+        <view class="section-hd">付款信息</view>
+        <view class="section-bd">
+            <view class="section-cell">手机号码 <view>13344445555</view></view>
+        </view>
+    </view>
+    <view class="order-info section">
+        <view class="section-hd">订单信息</view>
+        <view class="section-bd">
+            <view class="section-cell">开发商 <view>宁波xxx建筑公司</view></view>
+            <view class="section-cell">中介商 <view>xxx房产公司</view></view>
+        </view>
+    </view>
+    <view class="order-detail-info section">
+        <view class="section-cell">
+           <view class="label">交易方式</view> <view>支付宝</view>
+        </view>
+        <view class="section-cell">
+            <view class="label">订单编号</view> <view>11234455562131211</view>
+        </view>
+        <view class="section-cell">
+             <view class="label">交易编号 </view><view>11234455562131211</view>
+        </view>
+    </view>
+</view>
