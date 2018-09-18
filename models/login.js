@@ -141,6 +141,12 @@ module.exports = {
         wx.setStorageSync('wxUserInfo', this.wxUserInfo)
     },
 
+    // 客户端保存appId用于请求
+    saveAppId: function(appId) {
+        this.appId = appId
+        wx.setStorageSync('appId', this.appId)
+    },
+
     // 加载本地信息
     loadStorage: function() {
         let openId = wx.getStorageSync('openId')

@@ -1,5 +1,6 @@
 const template = require('../../models/template.js')
 const auth = require('../../models/auth.js')
+const login = require('../../models/login.js')
 const util = require('../../utils/util.js')
 
 // pages/auth/auth.js
@@ -72,6 +73,7 @@ Page({
             console.log(result)
             auth.productName = result['product_name']
             auth.needBindCard = result['is_bind_bank_card']
+            login.saveAppId(result['app_id'])
             let text = auth.needBindCard ? '下一步' : '完成'
             this.setData({
                 productName: auth.productName,
