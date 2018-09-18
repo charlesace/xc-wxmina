@@ -24,7 +24,8 @@
                             <view class="order-cell-label">{{item.label}}</view>
                         </view>
                         <view class="order-cell__bd">
-                            <input type="digit" bindinput="orderConfigChange" data-item="{{item}}" class="order-cell-value"></input>
+                            <input type="digit" bindinput="orderConfigChange" data-item="{{item}}"
+                            class="order-cell-value"></input>
                         </view>
                     </view>
                 </view>
@@ -54,7 +55,7 @@
             <canvas class="canvas" canvas-id="canvas" bindlongtap="save"></canvas>
         </modal>
         <view class="page__ft">
-            <button class="btn-confirm" bindtap="orderConfirm">确认下单</button>
+            <button class="btn-confirm" bindtap="orderConfirm" disabled="{{!isAuthPass}}">确认下单</button>
         </view>
     </view>
 </view>

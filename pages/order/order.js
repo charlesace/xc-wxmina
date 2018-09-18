@@ -161,8 +161,6 @@ Page({
         orderModel.searchParams['roleID'] = role_code
         orderModel.searchParams['roleName'] = role_name
 
-        console.log('orderModel', orderModel)
-
         wx.navigateTo({
             url: './searchPage'
         })
@@ -295,8 +293,7 @@ Page({
             this.setData({
                 xcAuthNO: xcAuthNO
             })
-
-            let qrcodeUrl = `http(s)://xxxx/cashier/auth?member_auth_id=${xcAuthNO}&product_id=${productID}`
+            let qrcodeUrl = `https://cloud.xc-fintech.com/static/mp/auth?i=${xcAuthNO}&p=${productID}`
 
             let qrcode = new QRCode('canvas', {
                 text: qrcodeUrl,

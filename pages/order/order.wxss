@@ -108,7 +108,7 @@ page {
 }
 .order-cell .order-cell-value {
     /* align-self: flex-end; */
-    width: 80rpx;
+    width: 100rpx;
 }
 
 modal canvas {
