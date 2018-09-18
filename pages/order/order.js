@@ -40,6 +40,7 @@ Page({
      */
     onLoad: function(options) {
         let productID = options['productID']
+        orderModel['productID'] = productID
         this.setData({
             productID: productID
         }, this.getTemplateDetail)
@@ -55,7 +56,13 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function() {},
+    onShow: function() {
+        console.log('show', orderModel['members'])
+        // this.updateMember()
+        this.setData({
+            members: orderModel['members']
+        })
+    },
 
     /**
      * 生命周期函数--监听页面隐藏
@@ -124,6 +131,7 @@ Page({
         if (orderAmount.split('.').length > 2) {
             return
         }
+        orderModel['orderAmount'] = orderAmount
         this.setData({
             orderAmount: orderAmount
         })
@@ -139,28 +147,24 @@ Page({
         let {
             role_code,
             role_name,
-            is_member_updatable
+            assigned_member_id,
+            assigned_member_name
         } = search
 
         this.setData({
             currentSearch: search
         })
 
-        let memberName = this.data.searchName || ''
+        orderModel['selectItemID'] = assigned_member_id
+        orderModel['selectItemName'] = assigned_member_name
 
-        if (!is_member_updatable) {
-            return
-        }
+        orderModel.searchParams['roleID'] = role_code
+        orderModel.searchParams['roleName'] = role_name
 
-        this.showSearchPage()
-        wx.setNavigationBarTitle({title: role_name})
+        console.log('orderModel', orderModel)
 
-        orderModel.getAllMemberList(role_code).then((result) => {
-            let searchList = result['members'] || []
-
-            this.setData({
-                searchList: searchList
-            })
+        wx.navigateTo({
+            url: './searchPage'
         })
 
     },
@@ -224,7 +228,6 @@ Page({
         // let pageSize = 20
 
         orderModel.getMemberSearchList(role_code, inputVal).then((result) => {
-            console.log(result)
             let searchList = result['members'] || []
 
             this.setData({
@@ -273,6 +276,8 @@ Page({
             return item
         })
 
+        orderModel['orderParams'] = updatedParams
+
         this.setData({
             orderParams: updatedParams
         })
@@ -286,6 +291,7 @@ Page({
             let xcAuthNO = result['xc_auth_no']
             let productID = this.data.productID
 
+            orderModel['xcAuthNO'] = xcAuthNO
             this.setData({
                 xcAuthNO: xcAuthNO
             })
@@ -348,19 +354,11 @@ Page({
 
     orderConfirm () {
         let data = this['data']
-        let {
-            orderAmount,
-            productID,
-            xcAuthNO,
-            orderParams,
-            members,
-            isCreateMember,
-            isAuthPass
-        } = data
+        // let members = orderModel.members
 
         // if (isCreateMember && isAuthPass) {
         // }
-        orderModel.createOrder(orderAmount, productID, xcAuthNO, orderParams, members).then((result) => {
+        orderModel.createOrder().then((result) => {
             // console.log(result)
         })
         

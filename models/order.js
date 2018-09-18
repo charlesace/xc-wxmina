@@ -8,13 +8,18 @@ const login = require('./login.js')
 module.exports = {
     searchList: [],
     selectItemID: '',
+    selectItemName: '',
     searchParams: {
         roleID: '',
+        roleName: '',
         member_name: '',
         startIndex: 0,
         pageSize: 20
     },
+    orderAmount: '',
+    xcAuthNO: '',
     members: [],    //  用于创建订单
+    orderParams: [],    //
 
 
     //  请求获取搜索列表数据 （输入名称改变时）
@@ -24,7 +29,7 @@ module.exports = {
             http.request(
                 'employee.member.query', {
                     app_id: login.appId,
-                    member_role: this.roleID,
+                    member_role: this.searchParams['roleID'],
                     member_name: this.searchParams['member_name'],
                     start_index: loadMore ? this.searchParams['startIndex'] : 0,
                     page_size: this.searchParams['pageSize']
@@ -45,23 +50,30 @@ module.exports = {
                 reject(err)
             })
         })
-
-        // return http.request(
-        //     'employee.member.query', {
-        //         app_id: login.appId,
-        //         member_role: this.roleID,
-        //         member_name: this.memberName,
-        //         start_index: startIndex,
-        //         page_size: this.searchParams.pageSize
-        //     }
-        // )
     },
 
     //  选择一项时，清空其他的
-    setSelectItem: function (id) {
-        this.selectItemID = id
+    setSelectItem: function (item) {
+        
+        this.selectItemID = item.id
+        this.selectItemName = item.name
 
+        this.updateMembers()
         this.updateSelectSearchList()
+    },
+    updateMembers: function () {
+        console.log('111', this.members, this.searchParams['roleID'])
+        
+        this.members = this.members.map((item) => {
+            if (item['role_code'] == this.searchParams['roleID']) {
+                item['assigned_member_id'] = this.selectItemID
+                item['assigned_member_name'] = this.selectItemName
+
+                return item
+            } else {
+                return item
+            }
+        })
     },
     updateSelectSearchList: function () {
         this.searchList = this.searchList.map((item) => {
@@ -73,6 +85,20 @@ module.exports = {
                 return item
             }
         })
+
+    },
+
+    //  离开搜索页面，清空搜索列表
+    resetSearchData: function () {
+        this.searchList = []
+        this.selectItemID = ''
+        this.selectItemName = ''
+        this.searchParams = {
+            roleID: '',
+            member_name: '',
+            startIndex: 0,
+            pageSize: 20
+        }
     },
 
     // 获取买家临时唯一编码
@@ -91,19 +117,19 @@ module.exports = {
     },
 
     //  创建订单
-    createOrder: function (orderAmount, productID, xcAuthNO, orderConfig, members) {
+    createOrder: function (orderAmount, xcAuthNO) {
 
         return http.request(
             'employee.order.crate',
             {
                 pay_info: {
-                    order_amount: orderAmount,
-                    xc_auth_no: xcAuthNO,
-                    product_id: productID,
+                    order_amount: this.orderAmount,
+                    xc_auth_no: this.xcAuthNO,
+                    product_id: this.productID,
                     employee_id: login['xcUserInfo']['employeeId'],
                     employee_name: login['xcUserInfo']['name'],
-                    order_config: orderConfig,
-                    members: members
+                    order_config: this.orderParams,
+                    members: this.members
                 }
             }
         )

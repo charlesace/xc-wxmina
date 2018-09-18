@@ -9,13 +9,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        searchList: [{
-            name: 'hhh',
-            id: 0
-        }, {
-            name: '222',
-            id: 1
-        }],
+        searchList: [],
         currentIndex: 0,
         inputVal: ''
     },
@@ -27,6 +21,10 @@ Page({
 
         this.setData({
             searchList: orderModel.searchList
+        })
+
+        orderModel.getMemberSearchList().then(() => {
+            this.updateSearchList()
         })
     },
 
@@ -41,7 +39,9 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        wx.setNavigationBarTitle({
+            title: orderModel.searchParams['roleName']
+        })
     },
 
     /**
@@ -55,7 +55,8 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+        orderModel.resetSearchData()
+        this.resetData()
     },
 
     /**
@@ -129,7 +130,7 @@ Page({
     },
     resetSearchData: function () {
         this.setData({
-            searchList: []
+            searchList: [],
         })
     },
 
@@ -188,7 +189,7 @@ Page({
 
         console.log(chooseItem)
 
-        orderModel.setSelectItem(chooseItem['id'])
+        orderModel.setSelectItem(chooseItem)
         this.updateSearchList()
 
     },
@@ -196,6 +197,11 @@ Page({
     updateSearchList () {
         this.setData({
             searchList: orderModel.searchList
+        })
+    },
+    resetData () {
+        this.setData({
+            searchList: [],
         })
     }
 })
