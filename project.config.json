@@ -93,10 +93,10 @@
 					"query": "code=88888"
 				},
 				{
-					"id": -1,
+					"id": 9,
 					"name": "订单详情",
 					"pathName": "pages/order/orderDetail",
-					"query": "productID=123222"
+					"query": "orderID=6445900970131070976"
 				}
 			]
 		}

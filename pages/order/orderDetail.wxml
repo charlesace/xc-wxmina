@@ -1,36 +1,47 @@
 <!--pages/order/orderDetail.wxml-->
 <view class="container">
-    <view>100.00</view>
+    <view>{{order_amount}}</view>
     <view>交易成功</view>
     <view class="receipt-info section">
         <view class="section-hd">收款信息</view>
         <view class="section-bd">
-            <view class="section-cell">订单金额 <view>100.00 元</view></view>
-            <view class="section-cell">收款人员 <view>张三</view></view>
+            <view class="section-cell">订单金额 <view>{{order_amount}} 元</view></view>
+            <view class="section-cell">收款人员 <view>{{employee_name}}</view></view>
         </view>
     </view>
-    <view class="payment-info section">
+    <view class="payment-info section"
+        hidden="{{!mobile}}">
         <view class="section-hd">付款信息</view>
         <view class="section-bd">
-            <view class="section-cell">手机号码 <view>13344445555</view></view>
+            <view class="section-cell">手机号码 <view>{{mobile}}</view></view>
         </view>
     </view>
     <view class="order-info section">
         <view class="section-hd">订单信息</view>
         <view class="section-bd">
-            <view class="section-cell">开发商 <view>宁波xxx建筑公司</view></view>
-            <view class="section-cell">中介商 <view>xxx房产公司</view></view>
+            <view class="section-cell"
+                wx:for="{{members}}"
+                wx:key="role_code">
+                {{item.role_name}}
+                <view>{{item.assigned_member_name}}</view>
+            </view>
         </view>
     </view>
     <view class="order-detail-info section">
         <view class="section-cell">
-           <view class="label">交易方式</view> <view>支付宝</view>
+           <view class="label">交易方式</view> <view>{{pay_method}}</view>
         </view>
         <view class="section-cell">
-            <view class="label">订单编号</view> <view>11234455562131211</view>
+            <view class="label">订单编号</view> <view>{{orderID}}</view>
         </view>
         <view class="section-cell">
-             <view class="label">交易编号 </view><view>11234455562131211</view>
+             <view class="label">交易编号 </view><view>{{channel_trade_no}}</view>
+        </view>
+        <view class="section-cell">
+             <view class="label">交易时间 </view><view>{{create_time}}</view>
+        </view>
+        <view class="section-cell">
+             <view class="label">付款时间 </view><view>{{pay_time}}</view>
         </view>
     </view>
 </view>

@@ -9,49 +9,28 @@ Page({
    * 页面的初始数据
    */
     data: {
+        orderID: '',    // 订单编号
         order_status: '订单状态',
         employee_id: '员工id',
         employee_name: '员工名称',
         order_amount: '订单金额',
-        mobile: '手机号',
-        member: [
-            {
-                "role_name": "开发商",
-                "role_code": "R0001",
-                "assigned_member_id": "指定会员id",
-                "assigned_member_name": "指定会员名称",
-                "is_member_show": "是否展示",
-                "is_seller_member": "false"
-            },
-            {
-                "role_name": "平台",
-                "role_code": "R000",
-                "assigned_member_id": "指定会员id",
-                "assigned_member_name": "指定会员名称",
-                "is_member_show": "是否展示",
-                "is_seller_member": "false"
-            },
-            {
-                "role_name": "中介商",
-                "role_code": "R0002",
-                "assigned_member_id": "指定会员id",
-                "assigned_member_name": "指定会员名称",
-                "is_member_show": "是否展示",
-                "is_seller_member": "false"
-            }
+        mobile: '手机号',   //  付款信息，手机号，当空时不显示付款信息
+        members: [
         ],
-        "channel_trade_no": "通道交易号",
-        "pay_method": "支付方式",
-        "create_time": "创建时间",
-        "pay_time": "支付时间",
-        "order_id": "订单号" 
+        pay_method: '',
+        channel_trade_no: '',
+        create_time: '',
+        pay_time: ''
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        let orderID = options['orderID']
+        this.setData({
+            orderID: orderID
+        }, this.getOrderDetail)
     },
 
     /**
@@ -65,9 +44,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        orderModel.getOrderDetail('6445900970131070976').then((result) => {
-            console.log(result)
-        })
+    
     },
 
     /**
@@ -103,5 +80,39 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+    getOrderDetail: function () {
+        let orderID = this.data['orderID']
+
+        orderModel.getOrderDetail(orderID).then((result) => {
+            this.orderDetailHandler(result)
+        })
+    },
+
+    orderDetailHandler: function (result) {
+        console.log('result', result)
+        let {
+            order_amount,
+            employee_id,
+            employee_name,
+            mobile,
+            members,
+            order_status,
+            pay_method,
+            channel_trade_no,
+            create_time,
+            pay_time
+        } = result
+
+        this.setData({
+            order_amount: parseFloat(order_amount).toFixed(2),
+            employee_name: employee_name,
+            members: JSON.parse(members),
+            mobile: mobile || '',
+            pay_method: pay_method || '',
+            channel_trade_no: channel_trade_no || '',
+            create_time: create_time || '',
+            pay_time: pay_time || ''
+        })
     }
 })
