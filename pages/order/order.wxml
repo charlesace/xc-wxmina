@@ -5,7 +5,7 @@
             <view class="product-name">{{productName}}</view>
             <view class="input-tip">请输入消费总金额</view>
             <view class="input-container">
-                <text>￥</text>
+                <text class="unit">￥</text>
                 <input type="digit" confirm-type="done" adjust-position="false" :value="{{orderAmount}}" bindinput="bindinputOrderAmount"></input>
             </view>
         </view>
@@ -49,12 +49,15 @@
                     <view class="weui-cell weui-cell_link" bindtap="showQrcodeModal">
                         <view class="weui-cell__bd">
                             扫码认证
-                            <text class="auth-status">待认证</text>
-                            <!-- <text class="auth-status">已认证</text> -->
+                            <text class="auth-needed"
+                                hidden="{{mobile}}">待认证</text>
+                            <text class="auth-pass"
+                                hidden="{{!mobile}}">已认证</text>
                         </view>
-                        <view class="weui-cell__ft weui-cell__ft_in-access">
-                            <text class="iconfont icon-qrcode"></text>
-                            <!-- <text>13344445555</text> -->
+                        <view class="weui-cell__ft">
+                            <text class="iconfont icon-qrcode"
+                                hidden="{{mobile}}"></text>
+                            <text hidden="{{!mobile}}">{{mobile}}</text>
                         </view>
                     </view>
                 </view>

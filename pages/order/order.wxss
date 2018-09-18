@@ -72,6 +72,18 @@ page {
     border-bottom: 1px solid #ddd;
 }
 
+.unit {
+    margin-right: 20rpx;
+}
+
+.auth-needed {
+    color: #f35f48;
+}
+
+.auth-pass {
+    color: #2edc29;
+}
+
 .order-cell {
     position: relative;
     z-index: 0;
@@ -96,6 +108,7 @@ page {
 }
 .order-cell .order-cell-value {
     /* align-self: flex-end; */
+    width: 80rpx;
 }
 
 modal canvas {

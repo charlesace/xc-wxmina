@@ -14,6 +14,7 @@ Page({
         xcAuthNO: '',
         productID: '',
         productName: '',
+        mobile: '',
         members: [
         ],
         orderConfig: [
@@ -38,7 +39,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        console.log(options)
         let productID = options['productID']
         this.setData({
             productID: productID
@@ -101,7 +101,6 @@ Page({
             let splitRuleID = result['split_rule_id']
             let isCreateMember = result['is_create_member']
 
-            console.log(productName, orderConfig, members, splitRuleID)
             let orderParams = orderConfig.map((item) => {
                 return {
                     field: item['field']
@@ -266,8 +265,6 @@ Page({
         let currentItem  = event['currentTarget']['dataset']['item']
         let orderParams = this.data['orderParams']
 
-        console.log('111', currentItem, value, orderParams)
-
         let updatedParams = orderParams.map((item) => {
             if (item.field === currentItem.field) {
                 item.value = value
@@ -275,8 +272,6 @@ Page({
 
             return item
         })
-
-        console.log(updatedParams)
 
         this.setData({
             orderParams: updatedParams
@@ -324,16 +319,17 @@ Page({
         return orderModel.getMemberAuthStatus(
             this.data.xcAuthNO
         ).then((result) => {
-            console.log(result)
             let {
                 member_id,
-                is_bind_card
+                is_bind_card,
+                mobile
             } = result
 
             if (member_id && is_bind_card) {
                 clearInterval(this.data.interval)
                 this.setData({
-                    hasAuthPass: true
+                    hasAuthPass: true,
+                    mobile: mobile
                 })
             }
 
@@ -362,20 +358,10 @@ Page({
             isAuthPass
         } = data
 
-        console.log(isCreateMember, isAuthPass)
-        console.log(orderAmount, productID, xcAuthNO, orderParams, members)
-
-        // orderParams = orderParams.filter((item) => {
-        //     return item.value !== undefined
-        // })
-
-        console.log(orderParams)
-
-
         // if (isCreateMember && isAuthPass) {
         // }
         orderModel.createOrder(orderAmount, productID, xcAuthNO, orderParams, members).then((result) => {
-            console.log(result)
+            // console.log(result)
         })
         
     }
