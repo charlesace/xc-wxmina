@@ -42,5 +42,28 @@ module.exports = {
             return true
         }
         return (/^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$/.test(str))
+    },
+
+    // url参数解析为JsonObject
+    parseUrl: function (url) {
+        let placeAsk = url.indexOf('?')
+        let search = url.slice(placeAsk + 1)
+        let partList = search.split('&')
+        let result = {}
+        partList.forEach(it => {
+            let spart = it.split('=')
+            let pro = spart[0]
+            let val = spart[1] === undefined ? true : spart[1]
+            if (result[pro]) {
+                if (result[pro] instanceof Array) {
+                    result[pro].push(val)
+                } else {
+                    result[pro] = [result[pro], val]
+                }
+            } else {
+                result[pro] = val
+            }
+        })
+        return result
     }
 }

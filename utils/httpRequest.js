@@ -7,7 +7,7 @@ const md5 = require('../lib/md5.js')
 
 module.exports = {
     request: function(service, data = {}, poll = false) {
-        let url = config.apiUrl
+        let url = config.apiUrl + config.soaPath
         let method = 'POST'
 
         return new Promise((resolve, reject) => {
