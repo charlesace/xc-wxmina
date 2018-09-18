@@ -72,7 +72,7 @@ module.exports = {
                 }
             ).then((res) => {
                 console.log(res)
-                this.bankCardId = res.card_id
+                this.bankCardId = res.bank_card_id
                 resolve()
             }).catch((err) => {
                 reject(err)
