@@ -28,7 +28,7 @@
             <view class="label">登录账号</view>
             <text class="value" selectable="true">{{userName}}</text>
         </view>
-        <view class="section">
+        <view class="section" bind:tap="makePhoneCall">
             <view class="label">技术支持</view>
             <text class="value" selectable="true">{{servicePhone}}</text>
         </view>

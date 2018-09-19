@@ -74,5 +74,13 @@ Page({
 
     logout() {
         login.logoutServer()
+    },
+
+    makePhoneCall (event) {
+        let servicePhone = this.data.servicePhone
+
+        wx.makePhoneCall({
+            phoneNumber: servicePhone
+        })
     }
 })
