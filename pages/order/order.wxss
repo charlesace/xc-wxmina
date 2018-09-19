@@ -111,23 +111,14 @@ page {
     width: 100rpx;
 }
 
-modal canvas {
+.modal {
+    position: fixed;
+    z-index: 2;
+}
+.modal canvas {
     margin-left: auto;
     margin-right: auto;
 
     width: 300rpx;
     height: 300rpx;
-}
-
-/* 搜索页面 */
-.search-page {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-
-    z-index: 2;
-
-    background-color: #f3f3f3;
 }

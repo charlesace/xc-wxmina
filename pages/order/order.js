@@ -285,6 +285,8 @@ Page({
     // order_config end
 
     showQrcodeModal() {
+        clearInterval(this.data.interval)
+
         orderModel.getMemberAuthNo().then((result) => {
             let xcAuthNO = result['xc_auth_no']
             let productID = this.data.productID
