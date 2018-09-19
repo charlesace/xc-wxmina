@@ -107,6 +107,11 @@ Page({
             let members = result['members']
             let splitRuleID = result['split_rule_id']
             let isCreateMember = result['is_create_member']
+            if (!isCreateMember) {
+                this.setData({
+                    isAuthPass: true
+                })
+            }
 
             let orderParams = orderConfig.map((item) => {
                 return {
