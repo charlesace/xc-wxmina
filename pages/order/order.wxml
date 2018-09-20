@@ -55,7 +55,7 @@
             no-cancel="true"
             hidden="{{hiddenQrcode}}"
             bindconfirm="closeQrcodeModal"
-            catchtouchmove="true">
+            catchtouchmove="stopPageScroll">
             <canvas class="canvas" canvas-id="canvas" bindlongtap="save"></canvas>
         </modal>
         <view class="page__ft">

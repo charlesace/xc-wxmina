@@ -347,6 +347,11 @@ Page({
         }).catch((error) => {})
     },
 
+    //  二维码 modal 展示时禁止滚动
+    stopPageScroll () {
+        return 
+    },
+
     getAuthStatus() {
         let getMemberAuthStatus = orderModel.getMemberAuthStatus
 
@@ -365,6 +370,8 @@ Page({
         // }
         orderModel.createOrder().then((result) => {
             // console.log(result)
+            
+
         })
         
     }
