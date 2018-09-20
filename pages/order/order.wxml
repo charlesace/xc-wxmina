@@ -52,6 +52,7 @@
             </view>
         </scroll-view>
         <modal class="modal"
+            title="向客户出示认证码"
             no-cancel="true"
             hidden="{{hiddenQrcode}}"
             bindconfirm="closeQrcodeModal"

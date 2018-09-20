@@ -127,7 +127,7 @@ page {
 .modal canvas {
     margin-left: auto;
     margin-right: auto;
-
-    width: 300rpx;
-    height: 300rpx;
+    margin-bottom: 50rpx;
+    width: 200px;
+    height: 200px;
 }

@@ -1,6 +1,6 @@
 const templateModel = require('../../models/template.js')
 const orderModel = require('../../models/order.js')
-const QRCode = require('../../lib/qrcode.js')
+const qrcode = require('../../lib/qrcode.js')
 const util = require('../../utils/util.js')
 
 // pages/order/order.js
@@ -307,11 +307,11 @@ Page({
                 xcAuthNO: xcAuthNO
             })
             let qrcodeUrl = `https://cloud.xc-fintech.com/static/mp/auth?i=${xcAuthNO}&p=${productID}`
-
-            let qrcode = new QRCode('canvas', {
-                text: qrcodeUrl,
-                width: 150,
-                height: 150
+            qrcode.drawQrcode({
+                width: 200,
+                height: 200,
+                canvasId: 'canvas',
+                text: qrcodeUrl
             })
 
             this.getAuthStatus()
