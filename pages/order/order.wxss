@@ -100,18 +100,20 @@ page {
 }
 .order-cell-input {
     display:flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 
     width: 100%;
 }
 .order-cell-input .order-cell-label{
-    width: 105px;
+    width: 240rpx;
     word-wrap: break-word;
     word-break: break-all;
 }
 .order-cell .order-cell-value {
     /* align-self: flex-end; */
-    width: 100rpx;
+    /* width: 100rpx; */
+
+    flex: 1;
 }
 
 .modal {
