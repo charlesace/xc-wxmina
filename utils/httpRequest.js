@@ -71,7 +71,7 @@ module.exports = {
                             wx.hideLoading()
                             if (!poll) {
                                 wx.showToast({
-                                    title: message + 'code: ' + error_code,
+                                    title: message,
                                     icon: 'none'
                                 })
                             }
