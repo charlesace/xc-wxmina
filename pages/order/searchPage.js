@@ -17,7 +17,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
 
         this.setData({
             searchList: orderModel.searchList
@@ -31,14 +31,14 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
         wx.setNavigationBarTitle({
             title: orderModel.searchParams['roleName']
         })
@@ -47,14 +47,14 @@ Page({
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
         orderModel.resetSearchData()
         this.resetData()
     },
@@ -62,30 +62,30 @@ Page({
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
         console.log('more info')
         orderModel.getMemberSearchList(true).then(() => {
             this.updateSearchList()
         })
-        
+
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
 
     },
 
 
-    searchMember (event) {
+    searchMember(event) {
 
         let dataset = event['currentTarget']['dataset']
         let search = dataset.search
@@ -106,7 +106,9 @@ Page({
         }
 
         this.showSearchPage()
-        wx.setNavigationBarTitle({title: role_name})
+        wx.setNavigationBarTitle({
+            title: role_name
+        })
 
         orderModel.getAllMemberList(role_code).then((result) => {
             let searchList = result['members'] || []
@@ -118,34 +120,23 @@ Page({
 
     },
 
-    showSearchPage: function () {
+    showSearchPage: function() {
         this.setData({
             searchPageHidden: false
         })
     },
-    hideSearchPage: function () {
+    hideSearchPage: function() {
         this.setData({
             searchPageHidden: true
         })
     },
-    resetSearchData: function () {
+    resetSearchData: function() {
         this.setData({
             searchList: [],
         })
     },
 
-    showInput: function () {
-        this.setData({
-            inputShowed: true
-        })
-    },
-    hideInput: function () {
-        this.setData({
-            inputVal: "",
-            inputShowed: false
-        })
-    },
-    clearInput: function () {
+    clearInput: function() {
         this.setData({
             inputVal: ""
         })
@@ -158,7 +149,7 @@ Page({
         //     })
         // })
     },
-    inputTyping: function (e) {
+    inputTyping: function(e) {
         // let searchData = this.data.currentSearch
         let inputVal = e.detail.value
         orderModel.searchParams['member_name'] = inputVal
@@ -176,7 +167,7 @@ Page({
 
     },
 
-    chooseMember (event) {
+    chooseMember(event) {
         let dataset = event['currentTarget']['dataset']
         let currentSearch = this.data['currentSearch']
         let chooseItem = dataset.item
@@ -190,12 +181,12 @@ Page({
 
     },
 
-    updateSearchList () {
+    updateSearchList() {
         this.setData({
             searchList: orderModel.searchList
         })
     },
-    resetData () {
+    resetData() {
         this.setData({
             searchList: [],
         })
