@@ -8,7 +8,7 @@
         <view class="code">{{code}}</view>
         <view class="describe">请在 POS 中输入以上凭证号</view>
         <view class="img-container">
-            <image src=""></image>
+            <image class="pic" src="../../res/img/pos.png"></image>
         </view>
     </view>
 </view>
