@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "等待支付"
+    "navigationBarTitleText": "等待支付",
+    "disableScroll": true
 }
