@@ -24,7 +24,7 @@ Page({
         ],  //  创建订单的参数
         orderAmount: '',
         isCreateMember: false,  //  是否需要创建会员
-        isAuthPass: true,   //    是否认证完成
+        isAuthPass: false,   //    是否认证完成
         buyerMemberNO: '',
         splitRuleID: '',
 
@@ -354,7 +354,7 @@ Page({
                 this.closeQrcodeModal()
             }
 
-            //  test poll for authStatus
+            // //  test poll for authStatus
             // setTimeout(() => {
             //     clearInterval(this.data.interval)
             //     this.setData({
