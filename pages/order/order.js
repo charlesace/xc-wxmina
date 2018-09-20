@@ -24,7 +24,7 @@ Page({
         ],  //  创建订单的参数
         orderAmount: '',
         isCreateMember: false,  //  是否需要创建会员
-        isAuthPass: false,   //    是否认证完成
+        isAuthPass: true,   //    是否认证完成
         buyerMemberNO: '',
         splitRuleID: '',
 
@@ -120,6 +120,9 @@ Page({
                     field: item['field']
                 }
             })
+
+            orderModel['orderConfig'] = orderConfig
+            orderModel['orderParams'] = orderParams
 
             this.setData({
                 productName: productName,
@@ -389,8 +392,31 @@ Page({
 
         // if (isCreateMember && isAuthPass) {
         // }
+
+        let orderParams = orderModel['orderParams']
+        let orderConfig = orderModel['orderConfig']
+
+
+        //  检验必填项
+        for (let i = orderConfig.length - 1; i >= 0; i--) {
+            let configItem = orderConfig[i]
+            let paramsItem = orderParams[i]
+            let require = configItem['is_required']
+            let label = configItem['label']
+            let value = paramsItem['value']
+
+            if (require && !value) {
+                wx.showToast({
+                    title: `请完善${label}`,
+                    icon: 'none'
+                })
+
+                return
+            }
+            
+        }
+
         orderModel.createOrder().then((result) => {
-            // console.log(result)
             
             wx.navigateTo({
                 url: './waitingForPayment'
