@@ -25,7 +25,8 @@ Page({
         orderAmount: '',
         isCreateMember: false,  //  是否需要创建会员
         isAuthPass: true,   //    是否认证完成
-        splitRuleID: '6445460536065925120',
+        buyerMemberNO: '',
+        splitRuleID: '',
 
         // search
         currentSearch: {},
@@ -39,6 +40,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        orderModel.reset()
+
         let productID = options['productID']
         orderModel['productID'] = productID
         this.setData({
@@ -57,7 +60,6 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-        console.log('show', orderModel['members'])
         // this.updateMember()
         this.setData({
             members: orderModel['members']
@@ -336,14 +338,32 @@ Page({
                 mobile
             } = result
 
-            if (member_id && is_bind_card) {
+            if (member_id && is_bind_card && mobile) {
                 clearInterval(this.data.interval)
                 this.setData({
                     hasAuthPass: true,
-                    member_id: member_id,
+                    buyerMemberNO: member_id,
                     mobile: mobile
                 })
+
+                orderModel['buyerMemberNO'] = member_id
+
+                this.closeQrcodeModal()
             }
+
+            // //  test poll for authStatus
+            // setTimeout(() => {
+            //     clearInterval(this.data.interval)
+            //     this.setData({
+            //         hasAuthPass: true,
+            //         buyerMemberNO: '6447003565755080704',
+            //         mobile: '13344443333'
+            //     })
+
+            //     orderModel['buyerMemberNO'] = '6447003565755080704'
+
+            //     this.closeQrcodeModal()
+            // }, 5000)
 
         }).catch((error) => {})
     },

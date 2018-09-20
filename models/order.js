@@ -23,6 +23,7 @@ module.exports = {
     orderID: '',    //  创建成功后返回的订单 ID
     payCode: '',
     yunOrderNO: '',
+    buyerMemberNO: '',
 
 
     //  请求获取搜索列表数据 （输入名称改变时）
@@ -91,6 +92,23 @@ module.exports = {
 
     },
 
+    reset () {
+        this.resetSearchData()
+        this.resetOrderInfo()
+    },
+
+    //  清空订单信息
+    resetOrderInfo () {
+        this.orderAmount = ''
+        this.xcAuthNO = ''
+        this.members = []
+        this.orderParams = []
+        this.orderID = ''
+        this.payCode = ''
+        this.yunOrderNO = ''
+        this.buyerMemberNO = '' 
+    },
+
     //  离开搜索页面，清空搜索列表
     resetSearchData: function () {
         this.searchList = []
@@ -121,21 +139,22 @@ module.exports = {
 
     //  创建订单
     createOrder: function (orderAmount, xcAuthNO) {
-        let that = this
 
         return new Promise((resolve, reject) => {
+            let payInfo = {
+                order_amount: this.orderAmount,
+                product_id: this.productID,
+                buyer_member_no: this.buyerMemberNO,
+                employee_id: login['xcUserInfo']['employeeId'],
+                employee_name: login['xcUserInfo']['name'],
+                order_config: this.orderParams,
+                members: this.members
+            }
+
             http.request(
                 'employee.order.crate',
                 {
-                    pay_info: {
-                        order_amount: this.orderAmount,
-                        buyer_member_no: '6447003565755080704',
-                        product_id: this.productID,
-                        employee_id: login['xcUserInfo']['employeeId'],
-                        employee_name: login['xcUserInfo']['name'],
-                        order_config: this.orderParams,
-                        members: this.members
-                    }
+                    pay_info: payInfo
                 }
             ).then((result) => {
                 let  {
@@ -143,8 +162,6 @@ module.exports = {
                     pay_code,
                     yun_order_no
                 } = result
-
-                console.log(this, that)
 
                 this.orderID = order_id
                 this.payCode = pay_code
