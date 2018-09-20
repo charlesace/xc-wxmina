@@ -79,4 +79,13 @@ module.exports = {
         }
         return val/1;
     },
+
+    getFixed (value, level) {
+        if (value == undefined) {
+            return value
+        }
+        var result = value/1;
+
+        return '' + parseInt(result * Math.pow(10 , level) + 0.5)/Math.pow(10,level);
+    },
 }
