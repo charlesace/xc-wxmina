@@ -20,6 +20,9 @@ module.exports = {
     xcAuthNO: '',
     members: [],    //  用于创建订单
     orderParams: [],    //
+    orderID: '',    //  创建成功后返回的订单 ID
+    payCode: '',
+    yunOrderNO: '',
 
 
     //  请求获取搜索列表数据 （输入名称改变时）
@@ -119,20 +122,38 @@ module.exports = {
     //  创建订单
     createOrder: function (orderAmount, xcAuthNO) {
 
-        return http.request(
-            'employee.order.crate',
-            {
-                pay_info: {
-                    order_amount: this.orderAmount,
-                    buyer_member_no: '6447003565755080704',
-                    product_id: this.productID,
-                    employee_id: login['xcUserInfo']['employeeId'],
-                    employee_name: login['xcUserInfo']['name'],
-                    order_config: this.orderParams,
-                    members: this.members
+        return new Promise((resolve, reject) => {
+            http.request(
+                'employee.order.crate',
+                {
+                    pay_info: {
+                        order_amount: this.orderAmount,
+                        buyer_member_no: '6447003565755080704',
+                        product_id: this.productID,
+                        employee_id: login['xcUserInfo']['employeeId'],
+                        employee_name: login['xcUserInfo']['name'],
+                        order_config: this.orderParams,
+                        members: this.members
+                    }
                 }
-            }
-        )
+            ).then((result) => {
+                let  {
+                    order_id,
+                    pay_code,
+                    yun_order_no
+                } = result
+
+                this.orderID = order_id
+                this.payCode = pay_code
+                this.yunOrderNO = yun_order_no
+
+                resolve()
+            }).catch((error) => {
+                reject(error)
+            })
+
+
+        })
     },
 
     getOrderDetail: function (orderID) {

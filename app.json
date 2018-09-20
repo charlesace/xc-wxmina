@@ -8,7 +8,7 @@
         "pages/auth/auth",
         "pages/auth/authBind",
         "pages/auth/authResult",
-        "pages/order/watingForPayment",
+        "pages/order/waitingForPayment",
         "pages/order/orderDetail",
         "pages/order/searchPage"
     ],

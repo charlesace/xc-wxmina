@@ -1,4 +1,4 @@
-<!-- pages/order/watingForPayment.wxml -->
+<!-- pages/order/waitingForPayment.wxml -->
 <view class="container">
     <view class="frame">
         <view class="amount">

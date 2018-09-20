@@ -1,4 +1,6 @@
-// pages/order/watingForPayment.js
+// pages/order/waitingForPayment.js
+let orderModel = require('../../models/order')
+
 Page({
 
     /**
@@ -14,7 +16,13 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let code = orderModel.payCode
+        let amountNumber = parseFloat(orderModel.orderAmount).toFixed(2)
 
+        this.setData({
+            code: code,
+            amountNumber: amountNumber
+        })
     },
 
     /**

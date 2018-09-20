@@ -89,7 +89,7 @@
 				{
 					"id": -1,
 					"name": "等待支付",
-					"pathName": "pages/order/watingForPayment",
+					"pathName": "pages/order/waitingForPayment",
 					"query": "code=88888"
 				},
 				{

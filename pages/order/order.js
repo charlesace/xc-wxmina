@@ -371,7 +371,9 @@ Page({
         orderModel.createOrder().then((result) => {
             // console.log(result)
             
-
+            wx.navigateTo({
+                url: './waitingForPayment'
+            })
         })
         
     }
