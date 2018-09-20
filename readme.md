@@ -34,3 +34,7 @@ admin
 
 ceshi3-cyx
 772675
+
+## 使用 icon-font
+1. iconfont 中添加图标，下载到本地， 拷贝其中 css 中的图标 className 至 app.wxss 中
+2. 使用 https://transfonter.org/ 将 ttf 转换，勾选TTF， 开启 Base64 encode， 下载至本地， 复制目录下 css 文件中 的 @font-face 部分至 app.wxss 中
