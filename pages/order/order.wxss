@@ -8,7 +8,7 @@ page {
     display: flex;
     flex-direction: column;
 
-    padding: 260rpx 0 100rpx 0;
+    padding: 270rpx 0 100rpx 0;
     height: 100%;
 }
 .page__hd {
@@ -70,6 +70,8 @@ page {
 .weui-cell {
     position: static;
     border-bottom: 1px solid #ddd;
+
+    font-size: 32rpx;
 }
 
 .unit {
@@ -93,13 +95,14 @@ page {
     align-items:center;
 
     border-bottom: 1px solid #ddd;
+
+    font-size: 32rpx;
 }
 .order-cell-input {
     display:flex;
     justify-content: space-between;
 
     width: 100%;
-    font-size: 14px;
 }
 .order-cell-input .order-cell-label{
     width: 105px;

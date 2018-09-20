@@ -124,7 +124,7 @@ module.exports = {
             {
                 pay_info: {
                     order_amount: this.orderAmount,
-                    xc_auth_no: this.xcAuthNO,
+                    buyer_member_no: '6447003565755080704',
                     product_id: this.productID,
                     employee_id: login['xcUserInfo']['employeeId'],
                     employee_name: login['xcUserInfo']['name'],

@@ -24,7 +24,7 @@ Page({
         ],  //  创建订单的参数
         orderAmount: '',
         isCreateMember: false,  //  是否需要创建会员
-        isAuthPass: false,   //    是否认证完成
+        isAuthPass: true,   //    是否认证完成
         splitRuleID: '6445460536065925120',
 
         // search
@@ -339,6 +339,7 @@ Page({
                 clearInterval(this.data.interval)
                 this.setData({
                     hasAuthPass: true,
+                    member_id: member_id,
                     mobile: mobile
                 })
             }
