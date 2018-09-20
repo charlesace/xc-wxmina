@@ -166,9 +166,9 @@ Page({
         // let searchData = this.data.currentSearch
         let inputVal = e.detail.value
         orderModel.searchParams['member_name'] = inputVal
-        // this.setData({
-        //     inputVal: inputVal
-        // })
+        this.setData({
+            inputVal: inputVal
+        })
 
         // orderModel.getMemberSearchList(inputVal).then(() => {
         //     this.updateSearchList()
