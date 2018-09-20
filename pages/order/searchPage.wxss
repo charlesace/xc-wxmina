@@ -11,3 +11,7 @@
 .searchbar-result {
   margin-top: 96rpx;
 }
+
+.icon-check {
+    color: #008fff
+}

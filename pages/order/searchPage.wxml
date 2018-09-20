@@ -31,7 +31,8 @@
                 </view>
                 <view class="weui-cell__ft"
                     wx:if="{{item.selected}}">
-                ></view>
+                    <view class="iconfont icon-check"></view>
+                </view>
             </view>
         </view>
     </view>

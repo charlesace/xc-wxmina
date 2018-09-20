@@ -149,18 +149,14 @@ Page({
         this.setData({
             inputVal: ""
         })
-        let searchData = this.data.currentSearch
-        let {
-            role_code
-        } = searchData
 
-        orderModel.getAllMemberList(role_code).then((result) => {
-            let searchList = result['members'] || []
+        // orderModel.getMemberSearchList().then((result) => {
+        //     // let searchList = result['members'] || []
 
-            this.setData({
-                searchList: searchList
-            })
-        })
+        //     this.setData({
+        //         searchList: searchList
+        //     })
+        // })
     },
     inputTyping: function (e) {
         // let searchData = this.data.currentSearch
