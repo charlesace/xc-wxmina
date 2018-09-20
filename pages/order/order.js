@@ -24,7 +24,7 @@ Page({
         ],  //  创建订单的参数
         orderAmount: '',
         isCreateMember: false,  //  是否需要创建会员
-        isAuthPass: true,   //    是否认证完成
+        isAuthPass: false,   //    是否认证完成
         buyerMemberNO: '',
         splitRuleID: '',
 
@@ -341,7 +341,7 @@ Page({
             if (member_id && is_bind_card && mobile) {
                 clearInterval(this.data.interval)
                 this.setData({
-                    hasAuthPass: true,
+                    isAuthPass: true,
                     buyerMemberNO: member_id,
                     mobile: mobile
                 })
@@ -351,11 +351,11 @@ Page({
                 this.closeQrcodeModal()
             }
 
-            // //  test poll for authStatus
+            //  test poll for authStatus
             // setTimeout(() => {
             //     clearInterval(this.data.interval)
             //     this.setData({
-            //         hasAuthPass: true,
+            //         isAuthPass: true,
             //         buyerMemberNO: '6447003565755080704',
             //         mobile: '13344443333'
             //     })
