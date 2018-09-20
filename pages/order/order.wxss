@@ -98,6 +98,10 @@ page {
 
     font-size: 32rpx;
 }
+.order-cell__bd {
+    flex: 1;
+}
+
 .order-cell-input {
     display:flex;
     justify-content: flex-start;

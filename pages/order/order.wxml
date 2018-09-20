@@ -9,7 +9,7 @@
                 <input type="digit" confirm-type="done" adjust-position="false" :value="{{orderAmount}}" bindinput="bindinputOrderAmount"></input>
             </view>
         </view>
-        <view class="page__bd">
+        <scroll-view class="page__bd">
             <view class="weui-panel">
                 <!-- member Info -->
                 <view class="weui-cell weui-cell_link" wx:for="{{members}}" wx:if="{{item.is_member_show}}" wx:key="role_code" data-search="{{item}}" bindtap="searchMember">
@@ -20,7 +20,7 @@
                 <!-- orderConfig -->
                 <view class="order-cell" wx:for="{{orderConfig}}" wx:key="field">
                     <view class="order-cell-input" wx:if="{{item.control === 'TextInput'}}">
-                        <view class="order-cell___hd">
+                        <view class="order-cell__hd">
                             <view class="order-cell-label">{{item.label}}</view>
                         </view>
                         <view class="order-cell__bd">
@@ -50,7 +50,7 @@
                     </view>
                 </view>
             </view>
-        </view>
+        </scroll-view>
         <modal class="modal"
             no-cancel="true"
             hidden="{{hiddenQrcode}}"
