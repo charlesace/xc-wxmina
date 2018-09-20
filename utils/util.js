@@ -65,5 +65,18 @@ module.exports = {
             }
         })
         return result
-    }
+    },
+
+    //  获取准确的数字
+    exactNum (val, count) {
+        if (val === undefined) {
+            return val
+        }
+        var deciLength = count||7
+        var decimals = val.toString().split('.');
+        if (decimals[1] && decimals[1].length > deciLength){
+            return this.getFixed(val, decimals[1].length-2)/1;
+        }
+        return val/1;
+    },
 }

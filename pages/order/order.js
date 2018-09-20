@@ -136,9 +136,10 @@ Page({
         if (orderAmount.split('.').length > 2) {
             return
         }
-        orderModel['orderAmount'] = orderAmount
+        let orderAmountUniPoint = util.exactNum(orderAmount * 100)
+        orderModel['orderAmount'] = orderAmountUniPoint
         this.setData({
-            orderAmount: orderAmount
+            orderAmount: orderAmountUniPoint 
         })
     },
     /**
@@ -273,7 +274,7 @@ Page({
 
         let updatedParams = orderParams.map((item) => {
             if (item.field === currentItem.field) {
-                item.value = value
+                item.value = util.exactNum(value * 100)
             }
 
             return item
