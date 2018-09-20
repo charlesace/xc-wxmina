@@ -1,5 +1,8 @@
 // pages/order/waitingForPayment.js
 let orderModel = require('../../models/order')
+const util = require('../../utils/util.js')
+const constant = require('../../config/constant')
+
 
 Page({
 
@@ -9,6 +12,7 @@ Page({
     data: {
         code: '1234444',
         amountNumber: '200.00',
+        orderID: '',
         interval: null,
     },
 
@@ -18,11 +22,15 @@ Page({
     onLoad: function (options) {
         let code = orderModel.payCode
         let amountNumber = (orderModel.orderAmount / 100).toFixed(2)
+        let orderID = orderModel.orderID
 
         this.setData({
             code: code,
-            amountNumber: amountNumber
+            amountNumber: amountNumber,
+            orderID: orderID
         })
+
+        this.pollingOrderStatus()
     },
 
     /**
@@ -50,7 +58,7 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+        this.clearOrderInterval()
     },
 
     /**
@@ -72,5 +80,40 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+
+    pollingOrderStatus: function () {
+        let interval = util.interval(this.queryOrderStatus, 2000)
+
+        this.setData({
+            interval: interval
+        })
+    },
+
+    queryOrderStatus: function () {
+        return orderModel.pollingOrderDetail(this.data.orderID).then((result) => {
+            let ORDER_STATUS = constant['ORDER_STATUS']
+            let orderStatus = result['order_status']
+
+            if (orderStatus === ORDER_STATUS['PAID']) {
+                this.clearOrderInterval()
+                wx.navigateTo({
+                    url: './orderDetail'
+                })
+            }
+            // if (orderStatus === ORDER_STATUS['WAIT_FOR_PAYMENT']) {
+            //     this.clearOrderInterval()
+            //     wx.navigateTo({
+            //         url: './orderDetail'
+            //     })
+            // }
+        })
+    },
+
+    clearOrderInterval: function () {
+        clearInterval(this.data.interval)
+        this.setData({
+            interval: null
+        })
     }
 })

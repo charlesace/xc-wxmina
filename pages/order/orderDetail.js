@@ -1,6 +1,8 @@
 // pages/order/orderDetail.js
 
 const orderModel = require('../../models/order.js')
+const util = require('../../utils/util.js')
+
 
 
 Page({
@@ -27,7 +29,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let orderID = options['orderID']
+        let orderID  = orderModel.orderID
         this.setData({
             orderID: orderID
         }, this.getOrderDetail)
@@ -105,7 +107,7 @@ Page({
         } = result
 
         this.setData({
-            order_amount: parseFloat(order_amount).toFixed(2),
+            order_amount: util.exactNum(order_amount / 100).toFixed(2),
             employee_name: employee_name,
             members: JSON.parse(members),
             mobile: mobile || '',

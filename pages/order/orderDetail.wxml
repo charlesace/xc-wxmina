@@ -28,19 +28,19 @@
         </view>
     </view>
     <view class="order-detail-info section">
-        <view class="section-cell">
+        <view class="section-cell" wx:if="{{pay_method}}">
            <view class="label">交易方式</view> <view>{{pay_method}}</view>
         </view>
         <view class="section-cell">
             <view class="label">订单编号</view> <view>{{orderID}}</view>
         </view>
-        <view class="section-cell">
+        <view class="section-cell" wx:if="{{channel_trade_no}}">
              <view class="label">交易编号 </view><view>{{channel_trade_no}}</view>
         </view>
-        <view class="section-cell">
+        <view class="section-cell"  wx:if="{{create_time}}">
              <view class="label">交易时间 </view><view>{{create_time}}</view>
         </view>
-        <view class="section-cell">
+        <view class="section-cell"  wx:if="{{pay_time}}">
              <view class="label">付款时间 </view><view>{{pay_time}}</view>
         </view>
     </view>

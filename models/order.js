@@ -121,6 +121,7 @@ module.exports = {
 
     //  创建订单
     createOrder: function (orderAmount, xcAuthNO) {
+        let that = this
 
         return new Promise((resolve, reject) => {
             http.request(
@@ -143,6 +144,8 @@ module.exports = {
                     yun_order_no
                 } = result
 
+                console.log(this, that)
+
                 this.orderID = order_id
                 this.payCode = pay_code
                 this.yunOrderNO = yun_order_no
@@ -162,6 +165,16 @@ module.exports = {
             {
                 order_id: orderID
             }
+        )
+    },
+
+    pollingOrderDetail: function (orderID) {
+        return http.request(
+            'employee.order.detail.query',
+            {
+                order_id: orderID
+            },
+            true
         )
     }
 }
