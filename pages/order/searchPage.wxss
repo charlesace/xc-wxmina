@@ -92,4 +92,5 @@ page {
 
 .bottom {
     height: 100rpx;
+    background-color: #fff;
 }
