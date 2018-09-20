@@ -84,42 +84,6 @@ Page({
 
     },
 
-
-    searchMember(event) {
-
-        let dataset = event['currentTarget']['dataset']
-        let search = dataset.search
-        let {
-            role_code,
-            role_name,
-            is_member_updatable
-        } = search
-
-        this.setData({
-            currentSearch: search
-        })
-
-        let memberName = this.data.searchName || ''
-
-        if (!is_member_updatable) {
-            return
-        }
-
-        this.showSearchPage()
-        wx.setNavigationBarTitle({
-            title: role_name
-        })
-
-        orderModel.getAllMemberList(role_code).then((result) => {
-            let searchList = result['members'] || []
-
-            this.setData({
-                searchList: searchList
-            })
-        })
-
-    },
-
     showSearchPage: function() {
         this.setData({
             searchPageHidden: false
@@ -138,16 +102,13 @@ Page({
 
     clearInput: function() {
         this.setData({
-            inputVal: ""
+            inputVal: ''
         })
+        orderModel.searchParams['member_name'] = ''
 
-        // orderModel.getMemberSearchList().then((result) => {
-        //     // let searchList = result['members'] || []
-
-        //     this.setData({
-        //         searchList: searchList
-        //     })
-        // })
+        orderModel.getMemberSearchList().then(() => {
+            this.updateSearchList()
+        })
     },
     inputTyping: function(e) {
         // let searchData = this.data.currentSearch
@@ -156,10 +117,6 @@ Page({
         this.setData({
             inputVal: inputVal
         })
-
-        // orderModel.getMemberSearchList(inputVal).then(() => {
-        //     this.updateSearchList()
-        // })
 
         orderModel.getMemberSearchList().then(() => {
             this.updateSearchList()
