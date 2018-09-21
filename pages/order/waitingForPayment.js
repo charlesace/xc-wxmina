@@ -75,13 +75,6 @@ Page({
 
     },
 
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    },
-
     pollingOrderStatus: function () {
         let interval = util.interval(this.queryOrderStatus, 2000)
 

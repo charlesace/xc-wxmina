@@ -77,13 +77,6 @@ Page({
 
     },
 
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function() {
-
-    },
-
     showSearchPage: function() {
         this.setData({
             searchPageHidden: false

@@ -95,13 +95,6 @@ Page({
 
     },
 
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function() {
-
-    },
-
     getTemplateDetail() {
         templateModel.getTemplateDetail(this.data.productID).then((result) => {
             let productName = result['product_name']
