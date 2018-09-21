@@ -10,12 +10,12 @@
             </view>
         </view>
         <scroll-view class="page__bd">
-            <view class="weui-panel">
+            <view class="panel">
                 <!-- member Info -->
-                <view class="weui-cell weui-cell_link" wx:for="{{members}}" wx:if="{{item.is_member_show}}" wx:key="role_code" data-search="{{item}}" bindtap="searchMember">
-                    <view class="weui-cell__bd">{{item.role_name}}</view>
+                <view class="cell" wx:for="{{members}}" wx:if="{{item.is_member_show}}" wx:key="role_code" data-search="{{item}}" bindtap="searchMember">
+                    <view class="cell__bd">{{item.role_name}}</view>
                     <view class="value">{{item.assigned_member_name}}</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-access" wx:if="{{item.is_member_updatable}}"></view>
+                    <view class="weui-cell__ft cell__ft_in-access" wx:if="{{item.is_member_updatable}}"></view>
                 </view>
                 <!-- orderConfig -->
                 <view class="order-cell" wx:for="{{orderConfig}}" wx:key="field">
@@ -31,18 +31,18 @@
                 </view>
             </view>
             <!-- 客户信息 -->
-            <view class="weui-panel" wx:if="{{isCreateMember}}">
-                <view class="weui-panel__hd">客户信息</view>
-                <view class="weui-panel__bd">
-                    <view class="weui-cell weui-cell_link" bindtap="showQrcodeModal">
-                        <view class="weui-cell__bd">
+            <view class="panel" wx:if="{{isCreateMember}}">
+                <view class="panel__hd">客户信息</view>
+                <view class="panel__bd">
+                    <view class="cell" bindtap="showQrcodeModal">
+                        <view class="cell__bd">
                             扫码认证
                             <text class="auth-needed"
                                 hidden="{{mobile}}">待认证</text>
                             <text class="auth-pass"
                                 hidden="{{!mobile}}">已认证</text>
                         </view>
-                        <view class="weui-cell__ft">
+                        <view class="cell__ft">
                             <text class="iconfont icon-qrcode"
                                 hidden="{{mobile}}"></text>
                             <text hidden="{{!mobile}}">{{mobile}}</text>
