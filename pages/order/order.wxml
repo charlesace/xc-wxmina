@@ -15,7 +15,7 @@
                 <view class="cell" wx:for="{{members}}" wx:if="{{item.is_member_show}}" wx:key="role_code" data-search="{{item}}" bindtap="searchMember">
                     <view class="cell__bd">{{item.role_name}}</view>
                     <view class="value">{{item.assigned_member_name}}</view>
-                    <view class="weui-cell__ft cell__ft_in-access" wx:if="{{item.is_member_updatable}}"></view>
+                    <view class="cell__ft cell__ft_in-access" wx:if="{{item.is_member_updatable}}"></view>
                 </view>
                 <!-- orderConfig -->
                 <view class="order-cell" wx:for="{{orderConfig}}" wx:key="field">

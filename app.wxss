@@ -1,6 +1,4 @@
 /**app.wxss**/
-@import 'style/weui.wxss';
-
 @font-face {
     font-family: 'iconfont';
     src: url(data:application/font-woff2;charset=utf-8;base64,d09GMgABAAAAAAQIAA0AAAAACUwAAAO0AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP0ZGVE0cGh4GVgCCWhEICoYEhGULEAABNgIkAxYEIAWFCAdHG7UHUZQvSprs4zBu+EowDBGKtsVSLobyxU17i4fv96Od+97733cdPHsobEKs4gmqaKlqEU+NxPQdkkpk+j/K2WbTskBy7lIRAU9RTw81S4t/8R+8b+pw2tig8eRAUvz7xlgU6B4UTcwC6QIaY9FYOAEXWFTKITfgzkS88rAUAlbfxLfw/l3fHe7YgRFrgSRktVCQEEXcV5FupOfAPeD18U9WtCRVxrU8crZWBBU/V34859AT7TSDUI8AZFi62Yc8IQrsA7h2Ab1Wkn6ufE/fP/zYNTmJfe+GpxuI9dv8pYAI7xA1AYiEBPh5AnDqmCYJNGAWi8B/YgcABQChGMXiRmJ+jWsZ8RKbx3Ga72z7Ch9THz7xYdpXzKz0t07YxqmVwcjp7GXZXrSFctyAw9Hz/n0PwwSB+tnNPLfz10OIHTdy3S/dChcwm0hyhd2//+DZ4G234h+xofTxGKXLisNAML6uE/4c+wCJqB6KKIHsfuQmH2B6XdT8BH2EikBauZnS246iEBaRLnYCGKqmQAd+5ADPZu1vpUXPnP1OR9/7970s2whaix5Ph6PEcPNLzJfw4L+/gD1cjfnqSn6J/VJW/DUGPnRt3oggeq36fk77VJEedWLk7R2ds/zq2ZVo/vT9Z6fM999yZtr9Q/EMLJ4FR3pui2kVAaeodeQJMtqs4bcOWx24Otc1oKEY3k05bp5uOZjXwsMtuCzoC+Gz/EEBDxdgHqt8/DaQHR0Hoe4xQRJeigypwXkRGTZL2pZg3k0WuMj4X5vEchNvCkLNGZinJi8BphXsvp473mCD5mpm8d7lhAggYAIX8LmP5x5wY1dkAS0B7f0BBBBg3Yv7/ePuJf/taqliaJlt53Qos3kYQCuBYDgIKQB5FefBulJwyP1LdrKg7YHQuGUECb0eE4BF3yDAGikQCK0TEEgaVyCQta4JULReCVAZvIVArfUFAr2dsQ8QGCzFU1mUDjuATQnzqijJrDOUbJ4ZWbDrKJW1jlFq815Reqf8aj/YEleBtJ+BGJ+JZRSJIDCTWU5IS0NSwISkv++A8w78L35iSCWD8P4Ax4hJmanwGcBf7eJNHj/FfIqYgZE8MEKmNBlgP5x7ZlpGVuRhkSZ7Qv1cxchCKouJiUQECQMttQh1RXxDTEVFK4KOgZaCmJBJGrhMsTZapFkmk2QHDd8Nw4Us7w/LZoDz5QOuuCLp0klKNqcR1imFDY5UkhmuEPiTTjZ6rGuDkCJFjhJVtQYQcdcrJqw3TNci7pwP) format('woff2'),
@@ -30,4 +28,65 @@
     width: 100%;
     height: 1rpx;
     background-color: #ddd;
+}
+
+
+.panel:first-child {
+    margin-top: 0;
+}
+
+.panel {
+    overflow: hidden;
+    margin-top: 20rpx;
+
+    background-color: #fff;
+}
+
+.panel__hd {
+    padding: 28rpx 30rpx 20rpx;
+
+    color: #999;
+    font-size: 26rpx;
+    border-bottom: 2rpx solid #ddd;
+}
+
+
+.cell {
+    /* position: static;
+    border-bottom: 1px solid #ddd;
+
+    font-size: 32rpx; */
+    display: flex;
+
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+
+    font-size: 32rpx;
+
+}
+
+.cell__bd {
+    flex: 1;
+}
+
+.cell__ft {
+    padding-right: 13px;
+}
+
+.cell__ft_in-access{
+    margin-left: 10rpx;
+
+    position:relative;
+}
+
+.cell__ft_in-access:after{
+    content:" ";
+    display:inline-block;
+    height:6px;
+    width:6px;
+    border-width:2px 2px 0 0;
+    border-color:#c8c8cd;
+    border-style:solid;
+    -webkit-transform:matrix(.71,.71,-.71,.71,0,0);
+    transform:matrix(.71,.71,-.71,.71,0,0);
 }
