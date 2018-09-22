@@ -48,7 +48,6 @@ page {
     width: 160rpx;
     margin-left: 40rpx;
     color: #444;
-    font-weight: bold;
     font-size: 34rpx;
 }
 
