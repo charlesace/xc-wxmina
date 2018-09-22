@@ -2,8 +2,7 @@ const templateModel = require('../../models/template.js')
 
 Page({
     data: {
-        cateInfo: [
-        ]
+        cateInfo: []
     },
 
     onShow() {
@@ -13,6 +12,13 @@ Page({
     onPullDownRefresh() {
         console.log('pullDown')
         this.getTemplateListInfo()
+    },
+
+    onShareAppMessage() {
+        return {
+            title: '小冲收银',
+            path: '/pages/index/index'
+        }
     },
 
     getTemplateListInfo() {

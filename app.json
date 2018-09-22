@@ -2,7 +2,7 @@
     "pages": [
         "pages/index/index",
         "pages/login/login",
-        "pages/template_list/template_list",
+        "pages/templateList/templateList",
         "pages/user_center/user_center",
         "pages/order/order",
         "pages/auth/auth",
@@ -23,7 +23,7 @@
         "selectedColor": "#008fff",
         "list": [
             {
-                "pagePath": "pages/template_list/template_list",
+                "pagePath": "pages/templateList/templateList",
                 "text": "收款"
             },
             {

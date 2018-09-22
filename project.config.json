@@ -1,110 +1,94 @@
 {
-	"description": "项目配置文件。",
-	"packOptions": {
-		"ignore": []
-	},
-	"setting": {
-		"urlCheck": false,
-		"es6": true,
-		"postcss": true,
-		"minified": true,
-		"newFeature": true
-	},
-	"compileType": "miniprogram",
-	"libVersion": "2.2.5",
-	"appid": "wx868e9fcca4d78287",
-	"projectname": "%E5%B0%8F%E5%86%B2%E5%88%86%E8%B4%A6",
-	"isGameTourist": false,
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"currentL": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": 10,
-			"list": [
-				{
-					"id": -1,
-					"name": "user_center",
-					"pathName": "pages/user_center/user_center",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "order",
-					"pathName": "pages/order/order",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "test_api",
-					"pathName": "pages/test_api/test_api",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "login",
-					"pathName": "pages/login/login",
-					"query": "",
-					"scene": "1011"
-				},
-				{
-					"id": -1,
-					"name": "fromQrcode",
-					"pathName": "pages/index/index",
-					"query": "",
-					"scene": "1011"
-				},
-				{
-					"id": -1,
-					"name": "template_list",
-					"pathName": "pages/template_list/template_list",
-					"query": ""
-				},
-				{
-					"id": 6,
-					"name": "orderWidthProductID",
-					"pathName": "pages/order/order",
-					"query": "productID=16"
-				},
-				{
-					"id": 7,
-					"name": "用户授权码",
-					"pathName": "pages/auth/auth",
-					"query": "s=user_auth&i=6446554885075902464&p=16",
-					"scene": "1011"
-				},
-				{
-					"id": -1,
-					"name": "等待支付",
-					"pathName": "pages/order/waitingForPayment",
-					"query": "code=88888"
-				},
-				{
-					"id": 9,
-					"name": "订单详情",
-					"pathName": "pages/order/orderDetail",
-					"query": "orderID=6445900970131070976"
-				},
-				{
-					"id": -1,
-					"name": "订单详情",
-					"pathName": "pages/order/searchPage",
-					"query": ""
-				}
-			]
-		}
-	}
+    "description": "项目配置文件。",
+    "packOptions": {
+        "ignore": []
+    },
+    "setting": {
+        "urlCheck": false,
+        "es6": true,
+        "postcss": true,
+        "minified": true,
+        "newFeature": true
+    },
+    "compileType": "miniprogram",
+    "libVersion": "2.2.5",
+    "appid": "wx868e9fcca4d78287",
+    "projectname": "%E5%B0%8F%E5%86%B2%E5%88%86%E8%B4%A6",
+    "isGameTourist": false,
+    "condition": {
+        "search": {
+            "current": -1,
+            "list": []
+        },
+        "conversation": {
+            "current": -1,
+            "list": []
+        },
+        "plugin": {
+            "current": -1,
+            "list": []
+        },
+        "game": {
+            "currentL": -1,
+            "list": []
+        },
+        "miniprogram": {
+            "current": -1,
+            "list": [
+                {
+                    "id": 0,
+                    "name": "我的",
+                    "pathName": "pages/user_center/user_center",
+                    "query": "",
+                    "scene": "1011"
+                },
+                {
+                    "id": -1,
+                    "name": "login",
+                    "pathName": "pages/login/login",
+                    "query": "",
+                    "scene": "1011"
+                },
+                {
+                    "id": -1,
+                    "name": "templateList",
+                    "pathName": "pages/templateList/templateList",
+                    "query": ""
+                },
+                {
+                    "id": 4,
+                    "name": "下单",
+                    "pathName": "pages/order/order",
+                    "query": "productID=16",
+                    "scene": "1011"
+                },
+                {
+                    "id": 7,
+                    "name": "用户授权码",
+                    "pathName": "pages/auth/auth",
+                    "query": "s=user_auth&i=6446554885075902464&p=16",
+                    "scene": "1011"
+                },
+                {
+                    "id": -1,
+                    "name": "等待支付",
+                    "pathName": "pages/order/waitingForPayment",
+                    "query": "code=88888"
+                },
+                {
+                    "id": 9,
+                    "name": "订单详情",
+                    "pathName": "pages/order/orderDetail",
+                    "query": "orderID=6445900970131070976"
+                },
+                {
+                    "id": 8,
+                    "name": "会员搜索",
+                    "pathName": "pages/order/searchPage",
+                    "query": "",
+                    "scene": "1011"
+                }
+            ]
+        }
+    }
 }
