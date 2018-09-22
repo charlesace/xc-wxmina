@@ -29,6 +29,7 @@ Page({
             this.setData({
                 cateInfo: cateInfo
             })
+            wx.stopPullDownRefresh()
         })
     }
 
