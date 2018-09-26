@@ -131,8 +131,12 @@ Page({
     //  订单金额 input
     bindinputOrderAmount (event) {
         let orderAmount = event.detail.value
-        if (orderAmount.split('.').length > 2) {
-            return
+        let orderAmountArr = orderAmount.split('.')
+        if (orderAmountArr.length > 2) {
+            return util.exactNum(this.data.orderAmount / 100)
+        } else if (orderAmountArr[1].length > 2) {
+            //  小数点后面两位
+            return util.exactNum(this.data.orderAmount / 100)
         }
         let orderAmountUniPoint = util.exactNum(orderAmount * 100)
         orderModel['orderAmount'] = orderAmountUniPoint

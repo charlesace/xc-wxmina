@@ -6,7 +6,7 @@
             <view class="input-tip">请输入消费总金额</view>
             <view class="input-container">
                 <text class="unit">￥</text>
-                <input type="digit" confirm-type="done" adjust-position="false" :value="{{orderAmount}}" bindinput="bindinputOrderAmount"></input>
+                <input class="order-amount" type="digit" confirm-type="done" adjust-position="false" :value="{{orderAmount}}" bindinput="bindinputOrderAmount" value="0"></input>
             </view>
         </view>
         <scroll-view class="page__bd">
