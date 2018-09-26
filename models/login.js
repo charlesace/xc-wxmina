@@ -42,7 +42,7 @@ module.exports = {
     // 跳转首页
     gotoHomePage: function() {
         wx.switchTab({
-            url: '../template_list/template_list'
+            url: '../templateList/templateList'
         })
     },
 

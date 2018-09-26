@@ -1,6 +1,7 @@
 <view class="container">
     <view class="frame">
         <image class="logo" src="../../res/img/logo.png"></image>
+        <view class="name">小冲收银</view>
         <view class="section">
             <text class="iconfont icon-user"></text>
             <input value="{{username}}"

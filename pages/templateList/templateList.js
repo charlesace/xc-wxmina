@@ -2,8 +2,7 @@ const templateModel = require('../../models/template.js')
 
 Page({
     data: {
-        cateInfo: [
-        ]
+        cateInfo: []
     },
 
     onShow() {
@@ -15,6 +14,13 @@ Page({
         this.getTemplateListInfo()
     },
 
+    onShareAppMessage() {
+        return {
+            title: '小冲收银',
+            path: '/pages/index/index'
+        }
+    },
+
     getTemplateListInfo() {
         templateModel.getTemplateList().then((res) => {
             let cateInfo = res['catalog_list']
@@ -23,6 +29,7 @@ Page({
             this.setData({
                 cateInfo: cateInfo
             })
+            wx.stopPullDownRefresh()
         })
     }
 
