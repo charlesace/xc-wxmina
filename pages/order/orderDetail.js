@@ -15,7 +15,7 @@ Page({
         order_status: '订单状态',
         employee_id: '员工id',
         employee_name: '员工名称',
-        order_amount: '订单金额',
+        order_amount: '1000',
         mobile: '手机号',   //  付款信息，手机号，当空时不显示付款信息
         members: [
         ],
