@@ -134,7 +134,7 @@ Page({
         let orderAmountArr = orderAmount.split('.')
         if (orderAmountArr.length > 2) {
             return util.exactNum(this.data.orderAmount / 100)
-        } else if (orderAmountArr[1].length > 2) {
+        } else if (orderAmountArr[1] && orderAmountArr[1].length > 2) {
             //  小数点后面两位
             return util.exactNum(this.data.orderAmount / 100)
         }
