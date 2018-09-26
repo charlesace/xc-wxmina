@@ -16,7 +16,7 @@
     flex-direction: row;
 
     margin-top: 40rpx;
-    padding-bottom: 40rpx;
+    padding-bottom: 20rpx;
     width: 100%;
     border-bottom: 2rpx solid #f5f5f5;
 
@@ -37,8 +37,8 @@
     flex-direction: row;
 }
 .section .section-bd .section-cell{
+    margin-bottom: 20rpx;
     justify-content: space-between;
-
 }
 
 .order-detail-info {
