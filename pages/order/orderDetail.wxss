@@ -1,56 +1,76 @@
 /* pages/order/orderDetail.wxss */
+page {
+    background-color: #f3f3f3;
+    /* height: 100%; */
+}
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 50rpx 30rpx;
+    justify-content: flex-start;
+    background-color: #fff;
+}
+
+.header {
+    height: 240rpx;
+    width: 750rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .order-amount {
-    font-size: 60rpx;
+    font-size: 68rpx;
+    color: #333;
+}
+
+.tip {
+    font-size: 32rpx;
+    color: #aaa;
 }
 
 .section {
+    width: 670rpx;
     display: flex;
     flex-direction: row;
-
-    margin-top: 40rpx;
-    padding-bottom: 20rpx;
-    width: 100%;
-    border-bottom: 2rpx solid #f5f5f5;
-
-    font-size: 28rpx;
+    font-size: 34rpx;
 }
 
 .section .section-hd {
-    width: 140rpx;
-
-    color: #c3c3c3;
+    width: 170rpx;
+    color: #aaa;
 }
 
 .section .section-bd {
     flex: 1;
 }
-.section .section-cell {
+
+.section .section-bd .section-cell {
+    margin-bottom: 20rpx;
     display: flex;
     flex-direction: row;
-}
-.section .section-bd .section-cell{
-    margin-bottom: 20rpx;
     justify-content: space-between;
 }
 
-.order-detail-info {
-    flex-direction: column;
-
-    color: #c3c3c3;
+.light {
+    color: #aaa;
 }
 
-.order-detail-info .section-cell {
+.dark {
+    color: #444;
+}
+
+.space {
     margin-top: 10rpx;
+    margin-bottom: 30rpx;
 }
 
-.order-detail-info .section-cell .label {
-    width: 140rpx;
+.margin {
+    margin-bottom: 20rpx;
+}
+
+.bottom {
+    margin-bottom: 10rpx;
 }

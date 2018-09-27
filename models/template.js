@@ -7,13 +7,23 @@ const login = require('./login.js')
 let orderModel = require('./order.js')
 
 module.exports = {
+    catalogList: [],
+
+
     // 获取支付模板列表
     getTemplateList: function() {
-        return http.request(
-            'employee.pay.template.list.query', {
-                app_id: login.appId
-            }
-        )
+        return new Promise((resolve, reject) => {
+            http.request(
+                'employee.pay.template.list.query', {
+                    app_id: login.appId
+                }
+            ).then((res) => {
+                this.catalogList = res['catalog_list'] || []
+                resolve(res)
+            }).catch((err) => {
+                reject(err)
+            })
+        })
     },
 
     // 获取支付模板详情
@@ -42,5 +52,18 @@ module.exports = {
                 reject(err)
             })
         })
+    },
+
+    getProduct: function(id) {
+        for (let i = 0; i < this.catalogList.length; ++i) {
+            let catalog = this.catalogList[i]
+            for (let j = 0; j < catalog.product_list.length; ++j) {
+                let product = catalog.product_list[j]
+                if (product.product_id == id){
+                    return product
+                }
+            }
+        }
+        return null
     }
 }

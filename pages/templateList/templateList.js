@@ -24,7 +24,7 @@ Page({
     getTemplateListInfo() {
         templateModel.getTemplateList().then((res) => {
             let cateInfo = res['catalog_list']
-            console.log(cateInfo)
+            // console.log(cateInfo)
 
             this.setData({
                 cateInfo: cateInfo

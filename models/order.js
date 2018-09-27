@@ -18,16 +18,16 @@ module.exports = {
     },
     orderAmount: '',
     xcAuthNO: '',
-    members: [],    //  用于创建订单
-    orderParams: [],    //
-    orderID: '',    //  创建成功后返回的订单 ID
+    members: [], //  用于创建订单
+    orderParams: [], //
+    orderID: '', //  创建成功后返回的订单 ID
     payCode: '',
     yunOrderNO: '',
     buyerMemberNO: '',
 
 
     //  请求获取搜索列表数据 （输入名称改变时）
-    getMemberSearchList: function (loadMore) {
+    getMemberSearchList: function(loadMore) {
 
         return new Promise((resolve, reject) => {
             http.request(
@@ -57,17 +57,17 @@ module.exports = {
     },
 
     //  选择一项时，清空其他的
-    setSelectItem: function (item) {
-        
+    setSelectItem: function(item) {
+
         this.selectItemID = item.id
         this.selectItemName = item.name
 
         this.updateMembers()
         this.updateSelectSearchList()
     },
-    updateMembers: function () {
+    updateMembers: function() {
         console.log('111', this.members, this.searchParams['roleID'])
-        
+
         this.members = this.members.map((item) => {
             if (item['role_code'] == this.searchParams['roleID']) {
                 item['assigned_member_id'] = this.selectItemID
@@ -79,7 +79,7 @@ module.exports = {
             }
         })
     },
-    updateSelectSearchList: function () {
+    updateSelectSearchList: function() {
         this.searchList = this.searchList.map((item) => {
             if (item.id === this.selectItemID) {
                 item.selected = true
@@ -92,13 +92,13 @@ module.exports = {
 
     },
 
-    reset () {
+    reset() {
         this.resetSearchData()
         this.resetOrderInfo()
     },
 
     //  清空订单信息
-    resetOrderInfo () {
+    resetOrderInfo() {
         this.orderAmount = ''
         this.xcAuthNO = ''
         this.members = []
@@ -106,11 +106,11 @@ module.exports = {
         this.orderID = ''
         this.payCode = ''
         this.yunOrderNO = ''
-        this.buyerMemberNO = '' 
+        this.buyerMemberNO = ''
     },
 
     //  离开搜索页面，清空搜索列表
-    resetSearchData: function () {
+    resetSearchData: function() {
         this.searchList = []
         this.selectItemID = ''
         this.selectItemName = ''
@@ -138,7 +138,7 @@ module.exports = {
     },
 
     //  创建订单
-    createOrder: function (orderAmount, xcAuthNO) {
+    createOrder: function(orderAmount, xcAuthNO) {
 
         return new Promise((resolve, reject) => {
             let payInfo = {
@@ -152,12 +152,11 @@ module.exports = {
             }
 
             http.request(
-                'employee.order.crate',
-                {
+                'employee.order.crate', {
                     pay_info: payInfo
                 }
             ).then((result) => {
-                let  {
+                let {
                     order_id,
                     pay_code,
                     yun_order_no
@@ -176,22 +175,46 @@ module.exports = {
         })
     },
 
-    getOrderDetail: function (orderID) {
+    getOrderDetail: function(orderID) {
         return http.request(
-            'employee.order.detail.query',
-            {
+            'employee.order.detail.query', {
                 order_id: orderID
             }
         )
     },
 
-    pollingOrderDetail: function (orderID) {
+    pollingOrderDetail: function(orderID) {
         return http.request(
-            'employee.order.detail.query',
-            {
+            'employee.order.detail.query', {
                 order_id: orderID
             },
             true
         )
+    },
+
+    getOrderStatus: function(code) {
+        let ret = ''
+        if (code == '1001') {
+            ret = '待支付'
+        }
+        else if (code == '1002') {
+            ret = '交易中'
+        }
+        else if (code == '1004') {
+            ret = '已付款'
+        }
+        else if (code == '1005') {
+            ret = '待核销'
+        }
+        else if (code == '1006') {
+            ret = '交易成功'
+        }
+        else if (code == '1001') {
+            ret = '交易关闭'
+        }
+        else if (code == '1001') {
+            ret = '已退款'
+        }
+        return ret
     }
 }

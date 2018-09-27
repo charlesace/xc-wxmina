@@ -1,47 +1,60 @@
 <!--pages/order/orderDetail.wxml-->
 <view class="container">
-    <view class="order-amount">{{order_amount}}</view>
-    <view>交易成功</view>
-    <view class="receipt-info section">
+    <view class="header">
+        <view class="order-amount">{{order_amount}}</view>
+        <view class="tip">{{status}}</view>
+    </view>
+    <view class="section">
         <view class="section-hd">收款信息</view>
-        <view class="section-bd">
-            <view class="section-cell">订单金额 <view>{{order_amount}} 元</view></view>
-            <view class="section-cell">收款人员 <view>{{employee_name}}</view></view>
+        <view class="section-bd dark">
+            <view class="section-cell">订单金额
+                <view>{{order_amount}} 元</view>
+            </view>
+            <view class="section-cell">收款人员
+                <view>{{employee_name}}</view>
+            </view>
         </view>
     </view>
-    <view class="payment-info section"
-        hidden="{{!mobile}}">
+    <view class="line space" hidden="{{!mobile}}"></view>
+    <view class="payment-info section" hidden="{{!mobile}}">
         <view class="section-hd">付款信息</view>
-        <view class="section-bd">
-            <view class="section-cell">手机号码 <view>{{mobile}}</view></view>
+        <view class="section-bd dark">
+            <view class="section-cell">手机号码
+                <view>{{mobile}}</view>
+            </view>
         </view>
     </view>
-    <view class="order-info section">
+    <view class="line space" hidden="{{members.length == 0}}"></view>
+    <view class="section">
         <view class="section-hd">订单信息</view>
-        <view class="section-bd">
-            <view class="section-cell"
-                wx:for="{{members}}"
-                wx:key="role_code">
+        <view class="section-bd dark">
+            <view class="section-cell" wx:for="{{members}}" wx:key="role_code">
                 {{item.role_name}}
                 <view>{{item.assigned_member_name}}</view>
             </view>
         </view>
     </view>
-    <view class="order-detail-info section">
-        <view class="section-cell" wx:if="{{pay_method}}">
-           <view class="label">交易方式</view> <view>{{pay_method}}</view>
+    <view class="line space"></view>
+    <view class="bottom">
+        <view class="section margin" wx:if="{{pay_method}}">
+            <view class="section-hd">交易方式</view>
+            <view class="section-bd light">{{pay_method}}</view>
         </view>
-        <view class="section-cell">
-            <view class="label">订单编号</view> <view>{{orderID}}</view>
+        <view class="section margin">
+            <view class="section-hd">订单编号</view>
+            <view class="section-bd light">{{orderID}}</view>
         </view>
-        <view class="section-cell" wx:if="{{channel_trade_no}}">
-             <view class="label">交易编号 </view><view>{{channel_trade_no}}</view>
+        <view class="section margin" wx:if="{{channel_trade_no}}">
+            <view class="section-hd">交易编号</view>
+            <view class="section-bd light">{{channel_trade_no}}</view>
         </view>
-        <view class="section-cell"  wx:if="{{create_time}}">
-             <view class="label">交易时间 </view><view>{{create_time}}</view>
+        <view class="section margin" wx:if="{{create_time}}">
+            <view class="section-hd">交易时间</view>
+            <view class="section-bd light">{{create_time}}</view>
         </view>
-        <view class="section-cell"  wx:if="{{pay_time}}">
-             <view class="label">付款时间 </view><view>{{pay_time}}</view>
+        <view class="section margin" wx:if="{{pay_time}}">
+            <view class="section-hd">付款时间</view>
+            <view class="section-bd light">{{pay_time}}</view>
         </view>
     </view>
 </view>
