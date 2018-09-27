@@ -272,11 +272,22 @@ Page({
     orderConfigChange (event) {
         let value = event.detail.value
         let currentItem  = event['currentTarget']['dataset']['item']
+        let controlType = currentItem['control']
         let orderParams = this.data['orderParams']
 
         let updatedParams = orderParams.map((item) => {
             if (item.field === currentItem.field) {
-                item.value = util.exactNum(value * 100)
+                switch (controlType) {
+                    case 'MoneyInput': 
+                        item.value = util.exactNum(value * 100)
+                        break
+                    case 'TextInput':
+                        item.value = value
+                        break
+                    case 'NumberInput':
+                        item.value = util.exactNum(value)
+                        break
+                }
             }
 
             return item

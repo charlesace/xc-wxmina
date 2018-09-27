@@ -6,8 +6,8 @@ module.exports = {
     wxAppId: 'wx868e9fcca4d78287',
 
     // 域名请求地址
-    // apiUrl: 'http://47.97.81.252:8012/',
-    apiUrl: 'https://cloud.xc-fintech.com/',
+    apiUrl: 'http://47.97.81.252:8012/',
+    // apiUrl: 'https://cloud.xc-fintech.com/',
 
     // 服务器请求地址
     soaPath: 'service/soa',

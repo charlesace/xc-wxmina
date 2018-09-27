@@ -19,7 +19,28 @@
                 </view>
                 <!-- orderConfig -->
                 <view class="order-cell" wx:for="{{orderConfig}}" wx:key="field">
+                    <!-- TextInput -->
                     <view class="order-cell-input" wx:if="{{item.control === 'TextInput'}}">
+                        <view class="order-cell__hd">
+                            <view class="order-cell-label">{{item.label}}</view>
+                        </view>
+                        <view class="order-cell__bd">
+                            <input type="text" bindinput="orderConfigChange" data-item="{{item}}"
+                            class="order-cell-value"></input>
+                        </view>
+                    </view>
+                    <!-- NumberInput -->
+                    <view class="order-cell-input" wx:if="{{item.control === 'NumberInput'}}">
+                        <view class="order-cell__hd">
+                            <view class="order-cell-label">{{item.label}}</view>
+                        </view>
+                        <view class="order-cell__bd">
+                            <input type="digit" bindinput="orderConfigChange" data-item="{{item}}"
+                            class="order-cell-value"></input>
+                        </view>
+                    </view>
+                    <!-- MoneyInput -->
+                    <view class="order-cell-input" wx:if="{{item.control === 'MoneyInput'}}">
                         <view class="order-cell__hd">
                             <view class="order-cell-label">{{item.label}}</view>
                         </view>
