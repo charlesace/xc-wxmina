@@ -22,6 +22,7 @@
                 </view>
                 <!-- orderConfig -->
                 <view class="order-cell" wx:for="{{orderConfig}}" wx:key="field">
+                    <view class="required" wx:if="{{item.is_required}}">*</view>
                     <!-- TextInput -->
                     <view class="order-cell-input" wx:if="{{item.control === 'TextInput'}}">
                         <view class="order-cell__hd">

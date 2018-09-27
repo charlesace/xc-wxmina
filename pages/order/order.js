@@ -437,7 +437,6 @@ Page({
         let orderParams = orderModel['orderParams']
         let orderConfig = orderModel['orderConfig']
 
-
         //  检验必填项
         for (let i = orderConfig.length - 1; i >= 0; i--) {
             let configItem = orderConfig[i]
