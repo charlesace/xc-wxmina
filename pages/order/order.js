@@ -148,7 +148,6 @@ Page({
         if (/^\d*(\.)?(\d){0,2}$/.test(orderAmount)) {
             let orderAmountPoint = util.exactNum(orderAmount * 100)
             orderModel['orderAmountPoint'] = orderAmountPoint
-            console.log(orderAmount)
 
             this.setData({
                 orderAmount: orderAmount
@@ -290,12 +289,17 @@ Page({
         let controlType = currentItem['control']
         let orderParams = this.data['orderParams']
 
+        //  设置请求参数
         let updatedParams = orderParams.map((item) => {
             if (item.field === currentItem.field) {
                 switch (controlType) {
                     case 'MoneyInput': 
-                        item.value = util.exactNum(value * 100)
-                        break
+                        if (/^\d*(\.)?(\d){0,2}$/.test(value)) {
+                            item.value = util.exactNum(value * 100)
+                            return item
+                        } else {
+                            return item
+                        }
                     case 'TextInput':
                         item.value = value
                         break
@@ -313,6 +317,20 @@ Page({
         this.setData({
             orderParams: updatedParams
         })
+
+        //  input 事件返回，设置 input 值
+        switch (controlType) {
+            case 'MoneyInput':
+                if (/^\d*(\.)?(\d){0,2}$/.test(value)) {
+                    return value
+                } else {
+                    return value.substring(0, value.length - 1)
+                }
+            case 'TextInput':
+                return value
+            case 'NumberInput':
+                return value
+        }
 
     },
 
