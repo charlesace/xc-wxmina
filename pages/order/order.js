@@ -22,7 +22,8 @@ Page({
         orderParams: [
 
         ],  //  创建订单的参数
-        orderAmount: '',
+        orderAmount: '0',
+        orderAmountPoint: '',
         isCreateMember: false,  //  是否需要创建会员
         isAuthPass: false,   //    是否认证完成
         buyerMemberNO: '',
@@ -128,21 +129,34 @@ Page({
 
         })
     },
-    //  订单金额 input
+    //  订单金额 input , 初始 0, 初次点击清空
+    focusOrderAmount (event) {
+        let focusValue = event.detail.value
+
+        if (focusValue === '0') {
+            this.setData({
+                orderAmount: '' 
+            })
+        }
+
+    },
+
     bindinputOrderAmount (event) {
         let orderAmount = event.detail.value
-        let orderAmountArr = orderAmount.split('.')
-        if (orderAmountArr.length > 2) {
-            return util.exactNum(this.data.orderAmount / 100)
-        } else if (orderAmountArr[1] && orderAmountArr[1].length > 2) {
-            //  小数点后面两位
-            return util.exactNum(this.data.orderAmount / 100)
+
+
+        if (/^\d*(\.)?(\d){0,2}$/.test(orderAmount)) {
+            let orderAmountPoint = util.exactNum(orderAmount * 100)
+            orderModel['orderAmountPoint'] = orderAmountPoint
+
+            this.setData({
+                orderAmount: orderAmount
+            })
+
+            return orderAmount
+        } else {
+            return this.data.orderAmount
         }
-        let orderAmountUniPoint = util.exactNum(orderAmount * 100)
-        orderModel['orderAmount'] = orderAmountUniPoint
-        this.setData({
-            orderAmount: orderAmountUniPoint 
-        })
     },
     /**
      * 点击角色部分，如果可修改，弹出搜索框选择
@@ -275,12 +289,17 @@ Page({
         let controlType = currentItem['control']
         let orderParams = this.data['orderParams']
 
+        //  设置请求参数
         let updatedParams = orderParams.map((item) => {
             if (item.field === currentItem.field) {
                 switch (controlType) {
                     case 'MoneyInput': 
-                        item.value = util.exactNum(value * 100)
-                        break
+                        if (/^\d*(\.)?(\d){0,2}$/.test(value)) {
+                            item.value = util.exactNum(value * 100)
+                            return item
+                        } else {
+                            return item
+                        }
                     case 'TextInput':
                         item.value = value
                         break
@@ -298,6 +317,20 @@ Page({
         this.setData({
             orderParams: updatedParams
         })
+
+        //  input 事件返回，设置 input 值
+        switch (controlType) {
+            case 'MoneyInput':
+                if (/^\d*(\.)?(\d){0,2}$/.test(value)) {
+                    return value
+                } else {
+                    return value.substring(0, value.length - 1)
+                }
+            case 'TextInput':
+                return value
+            case 'NumberInput':
+                return value
+        }
 
     },
 
@@ -403,7 +436,6 @@ Page({
 
         let orderParams = orderModel['orderParams']
         let orderConfig = orderModel['orderConfig']
-
 
         //  检验必填项
         for (let i = orderConfig.length - 1; i >= 0; i--) {

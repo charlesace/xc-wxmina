@@ -17,6 +17,7 @@ module.exports = {
         pageSize: 20
     },
     orderAmount: '',
+    orderAmountPoint: '',
     xcAuthNO: '',
     members: [], //  用于创建订单
     orderParams: [], //
@@ -100,6 +101,7 @@ module.exports = {
     //  清空订单信息
     resetOrderInfo() {
         this.orderAmount = ''
+        this.orderAmountPoint = ''
         this.xcAuthNO = ''
         this.members = []
         this.orderParams = []
@@ -142,7 +144,7 @@ module.exports = {
 
         return new Promise((resolve, reject) => {
             let payInfo = {
-                order_amount: this.orderAmount,
+                order_amount: this.orderAmountPoint,
                 product_id: this.productID,
                 buyer_member_no: this.buyerMemberNO,
                 employee_id: login['xcUserInfo']['employeeId'],

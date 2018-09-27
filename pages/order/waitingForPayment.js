@@ -21,7 +21,7 @@ Page({
      */
     onLoad: function (options) {
         let code = orderModel.payCode
-        let amountNumber = (orderModel.orderAmount / 100).toFixed(2)
+        let amountNumber = (orderModel.orderAmountPoint / 100).toFixed(2)
         let orderID = orderModel.orderID
 
         this.setData({
