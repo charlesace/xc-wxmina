@@ -22,7 +22,8 @@ Page({
         orderParams: [
 
         ],  //  创建订单的参数
-        orderAmount: '',
+        orderAmount: '0',
+        orderAmountPoint: '',
         isCreateMember: false,  //  是否需要创建会员
         isAuthPass: false,   //    是否认证完成
         buyerMemberNO: '',
@@ -128,21 +129,35 @@ Page({
 
         })
     },
-    //  订单金额 input
+    //  订单金额 input , 初始 0, 初次点击清空
+    focusOrderAmount (event) {
+        let focusValue = event.detail.value
+
+        if (focusValue === '0') {
+            this.setData({
+                orderAmount: '' 
+            })
+        }
+
+    },
+
     bindinputOrderAmount (event) {
         let orderAmount = event.detail.value
-        let orderAmountArr = orderAmount.split('.')
-        if (orderAmountArr.length > 2) {
-            return util.exactNum(this.data.orderAmount / 100)
-        } else if (orderAmountArr[1] && orderAmountArr[1].length > 2) {
-            //  小数点后面两位
-            return util.exactNum(this.data.orderAmount / 100)
+
+
+        if (/^\d*(\.)?(\d){0,2}$/.test(orderAmount)) {
+            let orderAmountPoint = util.exactNum(orderAmount * 100)
+            orderModel['orderAmountPoint'] = orderAmountPoint
+            console.log(orderAmount)
+
+            this.setData({
+                orderAmount: orderAmount
+            })
+
+            return orderAmount
+        } else {
+            return this.data.orderAmount
         }
-        let orderAmountUniPoint = util.exactNum(orderAmount * 100)
-        orderModel['orderAmount'] = orderAmountUniPoint
-        this.setData({
-            orderAmount: orderAmountUniPoint 
-        })
     },
     /**
      * 点击角色部分，如果可修改，弹出搜索框选择
