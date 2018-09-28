@@ -5,12 +5,12 @@
     </view>
     <view wx:for="{{cateInfo}}" wx:key="catalog_id" class="block">
         <view class="catalog">{{item.catalog_name}}</view>
-        <navigator wx:for="{{item.product_list}}" wx:key="split_rule_id" wx:for-item="i" url="/pages/order/order?productID={{i.product_id}}" class="section" hover-class="cell_active">
+        <navigator wx:for="{{item.product_list}}" wx:key="split_rule_id" wx:for-item="i" url="/pages/order/order?productID={{i.product_id}}" class="section">
             <view class="item">
                 <view class="label">{{i.product_name}}</view>
                 <image class="arrow" src="../../res/img/arrow.png"></image>
             </view>
-            <view wx:if="{{index + 1 != item.product_list.length}}" class="line"></view>
+            <view wx:if="{{index + 1 < item.product_list.length}}" class="line"></view>
         </navigator>
     </view>
 </view>

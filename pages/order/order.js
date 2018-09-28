@@ -15,17 +15,15 @@ Page({
         productID: '',
         productName: '',
         mobile: '',
-        members: [
-        ],
-        orderConfig: [
-        ],
+        members: [],
+        orderConfig: [],
         orderParams: [
 
-        ],  //  创建订单的参数
+        ], //  创建订单的参数
         orderAmount: '0',
         orderAmountPoint: '',
-        isCreateMember: false,  //  是否需要创建会员
-        isAuthPass: false,   //    是否认证完成
+        isCreateMember: false, //  是否需要创建会员
+        isAuthPass: false, //    是否认证完成
         buyerMemberNO: '',
         splitRuleID: '',
 
@@ -34,7 +32,7 @@ Page({
         searchList: [],
         inputShowed: false,
         inputVal: "",
-        searchPageHidden: true 
+        searchPageHidden: true
     },
 
     /**
@@ -130,18 +128,18 @@ Page({
         })
     },
     //  订单金额 input , 初始 0, 初次点击清空
-    focusOrderAmount (event) {
+    focusOrderAmount(event) {
         let focusValue = event.detail.value
 
         if (focusValue === '0') {
             this.setData({
-                orderAmount: '' 
+                orderAmount: ''
             })
         }
 
     },
 
-    bindinputOrderAmount (event) {
+    bindinputOrderAmount(event) {
         let orderAmount = event.detail.value
 
 
@@ -162,7 +160,7 @@ Page({
      * 点击角色部分，如果可修改，弹出搜索框选择
      *
      */
-    searchMember (event) {
+    searchMember(event) {
 
         let dataset = event['currentTarget']['dataset']
         let search = dataset.search
@@ -189,34 +187,34 @@ Page({
 
     },
 
-    showSearchPage: function () {
+    showSearchPage: function() {
         this.setData({
             searchPageHidden: false
         })
     },
-    hideSearchPage: function () {
+    hideSearchPage: function() {
         this.setData({
             searchPageHidden: true
         })
     },
-    resetSearchData: function () {
+    resetSearchData: function() {
         this.setData({
             searchList: []
         })
     },
 
-    showInput: function () {
+    showInput: function() {
         this.setData({
             inputShowed: true
         })
     },
-    hideInput: function () {
+    hideInput: function() {
         this.setData({
             inputVal: "",
             inputShowed: false
         })
     },
-    clearInput: function () {
+    clearInput: function() {
         this.setData({
             inputVal: ""
         })
@@ -233,7 +231,7 @@ Page({
             })
         })
     },
-    inputTyping: function (e) {
+    inputTyping: function(e) {
         let searchData = this.data.currentSearch
         let inputVal = e.detail.value
         this.setData({
@@ -256,7 +254,7 @@ Page({
         })
     },
 
-    chooseMember (event) {
+    chooseMember(event) {
         let dataset = event['currentTarget']['dataset']
         let currentSearch = this.data['currentSearch']
         let chooseItem = dataset.item
@@ -283,9 +281,9 @@ Page({
 
     // order_config start
 
-    orderConfigChange (event) {
+    orderConfigChange(event) {
         let value = event.detail.value
-        let currentItem  = event['currentTarget']['dataset']['item']
+        let currentItem = event['currentTarget']['dataset']['item']
         let controlType = currentItem['control']
         let orderParams = this.data['orderParams']
 
@@ -293,7 +291,7 @@ Page({
         let updatedParams = orderParams.map((item) => {
             if (item.field === currentItem.field) {
                 switch (controlType) {
-                    case 'MoneyInput': 
+                    case 'MoneyInput':
                         if (/^\d*(\.)?(\d){0,2}$/.test(value)) {
                             item.value = util.exactNum(value * 100)
                             return item
@@ -413,8 +411,8 @@ Page({
     },
 
     //  二维码 modal 展示时禁止滚动
-    stopPageScroll () {
-        return 
+    stopPageScroll() {
+        return
     },
 
     getAuthStatus() {
@@ -427,7 +425,7 @@ Page({
         })
     },
 
-    orderConfirm () {
+    orderConfirm() {
         let data = this['data']
         // let members = orderModel.members
 
@@ -453,15 +451,15 @@ Page({
 
                 return
             }
-            
+
         }
 
         orderModel.createOrder().then((result) => {
-            
+
             wx.navigateTo({
                 url: './waitingForPayment'
             })
         })
-        
+
     }
 })

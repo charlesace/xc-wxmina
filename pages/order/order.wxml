@@ -1,91 +1,76 @@
 <!-- pages/order/order.wxml -->
 <view class="page" scroll-y="true">
-    <view class="order-page">
-        <view class="page__hd">
-            <view class="product-name">{{productName}}</view>
-            <view class="input-tip">请输入消费总金额</view>
-            <view class="input-container">
-                <text class="unit">￥</text>
-                <input class="order-amount" type="digit" confirm-type="done" adjust-position="false"
-                value="{{orderAmount}}"
-                bindinput="bindinputOrderAmount"
-                bindfocus="focusOrderAmount"></input>
+    <view class="head">
+        <view class="product-name nowrap">{{productName}}</view>
+        <view class="input-tip">请输入消费总金额</view>
+        <view class="input-container">
+            <text class="unit">￥</text>
+            <input class="order-amount" type="digit" confirm-type="done" adjust-position="false" maxlength="12" value="{{orderAmount}}" bindinput="bindinputOrderAmount" bindfocus="focusOrderAmount"></input>
+        </view>
+    </view>
+    <view class="body">
+        <view class="title" wx:if="{{members.length > 0}}">
+            <view class="title-text">角色信息</view>
+            <view class="line"></view>
+        </view>
+        <view class="section" wx:for="{{members}}" wx:if="{{item.is_member_show}}" wx:key="role_code" data-search="{{item}}" bindtap="searchMember">
+            <!-- member Info -->
+            <view class="item">
+                <view class="label">{{item.role_name}}</view>
+                <view class="value nowrap">{{item.assigned_member_name}}</view>
+                <image class="arrow" src="../../res/img/arrow.png" wx:if="{{item.is_member_updatable}}"></image>
+            </view>
+            <view class="line" wx:if="{{index + 1 < members.length}}"></view>
+        </view>
+
+        <!-- orderConfig -->
+        <view class="title" wx:if="{{orderConfig.length > 0}}">
+            <view class="title-text">订单信息</view>
+            <view class="line"></view>
+        </view>
+        <view class="section" wx:for="{{orderConfig}}" wx:key="field">
+            <!-- TextInput -->
+            <view class="item" wx:if="{{item.control === 'TextInput'}}">
+                <view class="required" wx:if="{{item.is_required}}">*</view>
+                <view class="label">{{item.label}}</view>
+                <input class="input" placeholder-class="input-ph" type="text" placeholder="请输入{{item.label}}" bindinput="orderConfigChange" data-item="{{item}}"></input>
+            </view>
+            <!-- NumberInput -->
+            <view class="item" wx:if="{{item.control === 'NumberInput'}}">
+                <view class="required" wx:if="{{item.is_required}}">*</view>
+                <view class="label">{{item.label}}</view>
+                <input class="input" placeholder-class="input-ph" type="digit" placeholder="请输入{{item.label}}" bindinput="orderConfigChange" data-item="{{item}}"></input>
+            </view>
+            <!-- MoneyInput -->
+            <view class="item" wx:if="{{item.control === 'MoneyInput'}}">
+                <view class="required" wx:if="{{item.is_required}}">*</view>
+                <view class="label">{{item.label}}</view>
+                <input class="input" placeholder-class="input-ph" type="digit" placeholder="请输入{{item.label}}" bindinput="orderConfigChange" data-item="{{item}}"></input>
+            </view>
+            <view class="line" wx:if="{{index + 1 < orderConfig.length}}"></view>
+        </view>
+
+        <!-- 客户信息 -->
+        <view class="title" wx:if="{{isCreateMember}}">
+            <view class="title-text">客户信息</view>
+            <view class="line"></view>
+        </view>
+        <view class="section" wx:if="{{isCreateMember}}">
+            <view class="item" bindtap="showQrcodeModal">
+                <view class="label">扫码认证</view>
+                <text class="auth-needed" hidden="{{mobile}}">待认证</text>
+                <text class="auth-pass" hidden="{{!mobile}}">已认证</text>
+                <view class="auth-ret">
+                    <image class="qrcode" src="../../res/img/qrcode.png" hidden="{{mobile}}"></image>
+                    <view class="phone" hidden="{{!mobile}}">{{mobile}}</view>
+                </view>
             </view>
         </view>
-        <scroll-view class="page__bd">
-            <view class="panel">
-                <!-- member Info -->
-                <view class="cell" wx:for="{{members}}" wx:if="{{item.is_member_show}}" wx:key="role_code" data-search="{{item}}" bindtap="searchMember">
-                    <view class="cell__bd">{{item.role_name}}</view>
-                    <view class="value">{{item.assigned_member_name}}</view>
-                    <view class="cell__ft cell__ft_in-access" wx:if="{{item.is_member_updatable}}"></view>
-                </view>
-                <!-- orderConfig -->
-                <view class="order-cell" wx:for="{{orderConfig}}" wx:key="field">
-                    <view class="required" wx:if="{{item.is_required}}">*</view>
-                    <!-- TextInput -->
-                    <view class="order-cell-input" wx:if="{{item.control === 'TextInput'}}">
-                        <view class="order-cell__hd">
-                            <view class="order-cell-label">{{item.label}}</view>
-                        </view>
-                        <view class="order-cell__bd">
-                            <input type="text" bindinput="orderConfigChange" data-item="{{item}}"
-                            class="order-cell-value"></input>
-                        </view>
-                    </view>
-                    <!-- NumberInput -->
-                    <view class="order-cell-input" wx:if="{{item.control === 'NumberInput'}}">
-                        <view class="order-cell__hd">
-                            <view class="order-cell-label">{{item.label}}</view>
-                        </view>
-                        <view class="order-cell__bd">
-                            <input type="digit" bindinput="orderConfigChange" data-item="{{item}}"
-                            class="order-cell-value"></input>
-                        </view>
-                    </view>
-                    <!-- MoneyInput -->
-                    <view class="order-cell-input" wx:if="{{item.control === 'MoneyInput'}}">
-                        <view class="order-cell__hd">
-                            <view class="order-cell-label">{{item.label}}</view>
-                        </view>
-                        <view class="order-cell__bd">
-                            <input type="digit" bindinput="orderConfigChange" data-item="{{item}}"
-                            class="order-cell-value"></input>
-                        </view>
-                    </view>
-                </view>
-            </view>
-            <!-- 客户信息 -->
-            <view class="panel" wx:if="{{isCreateMember}}">
-                <view class="panel__hd">客户信息</view>
-                <view class="panel__bd">
-                    <view class="cell" bindtap="showQrcodeModal">
-                        <view class="cell__bd">
-                            扫码认证
-                            <text class="auth-needed"
-                                hidden="{{mobile}}">待认证</text>
-                            <text class="auth-pass"
-                                hidden="{{!mobile}}">已认证</text>
-                        </view>
-                        <view class="cell__ft">
-                            <text class="iconfont icon-qrcode"
-                                hidden="{{mobile}}"></text>
-                            <text hidden="{{!mobile}}">{{mobile}}</text>
-                        </view>
-                    </view>
-                </view>
-            </view>
-        </scroll-view>
-        <modal class="modal"
-            title="向客户出示认证码"
-            no-cancel="true"
-            hidden="{{hiddenQrcode}}"
-            bindconfirm="closeQrcodeModal"
-            catchtouchmove="stopPageScroll">
-            <canvas class="canvas" canvas-id="canvas" bindlongtap="save"></canvas>
-        </modal>
-        <view class="page__ft">
-            <button class="btn-confirm" bindtap="orderConfirm" disabled="{{!isAuthPass}}">确认下单</button>
-        </view>
+    </view>
+    <modal class="modal" title="向客户出示认证码" no-cancel="true" hidden="{{hiddenQrcode}}" bindconfirm="closeQrcodeModal" catchtouchmove="stopPageScroll">
+        <canvas class="canvas" canvas-id="canvas" bindlongtap="save"></canvas>
+    </modal>
+    <view class="foot">
+        <button class="btn-confirm" bindtap="orderConfirm" disabled="{{!isAuthPass}}">确认下单</button>
     </view>
 </view>
