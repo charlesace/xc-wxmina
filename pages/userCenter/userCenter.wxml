@@ -1,4 +1,4 @@
-<!--pages/user_center/user_center.wxml-->
+<!--pages/userCenter/userCenter.wxml-->
 <view class="container">
     <view class="userinfo">
         <view class="userinfo-avatar">
@@ -8,21 +8,6 @@
             <open-data type="userNickName"></open-data>
         </view>
     </view>
-    <!-- <view class="content">
-        <view class="panel login-info">
-            <text class="label">登录账号</text>
-            <text class="value" selectable="true">{{userName}}</text>
-        </view>
-
-        <view class="panel">
-            <text class="label">技术支持</text>
-            <text class="value" selectable="true">{{servicePhone}}</text>
-        </view>
-        <view class="panel">
-            <text class="label">当前版本</text>
-            <text class="value">{{version}}</text>
-        </view>
-    </view> -->
     <view>
         <view class="section account">
             <view class="label">登录账号</view>

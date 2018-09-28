@@ -1,4 +1,4 @@
-// pages/user_center/user_center.js
+// pages/userCenter/userCenter.js
 let login = require('../../models/login.js')
 let config = require('../../config/config.js')
 

@@ -128,7 +128,7 @@ Page({
 
         orderModel.setSelectItem(chooseItem)
         this.updateSearchList()
-
+        wx.navigateBack({})
     },
 
     updateSearchList() {
