@@ -57,7 +57,10 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function() {
-
+        // 目前入口只有收款页，交易成功后直接返回首页
+        wx.switchTab({
+            url: '../../pages/templateList/templateList',
+        })
     },
 
     /**
