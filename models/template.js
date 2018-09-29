@@ -44,8 +44,13 @@ module.exports = {
                 let splitRuleID = result['split_rule_id']
                 let isCreateMember = result['is_create_member']
 
-                console.log(result)
-                orderModel['members'] = members
+                let membersFiltered = members.filter((item) => {
+                    // return true
+                    return item['is_member_show'] === true
+                })
+
+                orderModel['members'] = membersFiltered
+                orderModel['membersRaw'] = members
                 orderModel['orderParams'] = orderConfig
                 resolve(result)
             }).catch((err) => {

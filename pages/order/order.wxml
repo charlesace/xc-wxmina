@@ -13,7 +13,7 @@
             <view class="title-text">角色信息</view>
             <view class="line"></view>
         </view>
-        <view class="section" wx:for="{{members}}" wx:if="{{item.is_member_show}}" wx:key="role_code" data-search="{{item}}" bindtap="searchMember">
+        <view class="section" wx:for="{{members}}" wx:key="role_code" data-search="{{item}}" bindtap="searchMember">
             <!-- member Info -->
             <view class="item">
                 <view class="label">{{item.role_name}}</view>

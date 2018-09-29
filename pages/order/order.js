@@ -59,7 +59,6 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-        // this.updateMember()
         this.setData({
             members: orderModel['members']
         })
@@ -113,6 +112,10 @@ Page({
                 }
             })
 
+            let membersFiltered = members.filter((item) => {
+                return item['is_member_show'] === true
+            })
+
             orderModel['orderConfig'] = orderConfig
             orderModel['orderParams'] = orderParams
 
@@ -120,7 +123,7 @@ Page({
                 productName: productName,
                 orderConfig: orderConfig,
                 orderParams: orderParams,
-                members: members,
+                members: membersFiltered,
                 splitRuleID: splitRuleID,
                 isCreateMember: isCreateMember
             })
@@ -254,29 +257,32 @@ Page({
         })
     },
 
-    chooseMember(event) {
-        let dataset = event['currentTarget']['dataset']
-        let currentSearch = this.data['currentSearch']
-        let chooseItem = dataset.item
-        // 根据 当前搜索项与点击的项， 设置
-        let members = this.data['members']
+    // chooseMember(event) {
+    //     let dataset = event['currentTarget']['dataset']
+    //     let currentSearch = this.data['currentSearch']
+    //     let chooseItem = dataset.item
+    //     // 根据 当前搜索项与点击的项， 设置
+    //     let members = this.data['members']
 
-        let updatedMembers = members.map((item) => {
-            if (item['role_code'] === currentSearch['role_code']) {
-                item['assigned_member_id'] = chooseItem['id']
-                item['assigned_member_name'] = chooseItem['name']
-            }
 
-            return item
-        })
+    //     let updatedMembers = members.map((item) => {
+    //         if (item['role_code'] === currentSearch['role_code']) {
+    //             item['assigned_member_id'] = chooseItem['id']
+    //             item['assigned_member_name'] = chooseItem['name']
+    //         }
 
-        this.setData({
-            members: updatedMembers
-        })
+    //         return item
+    //     })
 
-        this.hideSearchPage()
-        this.resetSearchData()
-    },
+    //     console.log('cccccc', members, updatedMembers)
+
+    //     this.setData({
+    //         members: updatedMembers
+    //     })
+
+    //     this.hideSearchPage()
+    //     this.resetSearchData()
+    // },
     // search page end
 
     // order_config start

@@ -19,6 +19,7 @@ module.exports = {
     orderAmount: '',
     orderAmountPoint: '',
     xcAuthNO: '',
+    membersRaw: [],
     members: [], //  用于创建订单
     orderParams: [], //
     orderID: '', //  创建成功后返回的订单 ID
@@ -143,6 +144,12 @@ module.exports = {
     createOrder: function(orderAmount, xcAuthNO) {
 
         return new Promise((resolve, reject) => {
+            let memberNotShow = this.membersRaw.filter((item) => {
+                return item['is_member_show'] === false
+            })
+
+            let membersWithPadding = [...this.members, ...memberNotShow]
+
             let payInfo = {
                 order_amount: this.orderAmountPoint,
                 product_id: this.productID,
@@ -150,7 +157,7 @@ module.exports = {
                 employee_id: login['xcUserInfo']['employeeId'],
                 employee_name: login['xcUserInfo']['name'],
                 order_config: this.orderParams,
-                members: this.members
+                members: membersWithPadding
             }
 
             http.request(
