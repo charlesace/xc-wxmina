@@ -7,5 +7,8 @@ module.exports = {
         'COMPLETE': '1006',
         'CLOSED': '2002',
         'REFUNDED': '2003'
+    },
+    ERROR_CODE: {
+        'SESSION_TIME_OUT': '39999'
     }
 }

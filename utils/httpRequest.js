@@ -4,6 +4,9 @@
 
 const config = require('../config/config.js')
 const md5 = require('../lib/md5.js')
+const login = require('../models/login.js')
+const constant = require('../config/constant.js')
+
 
 module.exports = {
     request: function(service, data = {}, poll = false) {
@@ -16,11 +19,13 @@ module.exports = {
             let token = config.token
             let version = data['version'] || '1.0'
             let appID = data['app_id'] || wx.getStorageSync('appId') || '0'
+            let xcID = login['openId'] || wx.getStorageSync('openId') || ''
             let strMD5 = appID + timestamp + version + service + JSON.stringify(data) + MD5Key
             let sign = md5(strMD5)
 
             let newData = {
                 app_id: appID,
+                xc_id: xcID,
                 timestamp: timestamp,
                 version: version,
                 sign: sign,
@@ -69,6 +74,12 @@ module.exports = {
                         } else if (status === 'error') {
                             // 请求失败
                             wx.hideLoading()
+                            //  openID 过期
+                            if (error_code === constant['ERROR_CODE']['SESSION_TIME_OUT']) {
+                                login.clearLoginInfo()
+                                login.gotoLoginPage()
+                            }
+
                             if (!poll) {
                                 wx.showToast({
                                     title: message,
